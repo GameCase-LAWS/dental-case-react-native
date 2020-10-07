@@ -1,0 +1,741 @@
+[
+  {
+    "id": 2,
+    "titulo": "Urgência Odontológica na Gestação",
+    "descricao": "Mulher de 37 anos, grávida de sete meses, recorreu ao dentista devido à presença de forte dor de dente. Não vem tendo adesão às consultas do pré-natal odontológico. Ao exame físico, foi observado que a dor advinha de um pré-molar inferior direito, dente 45.",
+    "projeto": 21,
+    "tema": [
+      18
+    ],
+    "tipo": 2,
+    "tipo_consulta": 3,
+    "historico_paciente": "História médica não apresenta nada de relevante. Faz o pré-natal na UBS, apresenta gravidez normal.",
+    "historico_familiar": "História familiar revela que a mãe da paciente, atualmente com 60 anos, tem hipertensão.",
+    "gravidade_caso": 2,
+    "doenca_cronologia": 1,
+    "doenca_prognostico": 1,
+    "queixa_paciente": "Essa dor de dente está muito forte, não consegui dormir a noite. Parece que meu dente cresceu.",
+    "imagem_enfermidade": null,
+    "local_atendimento": 1,
+    "mobiliario": null,
+    "enfermidade": "Abscesso periapical agudo ou abscesso dentoalveolar agudo",
+    "aparencia_enfermidade": "",
+    "paciente": {
+      "nome": "Regina",
+      "fase_da_vida": 5,
+      "dias_de_vida": null,
+      "idade_anos_completos": 37,
+      "sexo": "F",
+      "description": "",
+      "_paridade": [
+        "1 parto normal",
+        "1 cesária"
+      ],
+      "aborto": 1,
+      "meses_gravidez": 7,
+      "faixa_peso": 3,
+      "imc": 31,
+      "expressao_genero": 1,
+      "estado_conjugal": 2,
+      "paciente_acompanhando": 1,
+      "paciente_acompanhante": null,
+      "deficiencia_paciente": [
+        1
+      ],
+      "etnia": 3,
+      "escolaridade": 2,
+      "atividade_laboral": "Costureira",
+      "renda_familiar": 2,
+      "domicilio": 1,
+      "foto": "http://gamecase.adm.br/media/caso/images/pacientes/3x4_regina.png"
+    },
+    "anamnese": {
+      "observacao": "Anamnese do caso 'Urgência Odontológica na Gestação'",
+      "perguntas_positivas": [
+        {
+          "texto": "Olá Regina, como posso te ajudar?",
+          "resposta": "Passei o final de semana com dor. A dor nesse dente vem crescendo e não pára. Estava esperando segunda-feira chegar.",
+          "rude": "Há quanto tempo Regina...Aposto que você decidiu voltar somente porque deve ter algo te incomodando. É isso?",
+          "resposta_prontuario": "Paciente relata dor durante final de semana. A dor vem aumentando.",
+          "feedback_pedagogico": "A palavra anamnese significa recordar e refere-se ao fato de inquirir o paciente sobre acontecimentos relacionados à sua saúde. O primeiro ponto do interrogatório de saúde que caracteriza a anamnese é a queixa principal, o motivo que levou o paciente até o ponto de atenção à saúde. O motivo que leva o paciente a buscar assistência odontológica é quase sempre a dor.",
+          "referencia_bibliografica": "A Saúde bucal no SUS",
+          "tipo": "+"
+        },
+        {
+          "texto": "Pode dar mais detalhes? Como, quando e onde começou?",
+          "resposta": "Estou com dor desde sexta-feira. Mas agora a dor não pára, é espontânea. Parece que meu dente cresceu. Não consigo comer direito. Eu já estava sentindo esse dente estranho, mas eu não tinha certeza. Agora sei que é este dente aqui.",
+          "rude": "Por que você não veio antes? Agora não sei se vai dar certo...",
+          "resposta_prontuario": "Paciente relata ter dificuldade na alimentação. Dor espontânea, contínua e localizada.",
+          "feedback_pedagogico": "Da resposta do paciente sobre sua queixa, derivam outras perguntas que ajudam o profissional a definir sua conduta no interrogatório, sua trajetória ao diagnóstico. Na sequência do interrogatório clínico, o profissional precisa estimular o paciente a relatar a história da queixa atual ou da doença atual: como, quando e onde começou? Qual o tratamento já realizado? Quais medicamentos tomou? Teve febre? Esses são alguns entre outros questionamentos possíveis para construção da história da queixa atual ou do motivo que levou o paciente a procurar o serviço.",
+          "referencia_bibliografica": "A Saúde Bucal no SUS",
+          "tipo": "+"
+        },
+        {
+          "texto": "Você está tomando algum remédio?",
+          "resposta": "Até queria tomar algum remédio para parar a dor, mas achei melhor perguntar qual remédio posso tomar, já que estou grávida...",
+          "rude": "Vai me dizer que você tomou algum remédio antes de perguntar qual remédio você pode tomar?",
+          "resposta_prontuario": "Apesar do relato de dor, paciente não utilizou medicamento.",
+          "feedback_pedagogico": "Consciente de sua situação gestacional, a paciente tem necessidade de saber qual é o melhor analgésico em seu caso. \r\nDa resposta do paciente sobre sua queixa, derivam outras perguntas que ajudam o profissional a definir sua conduta no interrogatório, sua trajetória ao diagnóstico. Na sequência do interrogatório clínico, o profissional precisa estimular o paciente a relatar a história da queixa atual ou da doença atual: como, quando e onde começou? Qual o tratamento já realizado? Quais medicamentos tomou? Teve febre? Esses são alguns entre outros questionamentos possíveis para construção da história da queixa atual ou do motivo que levou o paciente a procurar o serviço.",
+          "referencia_bibliografica": "A Saúde Bucal no SUS",
+          "tipo": "+"
+        },
+        {
+          "texto": "Regina, você teve febre?",
+          "resposta": "Ainda não tive febre, mas estou começando a me sentir mal. Não estou me alimentando bem.",
+          "rude": "Você sabe que febre não é bom sinal, teve ou não teve febre?",
+          "resposta_prontuario": "Paciente não relata febre. Relata mal estar.",
+          "feedback_pedagogico": "Neste caso, apesar de não relatar febre, duas situações importantes são relatadas, início de mal-estar e alimentação deficiente.\r\nDa resposta do paciente sobre sua queixa, derivam outras perguntas que ajudam o profissional a definir sua conduta no interrogatório, sua trajetória ao diagnóstico. Na sequência do interrogatório clínico, o profissional precisa estimular o paciente a relatar a história da queixa atual ou da doença atual: como, quando e onde começou? Qual o tratamento já realizado? Quais medicamentos tomou? Teve febre? Esses são alguns entre outros questionamentos possíveis para construção da história da queixa atual ou do motivo que levou o paciente a procurar o serviço.",
+          "referencia_bibliografica": "A Saúde Bucal no SUS",
+          "tipo": "+"
+        }
+      ],
+      "perguntas_neutras": [
+        {
+          "texto": "Então, todos os dentes estão doendo?",
+          "resposta": "Não, já disse que somente este local está doendo (paciente indica a região com a mão).",
+          "rude": "",
+          "resposta_prontuario": "Paciente relata dor localizada.",
+          "feedback_pedagogico": "A narrativa do paciente durante a anamnese será o suporte principal do diagnóstico. O bom clínico é um ouvinte atento. A maneira como a entrevista é conduzida proporciona ao paciente uma imagem do clínico, que pode afetar a relação futura entre os dois.",
+          "referencia_bibliografica": "Soni, S.T; Fazio, R.C e Fang, L, Princípios e práticas de medicina oral",
+          "tipo": "0"
+        }
+      ],
+      "perguntas_negativas": [
+        {
+          "texto": "Você fez clareamento dental?",
+          "resposta": "Não fiz não.",
+          "rude": "",
+          "resposta_prontuario": "Paciente relata não ter feito clareamento dental.",
+          "feedback_pedagogico": "A sensibilidade dentária é o efeito colateral mais comum após o clareamento, podendo trazer desconforto ao paciente.",
+          "referencia_bibliografica": "Briso ALF, Rahal V, Azevedo FA et al. Neurosensory analysis of tooth sensitivity during at-home dental bleaching: a randomized clinical trial. J Appl Oral Sci. 2018;26:e20170284",
+          "tipo": "-"
+        },
+        {
+          "texto": "Regina, quando foi a última vez que você fez exame de sangue?",
+          "resposta": "Não lembro bem, acho que no começo da gestação.",
+          "rude": "",
+          "resposta_prontuario": "Paciente relata não recordar da época da coleta do último exame de sangue.",
+          "feedback_pedagogico": "O estudo do exame de sangue deve ser do conhecimento do dentista, pois na anamnese pode surgir algum fato, levando o profissional a exigir o recurso dos exames hematológicos.",
+          "referencia_bibliografica": "Paiva, J. G. e Antoniazzi, J.H., Endodontia, bases para a prática clínica",
+          "tipo": "-"
+        }
+      ]
+    },
+    "exame_fisico": {
+      "observacao": "Exame Físico do caso 'Urgência Odontológica na Gestação'",
+      "exames_positivos": [
+        {
+          "nome": "Teste térmico - frio",
+          "resultado": "Negativo",
+          "resultado_prontuario": "Teste térmico ao frio - negativo",
+          "arquivo": null,
+          "tipo": "+",
+          "feedback_pedagogico": "O teste térmico visa, através das alterações da temperatura, obter resposta pulpar mediante sensação dolorosa. O resultado negativo ao estímulo frio do teste térmico representa necrose pulpar, pois a polpa não responde com sinais funcionais evidenciadores de vitalidade pulpar.",
+          "referencia_bibliografica": "Paiva, J. G. e Antoniazzi, J.H., Endodontia, bases para a prática clínica",
+          "custo_financeiro": 1
+        },
+        {
+          "nome": "Teste de percussão",
+          "resultado": "Positivo",
+          "resultado_prontuario": "Teste de percussão realizado com cabo do espelho nos dentes da região da queixa - positivo",
+          "arquivo": null,
+          "tipo": "+",
+          "feedback_pedagogico": "A percussão do elemento dental representa recurso semiotécnico de extrema aplicabilidade, pois propicia avaliação clínica da condição inflamatória da região periapical, além de ser útil na localização do dente responsável pela dor. \r\nUma característica dessa patologia é a presença de uma coleção purulenta nos tecidos periapicais em decorrência da infecção, que gera um edema e a tentativa de drenagem desse pus.",
+          "referencia_bibliografica": "Paiva, J. G. e Antoniazzi, J.H., Endodontia, bases para a prática clínica\r\nEventos agudos na atenção básica: dor de origem endodôntica /UNASUS-Universidade Federal de Santa Catarina; Michele Tillmann Biz, 2013",
+          "custo_financeiro": 1
+        }
+      ],
+      "exames_neutros": [
+        {
+          "nome": "Inspeção extra-oral",
+          "resultado": "Ausência de assimetria facial evidenciadora de aumento de volume externo ou alterações de estrutura e coloração da face do paciente.",
+          "resultado_prontuario": "Ausência de assimetria facial evidenciadora de aumento de volume externo ou alterações de estrutura e coloração da face do paciente.",
+          "arquivo": null,
+          "tipo": "0",
+          "feedback_pedagogico": "Em sua fase inicial, essa patologia (abscesso periapical agudo) não apresenta edema visível.",
+          "referencia_bibliografica": "Eventos agudos na atenção básica: dor de origem endodôntica /UNASUS-Universidade Federal de Santa Catarina; Michele Tillmann Biz, 2013",
+          "custo_financeiro": 1
+        }
+      ],
+      "exames_negativos": [
+        {
+          "nome": "Teste de mobilidade",
+          "resultado": "Presença de mobilidade",
+          "resultado_prontuario": "Presença de mobilidade",
+          "arquivo": null,
+          "tipo": "-",
+          "feedback_pedagogico": "A mobilidade dentária aumentada pode ser percebida.",
+          "referencia_bibliografica": "BARBIN, E. L.; SPANÓ, J. C. E. Atendimento de urgência em endodontia. Pelotas: PECOS, 2011",
+          "custo_financeiro": 1
+        },
+        {
+          "nome": "Exame da aparência da mucosa em nível apical do dente causador da dor",
+          "resultado": "Inconclusivo",
+          "resultado_prontuario": "Inconclusivo",
+          "arquivo": null,
+          "tipo": "-",
+          "feedback_pedagogico": "A inspeção intra-oral, nessa fase da patologia, não verifica alteração de volume.",
+          "referencia_bibliografica": "Eventos agudos na atenção básica: dor de origem endodôntica /UNASUS-Universidade Federal de Santa Catarina; Michele Tillmann Biz, 2013",
+          "custo_financeiro": 1
+        }
+      ],
+      "desafios": [
+        {
+          "descricao": "A paciente começa a suar.",
+          "feedback_pedagogico": "As intervenções dentárias causam situações estressantes, muitas vezes resultante da expectativa e da ansiedade preconcebidas pela paciente, devido a crenças e mitos sobre a segurança do atendimento odontológico a gestantes.",
+          "referencia_bibliografica": "Saúde Bucal da Gestante: Acompanhamento Integral em Saúde da Gestante e da Puérpera/ Ana Emilia Figueiredo de Oliveira; Ana Estela Haddad (Org.). - São Luís: EDUFMA, 2018."
+        }
+      ]
+    },
+    "diagnostico_inicial": {
+      "observacao": "Diagnostico Inicial do caso 'Urgência Odontológica na Gestação'",
+      "diagnosticos_positivos": [
+        {
+          "texto": "Abscesso periapical agudo em fase inicial",
+          "feedback_pedagogico": "No abscesso periapical agudo em fase inicial a sensibilidade pulpar ao frio será negativa, o teste de percussão apresentará resultado positivo e, geralmente, haverá também dor na palpação em fundo de sulco vestibular do dente afetado. A radiografia poderá evidenciar um leve espessamento do espaço do ligamento periodontal.",
+          "referencia_bibliografica": "Eventos agudos na atenção básica: dor de origem endodôntica /UNASUS-Universidade Federal de Santa Catarina; Michele Tillmann Biz, 2013; BARBIN, E. L.; SPANÓ, J. C. E. Atendimento de urgência em endodontia. Pelotas: PECOS, 2011.",
+          "tipo": "+"
+        }
+      ],
+      "diagnosticos_neutros": [
+        {
+          "texto": "Abscesso periapical agudo em evolução",
+          "feedback_pedagogico": "Abscesso periapical agudo em evolução: dor contínua, pulsátil, intensa, latejante, localizada, sensação de dente “crescido”; percussão aumentada; sensibilidade pulpar negativa, edema difuso.",
+          "referencia_bibliografica": "Eventos agudos na atenção básica: dor de origem endodôntica /UNASUS-Universidade Federal de Santa Catarina; Michele Tillmann Biz, 2013; BARBIN, E. L.; SPANÓ, J. C. E. Atendimento de urgência em endodontia. Pelotas: PECOS, 2011",
+          "tipo": "0"
+        }
+      ],
+      "diagnosticos_negativos": [
+        {
+          "texto": "Pólipo Periodontal",
+          "feedback_pedagogico": "Pólipo Periodontal: ausência de dor. Dente com extensão lesão de cárie podendo ter ou não a cavidade pulpar aberta. A radiografia mostrará a lesão de furca e a sondagem evidenciará que a origem do pólipo é o tecido periodontal.",
+          "referencia_bibliografica": "Eventos agudos na atenção básica: dor de origem endodôntica /UNASUS-Universidade Federal de Santa Catarina; Michele Tillmann Biz, 2013.",
+          "tipo": "-"
+        }
+      ]
+    },
+    "exame_complementar": {
+      "observacao": "Exame Complementar do caso 'Urgência Odontológica na Gestação'",
+      "exames_positivos": [
+        {
+          "nome": "Verificar a pressão sanguínea",
+          "resultado": "130/90 mm Hg",
+          "resultado_prontuario": "Pressão Sanguínea 130/90 mm Hg",
+          "arquivo": null,
+          "tipo": "+",
+          "feedback_pedagogico": "Paciente relata histórico familiar de hipertensão arterial, apresenta-se com sobrepeso de acordo IMC, idade superior a 35 anos e encontra-se no limite do quadro de hipertensão.\r\nNa sequência do exame clínico, pode-se estabelecer a análise dos sinais vitais, aferindo a pressão arterial, verificando o pulso e a frequência cardíaca e respiratória. Os sinais vitais, bem como todas as informações prestadas na anamnese e as características percebidas no exame físico, devem ser registrados no prontuário do paciente, sendo uma exigência legal.\r\nA hipertensão arterial é a pressão arterial igual ou maior que 140/90mmHg baseada na média de pelo menos duas medidas. A pressão arterial deve ser mensurada com a gestante sentada, com o braço no mesmo nível do coração e com um manguito de tamanho apropriado.",
+          "referencia_bibliografica": "A Saúde bucal no SUS ([recurso eletrônico] / Ministério da Saúde, Secretaria de Atenção à Saúde, Departamento de Atenção Básica. – Brasília : Ministério da Saúde, 2018).\r\nGestação de alto risco – manual técnico (Ministério da Saúde, Secretaria de Atenção à Saúde, Departamento de Ações Programáticas Estratégicas. – 5. ed. – Brasília : Editora do Ministério da Saúde, 2012)",
+          "custo_financeiro": 1
+        }
+      ],
+      "exames_neutros": [
+        {
+          "nome": "Exame radiográfico",
+          "resultado": "A radiografia poderá evidenciar um leve espessamento do espaço do ligamento periodontal",
+          "resultado_prontuario": "A radiografia poderá evidenciar um leve espessamento do espaço do ligamento periodontal",
+          "arquivo": null,
+          "tipo": "0",
+          "feedback_pedagogico": "Os abscessos periapicais em suas diversas fases (inicial, em evolução e evoluído) apresentam leve espessamento do ligamento periodontal.",
+          "referencia_bibliografica": "Eventos agudos na atenção básica: dor de origem endodôntica /UNASUS-Universidade Federal de Santa Catarina; Michele Tillmann Biz, 2013\r\nBARBIN, E. L.; SPANÓ, J. C. E. Atendimento de urgência em endodontia. Pelotas: PECOS, 2011",
+          "custo_financeiro": 1
+        }
+      ],
+      "exames_negativos": [
+        {
+          "nome": "Ressonância magnética",
+          "resultado": "Localiza a coleção purulenta",
+          "resultado_prontuario": "Localiza a coleção purulenta",
+          "arquivo": null,
+          "tipo": "-",
+          "feedback_pedagogico": "A ressonância magnética produz imagens que permitem determinar o tamanho e a localização de malformações vasculares, tumores, abscessos na parede, nos músculos ou nos ossos. \r\nA ressonância magnética é uma técnica de imagem médica usada em radiologia para formar imagens da anatomia e dos processos fisiológicos do corpo, tanto na saúde como na doença. Produz imagens que permitem determinar o tamanho e a localização de malformações vasculares, tumores, abscessos na parede, nos músculos ou nos ossos.",
+          "referencia_bibliografica": "Wikipédia",
+          "custo_financeiro": 3
+        },
+        {
+          "nome": "Glicemia em jejum",
+          "resultado": "Normorreativo",
+          "resultado_prontuario": "Normorreativo",
+          "arquivo": null,
+          "tipo": "-",
+          "feedback_pedagogico": "É uma das atribuições dos profissional cirurgião-dentista orientar a gestante sobre a realização e solicitação de exames complementares e orientar o tratamento, caso necessário. \r\nHá diversos exames laboratoriais que o cirurgião-dentista pode solicitar aos laboratórios para o tratamento seguro dos pacientes, evitando complicações no quadro de saúde.",
+          "referencia_bibliografica": "Atenção ao pré-natal de baixo risco. Cadernos de Atenção Básica, n° 32\r\nA Resolução CFO 63/2005, no artigo 36",
+          "custo_financeiro": 2
+        }
+      ],
+      "desafios": [
+        {
+          "descricao": "O aparelho esfigmomanômetro mecânico aneróide (sem coluna de mercúrio) do consultório odontológico está quebrado.",
+          "feedback_pedagogico": "Para a medida da pressão arterial, deve-se dar preferência aos aparelhos aneroides calibrados. Os aparelhos automáticos (digitais) só devem ser utilizados se forem corretamente validados para uso em pré-eclâmpsia. (Gestação de alto risco – manual técnico). De acordo com a Anvisa, desde janeiro de 2019 os aparelhos contendo mercúrio deverão ser substituídos.",
+          "referencia_bibliografica": ""
+        }
+      ]
+    },
+    "diagnostico_final": {
+      "observacao": "Diagnostico Final do caso 'Urgência Odontológica na Gestação'",
+      "diagnosticos": [
+        {
+          "texto": "Abscesso periapical agudo em fase inicial",
+          "feedback_pedagogico": "No abscesso periapical agudo em fase inicial a sensibilidade pulpar ao frio será negativa, o teste de percussão apresentará resultado positivo e, geralmente, haverá também dor na palpação em fundo de sulco vestibular do dente afetado. A radiografia poderá evidenciar um leve espessamento do espaço do ligamento periodontal.",
+          "referencia_bibliografica": "Eventos agudos na atenção básica: dor de origem endodôntica /UNASUS-Universidade Federal de Santa Catarina; Michele Tillmann Biz, 2013; BARBIN, E. L.; SPANÓ, J. C. E. Atendimento de urgência em endodontia. Pelotas: PECOS, 2011.",
+          "tipo": "+"
+        }
+      ]
+    },
+    "comunicacao_diagnostico": {
+      "comunicacoes": [
+        {
+          "diagnostico": {
+            "texto": "Abscesso periapical agudo em fase inicial",
+            "feedback_pedagogico": "No abscesso periapical agudo em fase inicial a sensibilidade pulpar ao frio será negativa, o teste de percussão apresentará resultado positivo e, geralmente, haverá também dor na palpação em fundo de sulco vestibular do dente afetado. A radiografia poderá evidenciar um leve espessamento do espaço do ligamento periodontal.",
+            "referencia_bibliografica": "Eventos agudos na atenção básica: dor de origem endodôntica /UNASUS-Universidade Federal de Santa Catarina; Michele Tillmann Biz, 2013; BARBIN, E. L.; SPANÓ, J. C. E. Atendimento de urgência em endodontia. Pelotas: PECOS, 2011.",
+            "tipo": "+"
+          },
+          "tratamento": null,
+          "adequada": "Regina, você está com uma infecção nesse dente, chamada abscesso periapical agudo. Desde que você recebe o tratamento adequado, que vou iniciar agora, você vai melhorar e essa lesão vai regredir. Mas preciso de sua ajuda, você não pode mais faltar nas consultas.",
+          "inadequada": "Regina, você está com uma grave infecção, chamada abscesso periapical agudo. Vou ver o que eu consigo fazer pelo seu dente, mas já vou avisando, pode ser que não dê certo."
+        }
+      ]
+    },
+    "tratamento": {
+      "condutas_positivas": [
+        {
+          "nome": "Abordagem inicial local e sistêmica. Referenciar para CEO.",
+          "tipo": "+",
+          "feedback_pedagogico": "Abordagem inicial local e sistêmica poderá ser suficiente para o alívio da dor e controle da infecção neste caso de urgência. Após essa consulta de urgência, deve ser realizado o atendimento eletivo.\r\nSerão encaminhados para a especialidade de Endodontia os usuários que necessitarem de terapias endodônticas não conservadoras, como: biopulpectomia, necropulpectomia e retratamento endodôntico. Caso a UBS esteja equipada para o procedimento e o profissional sinta-se seguro para realizá-lo, não há necessidade de encaminhamento para o CEO. Os usuários devem ser encaminhados com o diagnóstico e o acesso à cavidade pulpar realizados, curativo de demora indicado, selamento com o material adequado e, se necessário, prescrição de medicação sistêmica, como analgésicos, anti-inflamatórios e/ou antibióticos. O elemento dentário a ser submetido a tratamento endodôntico deverá apresentar condições de coroa remanescente para retenção do grampo.",
+          "referencia_bibliografica": null,
+          "custo_financeiro": 1
+        }
+      ],
+      "condutas_negativas": [
+        {
+          "nome": "Fazer ajuste oclusal para deixar o dente em infra-oclusão",
+          "tipo": "-",
+          "feedback_pedagogico": "Esse procedimento realizado isoladamente não contribui para a resolução do quadro de dor. Uma característica dessa patologia é a presença de uma coleção purulenta no ligamento periodontal apical em decorrência da infecção, que gera um edema e a tentativa de drenagem desse pus, gerando a sensação de dente crescido.",
+          "referencia_bibliografica": null,
+          "custo_financeiro": 1
+        }
+      ],
+      "condutas_neutras": [
+        {
+          "nome": "Receitar antibiótico e analgésico.",
+          "tipo": "0",
+          "feedback_pedagogico": "Deve-se resolver a situação de emergência do usuário e monitorá-lo (medicação e troca de curativos) enquanto ele aguarda agendamento no Centro de Especialidades Odontológicas (CEO). O tratamento endodôntico também poderá ser realizado na Unidade Básica de Saúde (UBS), conforme sua disponibilidade técnica e de equipamento.",
+          "referencia_bibliografica": null,
+          "custo_financeiro": 1
+        }
+      ]
+    },
+    "comunicacao_tratamento": {
+      "comunicacoes": [
+        {
+          "diagnostico": null,
+          "tratamento": {
+            "condutas_positivas": [
+              {
+                "nome": "Abordagem inicial local e sistêmica. Referenciar para CEO.",
+                "tipo": "+",
+                "feedback_pedagogico": "Abordagem inicial local e sistêmica poderá ser suficiente para o alívio da dor e controle da infecção neste caso de urgência. Após essa consulta de urgência, deve ser realizado o atendimento eletivo.\r\nSerão encaminhados para a especialidade de Endodontia os usuários que necessitarem de terapias endodônticas não conservadoras, como: biopulpectomia, necropulpectomia e retratamento endodôntico. Caso a UBS esteja equipada para o procedimento e o profissional sinta-se seguro para realizá-lo, não há necessidade de encaminhamento para o CEO. Os usuários devem ser encaminhados com o diagnóstico e o acesso à cavidade pulpar realizados, curativo de demora indicado, selamento com o material adequado e, se necessário, prescrição de medicação sistêmica, como analgésicos, anti-inflamatórios e/ou antibióticos. O elemento dentário a ser submetido a tratamento endodôntico deverá apresentar condições de coroa remanescente para retenção do grampo.",
+                "referencia_bibliografica": null,
+                "custo_financeiro": 1
+              }
+            ],
+            "condutas_negativas": [
+              {
+                "nome": "Fazer ajuste oclusal para deixar o dente em infra-oclusão",
+                "tipo": "-",
+                "feedback_pedagogico": "Esse procedimento realizado isoladamente não contribui para a resolução do quadro de dor. Uma característica dessa patologia é a presença de uma coleção purulenta no ligamento periodontal apical em decorrência da infecção, que gera um edema e a tentativa de drenagem desse pus, gerando a sensação de dente crescido.",
+                "referencia_bibliografica": null,
+                "custo_financeiro": 1
+              }
+            ],
+            "condutas_neutras": [
+              {
+                "nome": "Receitar antibiótico e analgésico.",
+                "tipo": "0",
+                "feedback_pedagogico": "Deve-se resolver a situação de emergência do usuário e monitorá-lo (medicação e troca de curativos) enquanto ele aguarda agendamento no Centro de Especialidades Odontológicas (CEO). O tratamento endodôntico também poderá ser realizado na Unidade Básica de Saúde (UBS), conforme sua disponibilidade técnica e de equipamento.",
+                "referencia_bibliografica": null,
+                "custo_financeiro": 1
+              }
+            ]
+          },
+          "adequada": "Regina, vou iniciar seu tratamento, colocando um remédio no dente e fechando com curativo. Você vai tomar antibiótico e analgésico O tratamento continuará com um especialista no CEO. Depois você volta para colocar a restauração definitiva.",
+          "inadequada": "Regina, seu tratamento começa hoje, aqui na urgência. Depois ele continua com outro profissional, não sei como vai ser..."
+        }
+      ]
+    },
+    "conteudista": {
+      "username": "camila.huanca",
+      "email": "camila.huanca@usp.br",
+      "groups": [],
+      "first_name": "Camila",
+      "last_name": "Huanca"
+    },
+    "imagens": []
+  },
+  {
+    "id": 4,
+    "titulo": "Atendimento odontológico em paciente diabético",
+    "descricao": "Paciente 58 anos, leucoderma, masculino, histórico de diabetes, sem exames de controle há 2 anos. Procurou atendimento médico com queixa de alterações visuais e formigamento nos pés. Encaminhado pelo clínico para avaliação odontológica.",
+    "projeto": 1,
+    "tema": [
+      24,
+      31,
+      32,
+      29,
+      19
+    ],
+    "tipo": 2,
+    "tipo_consulta": 1,
+    "historico_paciente": "Paciente 58 anos, leucoderma, masculino, histórico de diabetes, sem exames de controle há 2 anos. Procurou atendimento médico com queixa de alterações visuais e formigamento nos pés. Encaminhado pelo clínico para avaliação odontológica.",
+    "historico_familiar": "Histórico familiar de diabetes e hipertensão em ambos os pais.",
+    "gravidade_caso": 3,
+    "doenca_cronologia": 2,
+    "doenca_prognostico": 2,
+    "queixa_paciente": "Doutor, o médico falou para eu passar com o senhor para ver minha boca.",
+    "imagem_enfermidade": null,
+    "local_atendimento": 1,
+    "mobiliario": null,
+    "enfermidade": "Doença periodontal",
+    "aparencia_enfermidade": "Não apresenta.",
+    "paciente": {
+      "nome": "Mario Sousa",
+      "fase_da_vida": 5,
+      "dias_de_vida": null,
+      "idade_anos_completos": 58,
+      "sexo": "M",
+      "description": "",
+      "_paridade": [],
+      "aborto": null,
+      "meses_gravidez": null,
+      "faixa_peso": 3,
+      "imc": null,
+      "expressao_genero": 1,
+      "estado_conjugal": 2,
+      "paciente_acompanhando": 1,
+      "paciente_acompanhante": 2,
+      "deficiencia_paciente": [
+        4
+      ],
+      "etnia": 1,
+      "escolaridade": 3,
+      "atividade_laboral": "Motorista de ônibus",
+      "renda_familiar": 2,
+      "domicilio": 1,
+      "foto": "http://gamecase.adm.br/media/caso/images/pacientes/mario_uX5SArc.png"
+    },
+    "anamnese": {
+      "observacao": "Anamnese do caso 'Atendimento odontológico em paciente diabético'",
+      "perguntas_positivas": [
+        {
+          "texto": "Bom dia Seu Mario. Em que posso ajudá-lo?",
+          "resposta": "Eu tenho diabetes e faz uns dias que minha vista está embaçada e estou com um formigamento nos pés. Ai eu passei no médico e ele me falou que era bom eu dar uma olhada na minha boca porque fica saindo sangue quando escovo.",
+          "rude": "Pode falar...",
+          "resposta_prontuario": "Paciente diabético, relata alterações visuais e formigamento nos pés.  Encaminhado para avaliação pelo médico. Queixa de sangramento gengival durante escovação.",
+          "feedback_pedagogico": "Os profissionais da Equipe de Saúde Bucal (ESB) devem ser envolvidos no processo de primeira escuta e os demais profissionais da Atenção Básica, devem estar atentos também às necessidades de saúde bucal do usuário e ter ciência tanto da classificação de risco das urgências odontológicas, quanto do fluxo de encaminhamento desse usuário para a equipe de retaguarda para necessidades odontológicas.(1)",
+          "referencia_bibliografica": "1.\tMinistério da Saúde. Cadernos de Atenção Básica n28. Brasília; 2013. 292 p.",
+          "tipo": "+"
+        },
+        {
+          "texto": "E me conte como está o diabetes do senhor?",
+          "resposta": "Eu fiz exames na semana passada, mas o médico falou que minha diabetes está bem alta e eu preciso tomar os remédios. Ele me disse que posso perder a vista se não seguir o tratamento. E que posso perder os dentes se continuar desse jeito.",
+          "rude": "Então o senhor não deve tomar o remédio para diabete...",
+          "resposta_prontuario": "Paciente diabético, relata alterações visuais e formigamento nos pés.  Encaminhado para avaliação pelo médico. Queixa de sangramento gengival durante escovação.",
+          "feedback_pedagogico": "Para o manejo do paciente diabético, recomenda-se: Realizar adequada e rigorosa anamnese e exame clínico, visando conhecer o grau e o tipo de doença, assim como suas comorbidades. Atentar-se para os principais sinais e sintomas da DM: poliúria, polidipsia, polifagia, glicosúria e perda de peso.(1)\r\nResultados de estudos de coorte transversal e prospectivo são surpreendentemente consistentes: pessoas com diabetes tipo 1 em todas as idades e adultos com diabetes tipo 2 têm doença periodontal mais disseminada ou grave do que indivíduos sem diabetes. Embora pessoas com\r\ndiabetes bem controlado não parecem ter risco aumentado de doença periodontal quando comparadas aquelas pessoas sem diabetes, aqueles com diabetes mal controlado (que correm risco de retinopatia, nefropatia, neuropatia e doenças macrovasculares) têm maior risco de periodontite e perda óssea progressiva. (2)",
+          "referencia_bibliografica": "1.\tBrasil.Ministério da Saúde. A saúde bucal no Sistema Único de Saúde [Internet]. 2018. 342 p. Available from: http://bvsms.saude.gov.br/bvs/publicacoes/saude_bucal_sistema_unico_saude.pdf\r\n2.\tPihlstrom BL, Michalowicz BS, Johnson NW. Periodontal diseases. Lancet [Internet]. 2005 Nov;366(9499):1809–20. Available from: https://linkinghub.elsevier.com/retrieve/pii/S0140673605677288",
+          "tipo": "+"
+        },
+        {
+          "texto": "E o que mais o senhor tem sentido além do formigamento e da vista?",
+          "resposta": "Eu ando com o estômago enjoado, com muito sono, as vezes meu coração começa a bater rápido e sinto falta de ar. Toda hora eu vou urinar, porque fico com sede e tomo água. Minha boca fica muito seca. Minha mulher fala que ando irritado.",
+          "rude": "Mas sua diabetes está alta?",
+          "resposta_prontuario": "Paciente diabético, relata alterações visuais e formigamento nos pés.  Encaminhado para avaliação pelo médico. Queixa de sangramento gengival durante escovação.",
+          "feedback_pedagogico": "Diagnóstico de Diabetes tipo 2: Pacientes com sintomas clássicos de hiperglicemia, tais como poliúria, polidipsia, polifagia e emagrecimento, devem ser submetidos à dosagem de glicemia ao acaso e independente do jejum, não havendo necessidade de confirmação por meio de segunda dosagem caso se verifique glicemia aleatória ≥ 200 mg/dL.(1)",
+          "referencia_bibliografica": "1.\tOliveira JEP de, Júnior RMM, Vencio S. Diretrizes da Sociedade Brasileira de Diabetes 2017-2018 [Internet]. São Paulo; 2017. 383 p. Available from: https://www.diabetes.org.br/profissionais/images/2017/diretrizes/diretrizes-sbd-2017-2018.pdf",
+          "tipo": "+"
+        },
+        {
+          "texto": "E além do sangramento na escovação, o que mais o senhor observou?",
+          "resposta": "Sinto alguns dentes moles. Quando escovo sangra bastante. Semana passada apareceu “sapinho” na minha boca. Hoje já melhorou. Minha mulher fala que estou com mau hálito, mas o médico me explicou que isso era da diabetes.",
+          "rude": "Então se está sangrando, os dentes estão todos caindo?",
+          "resposta_prontuario": "Paciente diabético, relata alterações visuais e formigamento nos pés.  Encaminhado para avaliação pelo médico. Queixa de sangramento gengival durante escovação.",
+          "feedback_pedagogico": "Dentre as principais manifestações bucais dos pacientes diabéticos não controlados estão a xerostomia, glossodinia, hálito cetônico, distúrbios de gustação e doença periodontal. É comum a modificação da flora bucal com tendência a candidíase oral e queilite angular (1,2).",
+          "referencia_bibliografica": "1.AMERICAN DIABETES ASSOCIATION. Diagnosis and classification of\r\ndiabetes mellitus. Diabetes Care, v. 38, p. S8-S16, 2015.\r\n2. Haddad AE, Oliveira AE, Gallottini MHC, Garrido D, Anderson L, Couto TM. Odontologia para pacientes com comprometimento sistêmico [Internet]. EDUFMA, editor. São Luís; 2018. 83 p. Available from: https://ares.unasus.gov.br/acervo/handle/ARES/11551",
+          "tipo": "+"
+        },
+        {
+          "texto": "Seu Mario, você já fez algum tratamento nas gengivas?",
+          "resposta": "Há uns três anos atrás eu vim algumas vezes aqui no posto para fazer tratamento, mas tive que parar porque o horário era difícil para eu vir.",
+          "rude": "Então faz tempo que o senhor não cuida dos dentes?",
+          "resposta_prontuario": "Paciente diabético, relata alterações visuais e formigamento nos pés.  Encaminhado para avaliação pelo médico. Queixa de sangramento gengival durante escovação.",
+          "feedback_pedagogico": "O DM é um dos principais fatores de risco associados a periodontite. Diabéticos podem apresentar manifestações precoces da doença, apresentam maior destruição periodontal, e o risco para que a doença ocorra aumenta com a de- terioração do controle glicêmico e o aumento do tempo de duração do DM. A presença de periodontite pode dificultar o controle da glicemia em diabéticos. É importante que diabéticos sejam alertados quanto à possibilidade de desenvolverem periodontite e orientados a procurar tratamento com o dentista. Sugere-se, também, que o tratamento periodontal pode contribuir para o melhor controle glicêmico de DM2. Muito embora essa relação não seja clara, convém ressaltar que o tratamento periodontal é relevante para interromper o processo de destruição periodontal, diminuir ou controlar a infecção presente, manter os dentes em função adequada e evitar a perda dentária (1).",
+          "referencia_bibliografica": "1. Oliveira JEP de, Júnior RMM, Vencio S. Diretrizes da Sociedade Brasileira de Diabetes 2017-2018 [Internet]. São Paulo; 2017. 383 p. Available from: https://www.diabetes.org.br/profissionais/images/2017/diretrizes/diretrizes-sbd-2017-2018.pdf",
+          "tipo": "+"
+        }
+      ],
+      "perguntas_neutras": [
+        {
+          "texto": "Que tipo de escova o senhor usa, cerdas macias ou duras?",
+          "resposta": "Acho que é dura, não sei.",
+          "rude": "",
+          "resposta_prontuario": null,
+          "feedback_pedagogico": "O paciente diabético deve ser acompanhado com uma frequência maior do que aqueles pacientes não-diabéticos. Nas consultas de retorno, é importante estimular e reforçar a importância do cuidado bucal preventivo com higiene bucal rigorosa com uso de escovas macias, uso de fio dental, dentifrícios e enxaguatórios etc. e acompanhar os parâmetros periodontais para verificar a progressão ou não da doença periodontal (1).",
+          "referencia_bibliografica": "1. Nery CF. Diabetes e a relação com as doenças periodontais. Perionews. 2008;178–83.",
+          "tipo": "0"
+        },
+        {
+          "texto": "O senhor acha que o sangramento aumentou nos últimos meses?",
+          "resposta": "Sim, aumentou sim.",
+          "rude": "",
+          "resposta_prontuario": null,
+          "feedback_pedagogico": "As manifestações clínicas de periodontite em diabéticos são mais pronunciadas. Diabéticos que apresentam manifestações precoces da doença, apresentam maior destruição periodontal. Os casos mais avançados de periodontite severa podem culminar com perda dentária, em pacientes diabéticos ou não. Entretanto, foi demonstrado em diferentes populações que a perda dentária total ou parcial está associada ao pobre controle glicêmico do\r\nDM.",
+          "referencia_bibliografica": "1.Oliveira JEP de, Júnior RMM, Vencio S. Diretrizes da Sociedade Brasileira de Diabetes 2017-2018 [Internet]. São Paulo; 2017. 383 p. Available from: https://www.diabetes.org.br/profissionais/images/2017/diretrizes/diretrizes-sbd-2017-2018.pdf",
+          "tipo": "0"
+        }
+      ],
+      "perguntas_negativas": [
+        {
+          "texto": "O senhor já perdeu algum dente por causa da diabetes?",
+          "resposta": "Não sei se foi por causa da diabetes. Mas extrai um dente da última vez que vim no dentista. Estava mole e o dentista falou que precisava extrair.",
+          "rude": "",
+          "resposta_prontuario": null,
+          "feedback_pedagogico": "As perdas dentárias podem ocorrer nos casos mais avançados da doença periodontal sendo demonstrado que a perda dentária total ou parcial está associada ao pobre controle glicêmico do diabetes. O tratamento periodontal é relevante para interromper o processo de destruição periodontal, diminuir ou controlar a infecção presente, manter os dentes em função adequada e evitar a perda dentária.",
+          "referencia_bibliografica": "1. Oliveira JEP de, Júnior RMM, Vencio S. Diretrizes da Sociedade Brasileira de Diabetes 2017-2018 [Internet]. São Paulo; 2017. 383 p. Available from: https://www.diabetes.org.br/profissionais/images/2017/diretrizes/diretrizes-sbd-2017-2018.pdf",
+          "tipo": "-"
+        }
+      ]
+    },
+    "exame_fisico": {
+      "observacao": "Exame Físico do caso 'Atendimento odontológico em paciente diabético'",
+      "exames_positivos": [
+        {
+          "nome": "Exame intrabucal da condição periodontal",
+          "resultado": "Presença de Doença periodontal avançada com mobilidade dentária",
+          "resultado_prontuario": null,
+          "arquivo": null,
+          "tipo": "+",
+          "feedback_pedagogico": "A doença periodontal encontra-se presente em 75% dos pacientes com DM e pode ser considerada como uma complicação microvascular do diabetes. Deve-se atentar para as manifestações bucais observadas na pessoa com DM que, embora não sejam específicas da doença, têm sua incidência ou progressão favorecida pelo descontrole glicêmico. No exame clínico intrabucal a condição periodontal pode ser avaliada pelo índice periodontal comunitário (IPC). (1,2)",
+          "referencia_bibliografica": "1.\tBrasil. Ministério da Saúde. A saúde bucal no Sistema Único de Saúde [Internet]. 2018. 342 p. Available from: http://bvsms.saude.gov.br/bvs/publicacoes/saude_bucal_sistema_unico_saude.pdf\r\n2.\tBRASIL. Ministério da Saúde. Estratégias para o cuidado da pessoa com doença crônica: diabetes mellitus. 2013. 160 p.",
+          "custo_financeiro": 1
+        },
+        {
+          "nome": "Exame clínico da mucosa bucal",
+          "resultado": "Presença de manifestações bucais comuns em pacientes com DM (xerostomia e candidíase) relatadas pelo paciente",
+          "resultado_prontuario": null,
+          "arquivo": null,
+          "tipo": "+",
+          "feedback_pedagogico": "A xerostomia apresenta-se como uma das manifestações bucais comumente encontradas no DM. Tende a se agravar em fases de descontrole metabólico. Já a candidíase é uma infecção fúngica oportunista freqüente na presença de DM não controlado.",
+          "referencia_bibliografica": "1.\tBRASIL. Ministério da Saúde. Estratégias para o cuidado da pessoa com doença crônica: diabetes mellitus. 2013. 160 p.\r\n2.\tBrasil.Ministério da Saúde. A saúde bucal no Sistema Único de Saúde [Internet]. 2018. 342 p. Available from: http://bvsms.saude.gov.br/bvs/publicacoes/saude_bucal_sistema_unico_saude.pdf",
+          "custo_financeiro": 1
+        }
+      ],
+      "exames_neutros": [
+        {
+          "nome": "Exame clínico intrabucal detecção cárie",
+          "resultado": "Ausência de lesões de cárie.",
+          "resultado_prontuario": null,
+          "arquivo": null,
+          "tipo": "0",
+          "feedback_pedagogico": "Existe controvérsia sobre a associação entre DM e cárie dentária. Estudos que compararam a frequência de cárie entre indivíduos com DM e sem o distúrbio metabólico tiveram achados discrepantes não havendo consenso se os primeiros apresentariam ou não maior susceptibilidade.",
+          "referencia_bibliografica": "1. BRASIL. Ministério da Saúde. Estratégias para o cuidado da pessoa com doença crônica: diabetes mellitus. 2013. 160 p.",
+          "custo_financeiro": 1
+        },
+        {
+          "nome": "Exame físico extraoral: palpação",
+          "resultado": "Sem alterações",
+          "resultado_prontuario": "Sem alterações",
+          "arquivo": null,
+          "tipo": "0",
+          "feedback_pedagogico": "A palpação deve abranger todas as estruturas extra e intrabucais sob a responsabilidade do dentista. e, inclusive as mais afastadas que possam apresentar alterações tributárias ou não dos tecidos bucais. Na Periodontite necrosante, processo inflamatório do periodonto caracterizado por necrose/ulceração da papila interdental, sangramento gengival, halitose, dor e perda óssea rápida, podem ocorrer outros sinais/sintomas associados que incluem formação de pseudomembrana, linfadenopatia e febre.",
+          "referencia_bibliografica": "1.\tBrasil.Ministério da Saúde. A saúde bucal no Sistema Único de Saúde [Internet]. 2018. 342 p. Available from: http://bvsms.saude.gov.br/bvs/publicacoes/saude_bucal_sistema_unico_saude.pdf\r\n2.\tSTEFFENS JP, MARCANTONIO RAC. Classificação das Doenças e Condições Periodontais e Peri-implantares 2018: guia Prático e Pontos-Chave. Rev Odontol da UNESP. 2018;47(4):189–97.",
+          "custo_financeiro": 1
+        }
+      ],
+      "exames_negativos": [
+        {
+          "nome": "Avaliação temperatura corporal",
+          "resultado": "Sem alterações",
+          "resultado_prontuario": null,
+          "arquivo": null,
+          "tipo": "-",
+          "feedback_pedagogico": "A temperatura corporal é um dos indicadores utilizados na avaliação diagnóstica da descompensação da DM (1). Por sua vez na Periodontite necrosante, processo inflamatório do periodonto caracterizado por necrose/ulceração da papila interdental, sangramento gengival, halitose, dor e perda óssea rápida, podem ocorrer outros sinais/sintomas associados que incluem formação de pseudomembrana, linfadenopatia e febre (2).",
+          "referencia_bibliografica": "1.\tBRASIL. Ministério da Saúde. Estratégias para o cuidado da pessoa com doença crônica: diabetes mellitus. 2013. 160 p.\r\n2.\tSTEFFENS JP, MARCANTONIO RAC. Classificação das Doenças e Condições Periodontais e Peri-implantares 2018: guia Prático e Pontos-Chave. Rev Odontol da UNESP. 2018;47(4):189–97.",
+          "custo_financeiro": 1
+        }
+      ],
+      "desafios": []
+    },
+    "diagnostico_inicial": {
+      "observacao": "Diagnostico Inicial do caso 'Atendimento odontológico em paciente diabético'",
+      "diagnosticos_positivos": [
+        {
+          "texto": "Periodontite em paciente diabético",
+          "feedback_pedagogico": "Paciente relatou ser diabético com controle metabólico deficiente; sintomas frequentes e complicações do Diabetes. Manifestações bucais: presença de doença periodontal severa, candidíase, xerostomia, hálito cetônico.",
+          "referencia_bibliografica": "1.\tBrasil.Ministério da Saúde. A saúde bucal no Sistema Único de Saúde [Internet]. 2018. 342 p. Available from: http://bvsms.saude.gov.br/bvs/publicacoes/saude_bucal_sistema_unico_saude.pdf\r\n2.\tNery CF. Diabetes e a relação com as doenças periodontais. Perionews. 2008;178–83.\r\n3.\tBRASIL. Ministério da Saúde. Estratégias para o cuidado da pessoa com doença crônica: diabetes mellitus. 2013. 160 p.",
+          "tipo": "+"
+        }
+      ],
+      "diagnosticos_neutros": [
+        {
+          "texto": "Gengivite em paciente diabético",
+          "feedback_pedagogico": "Paciente relatou ser diabético. Exames laboratoriais ainda não concluidos. Paciente relatou ser diabético com controle metabólico deficiente; sintomas frequentes e complicações do Diabetes. Manifestações bucais: presença de doença periodontal severa, candidíase, xerostomia, hálito cetônico.",
+          "referencia_bibliografica": "1.Brasil.Ministério da Saúde. A saúde bucal no Sistema Único de Saúde [Internet]. 2018. 342 p. Available from: http://bvsms.saude.gov.br/bvs/publicacoes/saude_bucal_sistema_unico_saude.pdf\r\n2.Nery CF. Diabetes e a relação com as doenças periodontais. Perionews. 2008;178–83.\r\n3.BRASIL. Ministério da Saúde. Estratégias para o cuidado da pessoa com doença crônica: diabetes mellitus. 2013. 160 p.",
+          "tipo": "0"
+        }
+      ],
+      "diagnosticos_negativos": [
+        {
+          "texto": "Gengivite em paciente pré diabético",
+          "feedback_pedagogico": "Paciente relatou ser diabético com controle metabólico deficiente; aguarda resultados laboratoriais. Apresenta sintomas frequentes e complicações do Diabetes. Manifestações bucais: presença de doença periodontal, candidíase, xerostomia, hálito cetônico.",
+          "referencia_bibliografica": "1.Brasil.Ministério da Saúde. A saúde bucal no Sistema Único de Saúde [Internet]. 2018. 342 p. Available from: http://bvsms.saude.gov.br/bvs/publicacoes/saude_bucal_sistema_unico_saude.pdf\r\n2.Nery CF. Diabetes e a relação com as doenças periodontais. Perionews. 2008;178–83.\r\n3.BRASIL. Ministério da Saúde. Estratégias para o cuidado da pessoa com doença crônica: diabetes mellitus. 2013. 160 p.",
+          "tipo": "-"
+        }
+      ]
+    },
+    "exame_complementar": {
+      "observacao": "Exame Complementar do caso 'Atendimento odontológico em paciente diabético'",
+      "exames_positivos": [
+        {
+          "nome": "Aferição da glicemia capilar",
+          "resultado": ">250 mg/dl",
+          "resultado_prontuario": "Glicemia capilar >250 mg/dl",
+          "arquivo": null,
+          "tipo": "+",
+          "feedback_pedagogico": "A anamnese do paciente odontológico com diabetes deve ser detalhada e avaliadas as condições gerais. Atenção principal deve ser dada aos níveis recentes de glicemia de jejum e de hemoglobina glicada, tipo e posologia dos medicamentos antidiabetogênicos e comorbidades presentes. Antes de iniciar a consulta odontológica, mesmo que os procedimentos a serem realizados sejam não invasivos, é prudente aferir a glicemia capilar, considerando sempre as informações do paciente sobre hora e dose do medicamento ingerido e a hora da última ingestão alimentar.",
+          "referencia_bibliografica": "1.\tHaddad AE, Oliveira AE, Gallottini MHC, Garrido D, Anderson L, Couto TM. Odontologia para pacientes com comprometimento sistêmico [Internet]. EDUFMA, editor. São Luís; 2018. 83 p. Available from: https://ares.unasus.gov.br/acervo/handle/ARES/11551\r\n2.\tBrasil.Ministério da Saúde. A saúde bucal no Sistema Único de Saúde [Internet]. 2018. 342 p. Available from: http://bvsms.saude.gov.br/bvs/publicacoes/saude_bucal_sistema_unico_saude.pdf",
+          "custo_financeiro": 1
+        }
+      ],
+      "exames_neutros": [
+        {
+          "nome": "Radiografia panorâmica",
+          "resultado": "Presença de perda óssea severa.",
+          "resultado_prontuario": null,
+          "arquivo": null,
+          "tipo": "0",
+          "feedback_pedagogico": "Para realização do tratamento da doença periodontal, solicitar:\r\nRadiografia periapical de áreas com ≥ 2/3 do comprimento da raiz com perda de inserção (em até três áreas radiografáveis).\r\nRadiografia panorâmica em indivíduos com ≥ 2/3 do comprimento da raiz com perda de inserção generalizada (que não pode ser radiografado em três filmes radiográficos).",
+          "referencia_bibliografica": "1. Brasil.Ministério da Saúde. A saúde bucal no Sistema Único de Saúde [Internet]. 2018. 342 p. Available from: http://bvsms.saude.gov.br/bvs/publicacoes/saude_bucal_sistema_unico_saude.pdf",
+          "custo_financeiro": 1
+        }
+      ],
+      "exames_negativos": [
+        {
+          "nome": "Ressonância nuclear magnética (RNM) craniofacial",
+          "resultado": "Perda óssea região de maxila e mandíbula",
+          "resultado_prontuario": null,
+          "arquivo": null,
+          "tipo": "-",
+          "feedback_pedagogico": "Para casos de cirurgia em geral, solicitar exames de imagens, como:  Radiografias periapicais, oclusais, panorâmica, cefalometrias de perfil e frontal, demais radiografias craniofaciais.\r\nTomografias computadorizadas helicoidais craniofaciais, tomografias computadorizadas de feixe cônico (cone beam para cirurgias de implantes) craniofaciais.\r\nRessonância nuclear magnética (RNM) craniofacial com ou sem contraste.",
+          "referencia_bibliografica": "1.\tBrasil.Ministério da Saúde. A saúde bucal no Sistema Único de Saúde [Internet]. 2018. 342 p. Available from: http://bvsms.saude.gov.br/bvs/publicacoes/saude_bucal_sistema_unico_saude.pdf",
+          "custo_financeiro": 3
+        }
+      ],
+      "desafios": [
+        {
+          "descricao": "Dificuldade de agendamento – tempo de espera longo",
+          "feedback_pedagogico": "",
+          "referencia_bibliografica": ""
+        }
+      ]
+    },
+    "diagnostico_final": {
+      "observacao": "Diagnostico Final do caso 'Atendimento odontológico em paciente diabético'",
+      "diagnosticos": [
+        {
+          "texto": "Periodontite em paciente diabético",
+          "feedback_pedagogico": "Paciente relatou ser diabético com controle metabólico deficiente; sintomas frequentes e complicações do Diabetes. Manifestações bucais: presença de doença periodontal severa, candidíase, xerostomia, hálito cetônico.",
+          "referencia_bibliografica": "1.\tBrasil.Ministério da Saúde. A saúde bucal no Sistema Único de Saúde [Internet]. 2018. 342 p. Available from: http://bvsms.saude.gov.br/bvs/publicacoes/saude_bucal_sistema_unico_saude.pdf\r\n2.\tNery CF. Diabetes e a relação com as doenças periodontais. Perionews. 2008;178–83.\r\n3.\tBRASIL. Ministério da Saúde. Estratégias para o cuidado da pessoa com doença crônica: diabetes mellitus. 2013. 160 p.",
+          "tipo": "+"
+        }
+      ]
+    },
+    "comunicacao_diagnostico": {
+      "comunicacoes": [
+        {
+          "diagnostico": {
+            "texto": "Periodontite em paciente diabético",
+            "feedback_pedagogico": "Paciente relatou ser diabético com controle metabólico deficiente; sintomas frequentes e complicações do Diabetes. Manifestações bucais: presença de doença periodontal severa, candidíase, xerostomia, hálito cetônico.",
+            "referencia_bibliografica": "1.\tBrasil.Ministério da Saúde. A saúde bucal no Sistema Único de Saúde [Internet]. 2018. 342 p. Available from: http://bvsms.saude.gov.br/bvs/publicacoes/saude_bucal_sistema_unico_saude.pdf\r\n2.\tNery CF. Diabetes e a relação com as doenças periodontais. Perionews. 2008;178–83.\r\n3.\tBRASIL. Ministério da Saúde. Estratégias para o cuidado da pessoa com doença crônica: diabetes mellitus. 2013. 160 p.",
+            "tipo": "+"
+          },
+          "tratamento": null,
+          "adequada": "Sr Mario, vamos precisar fazer um tratamento odontológico para o problema de gengiva do senhor, para você não perder os dentes e isso vai ajudar no seu tratamento de diabetes.",
+          "inadequada": "O senhor tem um problema muito grave na boca e vai perder todos os dentes se não seguir o tratamento e sua diabetes pode até piorar."
+        }
+      ]
+    },
+    "tratamento": {
+      "condutas_positivas": [
+        {
+          "nome": "Procedimento de controle da doença periodontal",
+          "tipo": "+",
+          "feedback_pedagogico": "Paciente de alto risco - diabetes não compensado procedimento de controle da doença periodontal . Somente podem ser realizados exame/radiografias e instruções sobre higiene bucal. Demais procedimentos devem ser adiados até rigoroso controle do estado metabólico e das infecções bucais. Em todos os casos, o dentista deve tentar reduzir o estresse do paciente diabético. Quando possível convém fazer consultas de curta duração, considerando-se, ainda, a utilização de técnicas alternativas de sedação. O paciente deve ter sua consulta marcada para o meio da manhã, devendo ser instruído para alimentar-se normalmente no início do dia, ficando minimizada a possibilidade de hipoglicemia durante o procedimento dentário;\r\nExceção para infecção dentária ativa: executar procedimento mais simples para controle.",
+          "referencia_bibliografica": null,
+          "custo_financeiro": 1
+        }
+      ],
+      "condutas_negativas": [
+        {
+          "nome": "cirurgia com retalho",
+          "tipo": "-",
+          "feedback_pedagogico": "Paciente de alto risco - diabetes não compensado procedimento de controle da doença periodontal . Somente podem ser realizados exame/radiografias e instruções sobre higiene bucal. Demais procedimentos devem ser adiados até rigoroso controle do estado metabólico e das infecções bucais. Em todos os casos, o dentista deve tentar reduzir o estresse do paciente diabético. Quando possível convém fazer consultas de curta duração, considerando-se, ainda, a utilização de técnicas alternativas de sedação. O paciente deve ter sua consulta marcada para o meio da manhã, devendo ser instruído para alimentar-se normalmente no início do dia, ficando minimizada a possibilidade de hipoglicemia durante o procedimento dentário;\r\nExceção para infecção dentária ativa: executar procedimento mais simples para controle.",
+          "referencia_bibliografica": null,
+          "custo_financeiro": 3
+        }
+      ],
+      "condutas_neutras": [
+        {
+          "nome": "profilaxia supra gengival, raspagem e polimento radicular",
+          "tipo": "0",
+          "feedback_pedagogico": "Paciente de alto risco - diabetes não compensado procedimento de controle da doença periodontal . Somente podem ser realizados exame/radiografias e instruções sobre higiene bucal. Demais procedimentos devem ser adiados até rigoroso controle do estado metabólico e das infecções bucais. Em todos os casos, o dentista deve tentar reduzir o estresse do paciente diabético. Quando possível convém fazer consultas de curta duração, considerando-se, ainda, a utilização de técnicas alternativas de sedação. O paciente deve ter sua consulta marcada para o meio da manhã, devendo ser instruído para alimentar-se normalmente no início do dia, ficando minimizada a possibilidade de hipoglicemia durante o procedimento dentário;\r\nExceção para infecção dentária ativa: executar procedimento mais simples para controle.",
+          "referencia_bibliografica": null,
+          "custo_financeiro": 3
+        }
+      ]
+    },
+    "comunicacao_tratamento": {
+      "comunicacoes": [
+        {
+          "diagnostico": null,
+          "tratamento": {
+            "condutas_positivas": [
+              {
+                "nome": "Procedimento de controle da doença periodontal",
+                "tipo": "+",
+                "feedback_pedagogico": "Paciente de alto risco - diabetes não compensado procedimento de controle da doença periodontal . Somente podem ser realizados exame/radiografias e instruções sobre higiene bucal. Demais procedimentos devem ser adiados até rigoroso controle do estado metabólico e das infecções bucais. Em todos os casos, o dentista deve tentar reduzir o estresse do paciente diabético. Quando possível convém fazer consultas de curta duração, considerando-se, ainda, a utilização de técnicas alternativas de sedação. O paciente deve ter sua consulta marcada para o meio da manhã, devendo ser instruído para alimentar-se normalmente no início do dia, ficando minimizada a possibilidade de hipoglicemia durante o procedimento dentário;\r\nExceção para infecção dentária ativa: executar procedimento mais simples para controle.",
+                "referencia_bibliografica": null,
+                "custo_financeiro": 1
+              }
+            ],
+            "condutas_negativas": [
+              {
+                "nome": "cirurgia com retalho",
+                "tipo": "-",
+                "feedback_pedagogico": "Paciente de alto risco - diabetes não compensado procedimento de controle da doença periodontal . Somente podem ser realizados exame/radiografias e instruções sobre higiene bucal. Demais procedimentos devem ser adiados até rigoroso controle do estado metabólico e das infecções bucais. Em todos os casos, o dentista deve tentar reduzir o estresse do paciente diabético. Quando possível convém fazer consultas de curta duração, considerando-se, ainda, a utilização de técnicas alternativas de sedação. O paciente deve ter sua consulta marcada para o meio da manhã, devendo ser instruído para alimentar-se normalmente no início do dia, ficando minimizada a possibilidade de hipoglicemia durante o procedimento dentário;\r\nExceção para infecção dentária ativa: executar procedimento mais simples para controle.",
+                "referencia_bibliografica": null,
+                "custo_financeiro": 3
+              }
+            ],
+            "condutas_neutras": [
+              {
+                "nome": "profilaxia supra gengival, raspagem e polimento radicular",
+                "tipo": "0",
+                "feedback_pedagogico": "Paciente de alto risco - diabetes não compensado procedimento de controle da doença periodontal . Somente podem ser realizados exame/radiografias e instruções sobre higiene bucal. Demais procedimentos devem ser adiados até rigoroso controle do estado metabólico e das infecções bucais. Em todos os casos, o dentista deve tentar reduzir o estresse do paciente diabético. Quando possível convém fazer consultas de curta duração, considerando-se, ainda, a utilização de técnicas alternativas de sedação. O paciente deve ter sua consulta marcada para o meio da manhã, devendo ser instruído para alimentar-se normalmente no início do dia, ficando minimizada a possibilidade de hipoglicemia durante o procedimento dentário;\r\nExceção para infecção dentária ativa: executar procedimento mais simples para controle.",
+                "referencia_bibliografica": null,
+                "custo_financeiro": 3
+              }
+            ]
+          },
+          "adequada": "Sr Mario, até que consigamos estabilizar sua diabetes vamos fazer procedimentos de controle do seu problema de gengiva.",
+          "inadequada": "Se o senhor não tomar o remédio de diabetes não conseguiremos fazer o tratamento de sua boca."
+        }
+      ]
+    },
+    "conteudista": {
+      "username": "deise.garrido",
+      "email": "deisegarrido@usp.br",
+      "groups": [],
+      "first_name": "Deise",
+      "last_name": "Garrido"
+    }
+  }
+]

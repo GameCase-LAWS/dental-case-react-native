@@ -1,0 +1,33 @@
+{
+  "expo": {
+    "name": "Dental Case",
+    "slug": "dental-case",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./app/assets/icons/icon.png",
+    "splash": {
+      "image": "./app/assets/icons/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "updates": {
+      "fallbackToCacheTimeout": 0
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "android": {
+      "package": "com.unasus.dentalcase",
+      "versionCode": 1
+    },
+     "ios": {
+      "supportsTablet": true,
+      "requireFullScreen": true,
+      "bundleIdentifier": "com.unasus.dentalcase",
+      "buildNumber": "0.0.1"
+    },
+    "web": {
+      "favicon": "./app/assets/icons/favicon.png"
+    }
+  }
+}
