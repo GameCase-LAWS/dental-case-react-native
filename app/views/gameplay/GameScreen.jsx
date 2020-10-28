@@ -1,15 +1,18 @@
 import React from 'react';
-import { View, Image, ImageBackground, TouchableOpacity, Animated, StyleSheet } from 'react-native';
+import { View, Image, ImageBackground, TouchableOpacity, Animated, StyleSheet, Dimensions } from 'react-native';
 import { styles, appColors, windowWidth } from '../../styles';
 import { Cases } from '../../services/firestore';
 import { StepButton } from '../../components/StepButton';
 import { Typography } from '../../components/Typography';
 import { CircleButton } from '../../components/CircleButton';
 import { ArrowIcon } from '../../assets/icons';
-import { shuffle, mapForAnamense, mapForExame, mapForConduta, mapForDiagnostico, mapForComunicacoes, getScore, getMaxScore } from '../../tools/functions';
+import { shuffle, mapForAnamense, mapForExame, mapForConduta, mapForDiagnostico, mapForComunicacoes, getScore, getMaxScore, findObjectInListByTag } from '../../tools/functions';
 import { CheckBox } from '../../components/CheckBox';
 import { Modal } from '../../components/Modal';
 import { AlertScreen } from '../dialogs/AlertScreen';
+import { Container } from '../../components/Container';
+import { meansure } from '../../tools/resolution';
+import { ConfigurationScreen } from '../dialogs/ConfigurationScreen';
 
 const image = { uri: "https://reactjs.org/logo-og.png" };
 
@@ -20,33 +23,14 @@ const HelpImage = require('../../assets/images/help.png');
 const HomeImage = require('../../assets/images/home.png');
 const MedicalRecordImage = require('../../assets/images/record.png');
 
-const steps = [
-  'queixa', // 0
-  'anamnese', // 1
-  'exame_clinico', // 2
-  'diagnostico', // 3
-  'exame_complementar', // 4
-  'diagnostico', // 5
-  'tratamento', // 6
-  'comunicacao' // 7
-];
-
-const speechs = [
-  "Iniciando um novo dia de trabalho... Que casos vou atender hoje?",
-  "Que perguntas farei na anamnese?",
-  "Quais exames clínicos vou realizar?",
-  "De acordo com os exames clínicos, minha hipótese diagnóstica é...",
-  "Quais exames complementares vou pedir?",
-  "O diagnóstico para este caso é...",
-  "De acordo com os exames e diagnóstico, eu irei...",
-  "O que direi ao paciente?"
-];
+const gameplayScreenplay = require('../../screenplay/gameplay.json');
 
 const IsPlayerSpeech = (step) => step <= 1 || step >= 6;
 const IsPatientSpeech = (step) => step <= 1 || step >= 6;
 
 export const GameScreen = ({ route, navigation, ...props }) => {
-  const [currentCase, setCurrentCase] = React.useState(require('../../test/cases.json')[0]);
+  const currentCase = route.params.caso;
+
   const [currentStep, setCurrentStep] = React.useState(1);
   const [gameData, setGameData] = React.useState(null);
   const [speechDone, setSpeechDone] = React.useState(false);
@@ -56,12 +40,16 @@ export const GameScreen = ({ route, navigation, ...props }) => {
     visible: false
   });
   const [paginationIndex, setPaginationIndex] = React.useState(0);
-  const [modalVisible, setModalVisible] = React.useState(false);
+  const [modal, setModal] = React.useState({
+    visible: false,
+    modal: null
+  });
+
   const scoreAnim = React.useRef(new Animated.Value(0)).current;
 
   const getOptions = () => {
-    const { options } = gameData[steps[currentStep]];
-    if (!options) { console.log("No options for " + steps[currentStep]) }
+    const { options } = gameData[gameplayScreenplay.etapas[currentStep].key];
+    if (!options) { console.log("No options for " + gameplayScreenplay.etapas[currentStep].key) }
     return options || [];
   }
 
@@ -87,7 +75,11 @@ export const GameScreen = ({ route, navigation, ...props }) => {
         exame_complementar: { options: optionsShuffled.exame_complementar, score: 0, maxScore: getMaxScore(optionsShuffled.exame_complementar), aux: {} },
         diagnostico: { options: optionsShuffled.diagnostico, score: 0, maxScore: getMaxScore(optionsShuffled.diagnostico), aux: {} },
         tratamento: { options: optionsShuffled.tratamento, score: 0, maxScore: getMaxScore(optionsShuffled.tratamento), aux: {} },
-        comunicacao: { options: optionsShuffled.comunicacao, score: 0, maxScore: 90 }
+        comunicacao: { options: optionsShuffled.comunicacao, score: 0, maxScore: 90 },
+        images: {
+          background: findObjectInListByTag(currentCase.imagens, 'identificador', 'default-background').arquivo.replace(/(\/media)+/, '/media'),
+          character: findObjectInListByTag(currentCase.imagens, 'identificador', 'default-character').arquivo.replace(/(\/media)+/, '/media')
+        }
       });
     }
 
@@ -97,6 +89,20 @@ export const GameScreen = ({ route, navigation, ...props }) => {
   const handleRecordPress = () => navigation.navigate('MedicalRecord', {
     data: gameData
   });
+
+  function handleMenu() {
+    setModal({
+      visible: true,
+      modal: <AlertScreen message={'Voltar para o menu?'} onConfirm={() => navigation.navigate('Menu')} />
+    });
+  }
+
+  function handleConfiguration() {
+    setModal({
+      visible: true,
+      modal: <ConfigurationScreen />
+    });
+  }
 
   const handlePaginationPress = () => {
     if (speechDone) {
@@ -113,7 +119,7 @@ export const GameScreen = ({ route, navigation, ...props }) => {
   const handleOptionPress = (optionIndex) => () => {
     const option = getOptions()[optionIndex];
     setGameData(old => {
-      const stepData = old[steps[currentStep]];
+      const stepData = old[gameplayScreenplay.etapas[currentStep].key];
       stepData.options[optionIndex] = { ...option, checked: true };
       stepData.score += getScore(option);
       Animated.timing(scoreAnim, {
@@ -147,16 +153,15 @@ export const GameScreen = ({ route, navigation, ...props }) => {
   const handleOptionPressAsRadio = (optionIndex) => () => {
     const option = getOptions()[optionIndex];
     setGameData(old => {
-      const stepData = old[steps[currentStep]];
+      const stepData = old[gameplayScreenplay.etapas[currentStep].key];
       stepData.options = stepData.options.map((o, i) => ({ ...o, checked: i === optionIndex }))
       if (currentStep === 3) {
         stepData.aux.initialDiagnosis = option;
-        stepData.score = 2 * getScore(option);
-      } else {
-        stepData.score = getScore(stepData.aux.initialDiagnosis) + getScore(option);
+
       }
+      stepData.score = getScore(option);
       stepData.aux.finalDiagnosis = option;
-      return { ...old, [steps[currentStep]]: { ...stepData, aux: { ...stepData.aux, initial: stepData[optionIndex] } } };
+      return { ...old, [gameplayScreenplay.etapas[currentStep].key]: { ...stepData, aux: { ...stepData.aux, initial: stepData[optionIndex] } } };
     });
   }
 
@@ -169,7 +174,7 @@ export const GameScreen = ({ route, navigation, ...props }) => {
     }
     setCurrentStep(old => {
       ++old;
-      if (gameData[steps[old].length === 0]) {
+      if (gameData[gameplayScreenplay.etapas[old].key].length === 0) {
         ++old;
       }
       return old;
@@ -195,32 +200,32 @@ export const GameScreen = ({ route, navigation, ...props }) => {
 
   console.log('render');
   return (
-    <View style={{ flex: 1 }}>
-      <ImageBackground style={{ flex: 1 }} source={image}>
-        <ImageBackground style={{ flex: 1 }} source={{ uri: 'https://www.justica.gov.br/imagens/coracao.png/@@images/image.png' }} resizeMode="contain">
+    <Container containerStyle={{ backgroundColor: 'black' }}>
+      <ImageBackground style={styles.flex} source={{ uri: gameData.images.background }}>
+        <ImageBackground style={styles.flex} source={{ uri: gameData.images.character }} resizeMode="contain">
           {/* Ícone de prontuário (direita) */}
-          <CircleButton size={75} style={{ position: 'absolute', top: 30, left: 30 }} onPress={handleRecordPress}>
-            <Image source={MedicalRecordImage} style={{ height: 45, width: 45 }} resizeMode='contain' />
+          <CircleButton size={meansure(5)} style={{ position: 'absolute', top: meansure(2), left: meansure(2) }} onPress={handleRecordPress}>
+            <Image source={MedicalRecordImage} style={{ height: meansure(3), width: meansure(3) }} resizeMode='contain' />
           </CircleButton>
 
           {/* Ícones brancos da esquerda */}
-          <View style={[styles.spacedRow, { width: 175, position: 'absolute', top: 30, right: 105 }]}>
-            <CircleButton size={45}>
-              <Image source={HelpImage} style={{ height: 30, width: 30 }} resizeMode='contain' />
+          <View style={[styles.spacedRow, { position: 'absolute', top: meansure(2), right: meansure(7) }]}>
+            <CircleButton size={meansure(3)} style={{ marginRight: meansure(1) }}>
+              <Image source={HelpImage} style={{ height: meansure(2), width: meansure(2) }} resizeMode='contain' />
             </CircleButton>
-            <CircleButton size={45} onPress={() => setModalVisible(true)}>
-              <Image source={HomeImage} style={{ height: 30, width: 30 }} resizeMode='contain' />
+            <CircleButton size={meansure(3)} style={{ marginRight: meansure(1) }} onPress={handleMenu}>
+              <Image source={HomeImage} style={{ height: meansure(2), width: meansure(2) }} resizeMode='contain' />
             </CircleButton>
-            <CircleButton size={45}>
-              <Image source={CogImage} style={{ height: 30, width: 30 }} resizeMode='contain' />
+            <CircleButton size={meansure(3)} onPress={handleConfiguration}>
+              <Image source={CogImage} style={{ height: meansure(2), width: meansure(2) }} resizeMode='contain' />
             </CircleButton>
           </View>
 
           {/* Barra de pontuação */}
-          <View style={{ position: 'absolute', right: 30, top: 30, borderRadius: 15, backgroundColor: appColors.cardGray, overflow: 'hidden', flexDirection: 'column-reverse', width: 30, height: 240 }}>
+          <View style={styles.scoreBar}>
             <Animated.View style={{
               height: currentStep === 0 ? 0 : scoreAnim.interpolate({
-                inputRange: [0, gameData[steps[currentStep]].maxScore],
+                inputRange: [0, gameData[gameplayScreenplay.etapas[currentStep].key].maxScore],
                 outputRange: ['0%', '100%'],
                 extrapolate: 'clamp'
               }),
@@ -230,24 +235,18 @@ export const GameScreen = ({ route, navigation, ...props }) => {
 
           {/* Caixa de feedback do paciente e resultado de exames */}
           {feedbackContent.visible && (
-            <View
-              style={{
-                position: 'absolute', right: 105, bottom: 340, width: 300, paddingHorizontal: 30,
-                paddingVertical: 15, minHeight: 90, backgroundColor: feedbackContent.isSpeech ? '#ACDCCE' : appColors.cardGray,
-                alignItems: 'center', justifyContent: 'center', borderRadius: 30
-              }}
-            >
+            <View style={[styles.feedbackBox, { backgroundColor: feedbackContent.isSpeech ? '#ACDCCE' : appColors.cardGray }]}>
               <Typography>{feedbackContent.text}</Typography>
             </View>
           )}
 
           {/* Caixa de fala e pensamento do jogador */}
-          <View style={[gameStyles.playerSpeechThinkBox, { zIndex: speechDone ? 0 : 1, backgroundColor: speechDone ? '#ACDCCE' : '#FFF' }]}>
+          <View style={[gameStyles.playerSpeechThinkBox, { zIndex: speechDone ? -1 : 1, backgroundColor: speechDone ? '#ACDCCE' : '#FFF', paddingLeft: meansure(speechDone ? 6 : 4) }]}>
             <View style={[styles.spacedRow, { flexGrow: 1 }]}>
               {!speechDone
                 ? (
                   <View style={{ flexShrink: 1, justifyContent: 'center' }}>
-                    <Typography variant="header34">{speechs[currentStep]}</Typography>
+                    <Typography variant="header34">{gameplayScreenplay.etapas[currentStep].fala_inicial}</Typography>
                   </View>
                 )
                 : (
@@ -288,10 +287,10 @@ export const GameScreen = ({ route, navigation, ...props }) => {
                 )
               }
 
-              <View style={{ justifyContent: 'center', alignItems: 'center', marginLeft: 30 }}>
+              <View style={{ justifyContent: 'center', alignItems: 'center', marginLeft: meansure(2) }}>
                 {(!speechDone || currentStep !== 3 || gameData.diagnostico.options.filter(d => d.checked).length !== 0) && (
                   <TouchableOpacity activeOpacity={0.9} onPress={handlePaginationPress}>
-                    <ArrowIcon color='#1BA488' width={60} height={90} />
+                    <ArrowIcon color='#1BA488' width={meansure(4)} height={meansure(6)} />
                   </TouchableOpacity>
                 )}
               </View>
@@ -335,43 +334,47 @@ export const GameScreen = ({ route, navigation, ...props }) => {
         </ImageBackground>
       </ImageBackground>
 
-      {/* <Modal
-        message={'Voltar para o menu?'}
-        visible={modalVisible}
-        onConfirm={() => navigation.goBack()}
-        onCancel={() => setModalVisible(false)}
+      <Modal
+        visible={modal.visible}
+        onClose={() => setModal({ modal: null, visible: false })}
       >
-        <AlertScreen />
-      </Modal> */}
-    </View >
+        {modal.modal}
+      </Modal>
+    </Container>
   );
 }
 
 const gameStyles = StyleSheet.create({
   avatar: {
-    width: 195,
-    height: 195,
-    borderRadius: 15
+    width: meansure(13),
+    height: meansure(13),
+    borderRadius: meansure(1),
+    elevation: 3
   },
   avatarContainer: {
     position: 'absolute',
-    left: 30,
-    bottom: 105
+    left: meansure(2),
+    bottom: meansure(7)
   },
   playerSpeechThinkBox: {
     position: 'absolute',
-    right: 30,
-    bottom: 105,
-    width: windowWidth - 210,
-    height: 150,
-    paddingLeft: 60,
-    paddingRight: 45,
-    paddingVertical: 15,
-    borderRadius: 45
+    right: meansure(2),
+    left: meansure(10),
+    bottom: meansure(7),
+    height: meansure(9),
+    paddingRight: meansure(3),
+    paddingVertical: meansure(1),
+    borderRadius: meansure(4),
+    elevation: 3,
+    // shadowOffset: {
+    //   width: 0,
+    //   height: 2
+    // },
+    // shadowOpacity: 0.8
   },
   thinkCircles: {
-    width: 60,
-    height: 60,
+    width: meansure(4),
+    height: meansure(4),
     resizeMode: 'contain',
     position: 'absolute',
     right: 0,

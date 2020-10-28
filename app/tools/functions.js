@@ -1,3 +1,4 @@
+import { Dimensions, Platform, PixelRatio } from 'react-native';
 
 // Fisher-Yates Shuffle algorithm
 export function shuffle(array) {
@@ -88,4 +89,34 @@ export function getScore(option) {
 
 export function getMaxScore(options) {
   return options.filter(o => ['+', '0'].includes(o.tipo)).map(o => getScore(o)).reduce((prev, curr) => prev + curr, 0);
+}
+
+// Arquivos relacionados ao ajuste em múltiplas telas.
+const {
+  width: SCREEN_WIDTH,
+  height: SCREEN_HEIGHT,
+} = Dimensions.get('window');
+
+export const findObjectInListByTag = (object_list, tag, value) => {
+  const obj = object_list.filter(o => o[tag] === value)[0];
+  return obj || {};
+}
+
+// based on iphone 5s's scale
+const scale = SCREEN_WIDTH / 320;
+
+export function normalize(size) {
+  // console.log(scale);
+  const newSize = size * scale;
+  if (Platform.OS === 'ios') {
+    return Math.round(PixelRatio.roundToNearestPixel(newSize));
+  } else if (Platform.OS === 'web') {
+    return newSize / 4;
+  } else {
+    return Math.round(PixelRatio.roundToNearestPixel(newSize)) - 2;
+  }
+}
+
+export function generateGameData(case_) {
+
 }

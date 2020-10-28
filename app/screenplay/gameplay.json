@@ -1,0 +1,70 @@
+{
+  "prontuario_paginas": [
+    {
+      "dataKey": null,
+      "label": "PRONTUÁRIO"
+    },
+    {
+      "dataKey": null,
+      "label": "Informações do paciente"
+    },
+    {
+      "dataKey": null,
+      "label": "Histórico de doenças"
+    },
+    {
+      "dataKey": "anamnese",
+      "label": "Anamnese"
+    },
+    {
+      "dataKey": "exame_clinico",
+      "label": "Exame Clínico"
+    },
+    {
+      "dataKey": "exame_complementar",
+      "label": "Exames Complementares"
+    },
+    {
+      "dataKey": "diagnostico",
+      "label": "Diagnóstico"
+    },
+    {
+      "dataKey": "tratamento",
+      "label": "Conduta / Tratamento"
+    }
+  ],
+  "etapas": [
+    {
+      "key": "queixa",
+      "fala_inicial": "Iniciando um novo dia de trabalho... Que casos vou atender hoje?"
+    },
+    {
+      "key": "anamnese",
+      "fala_inicial": "Que perguntas farei na anamnese?"
+    },
+    {
+      "key": "exame_clinico",
+      "fala_inicial": "Quais exames clínicos vou realizar?"
+    },
+    {
+      "key": "diagnostico",
+      "fala_inicial": "De acordo com os exames clínicos, minha hipótese diagnóstica é..."
+    },
+    {
+      "key": "exame_complementar",
+      "fala_inicial": "Quais exames complementares vou pedir?"
+    },
+    {
+      "key": "diagnostico",
+      "fala_inicial": "O diagnóstico para este caso é..."
+    },
+    {
+      "key": "tratamento",
+      "fala_inicial": "De acordo com os exames e diagnóstico, eu irei..."
+    },
+    {
+      "key": "comunicacao",
+      "fala_inicial": "O que direi ao paciente?"
+    }
+  ]
+}

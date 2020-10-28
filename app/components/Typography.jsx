@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { StyleSheet, Text } from 'react-native';
 import { appColors } from '../styles';
+import { normalize } from '../tools/functions';
 
 export function Typography({
   color,
@@ -43,48 +44,48 @@ Typography.defaultProps = {
 const styles = StyleSheet.create({
   header48: {
     fontFamily: "roboto-regular",
-    fontSize: 48,
+    fontSize: normalize(48),
     letterSpacing: 0
   },
   header34: {
     fontFamily: "roboto-regular",
-    fontSize: 34,
+    fontSize: normalize(34),
     letterSpacing: 0.25
   },
   header24: {
     fontFamily: "roboto-regular",
-    fontSize: 24,
+    fontSize: normalize(24),
     letterSpacing: 0
   },
   header20: {
     fontFamily: "roboto-bold",
-    fontSize: 20,
+    fontSize: normalize(20),
     letterSpacing: 0.15
   },
   subtitle16: {
     fontFamily: "roboto-regular",
-    fontSize: 16,
+    fontSize: normalize(16),
     letterSpacing: 0.15
   },
   subtitle14: {
     fontFamily: "roboto-bold",
-    fontSize: 14,
+    fontSize: normalize(14),
     letterSpacing: 0.1
   },
   caption12: {
     fontFamily: "roboto-regular",
-    fontSize: 12,
+    fontSize: normalize(12),
     letterSpacing: 0.4
   },
   overline10: {
     fontFamily: "roboto-regular",
-    fontSize: 10,
-    letterSpacing: 1.5
+    fontSize: normalize(10),
+    letterSpacing: 0.5
   },
   button14: {
     fontFamily: "roboto-bold",
     textTransform: 'uppercase',
-    fontSize: 14,
+    fontSize: normalize(14),
     letterSpacing: 1.25
   }
 });

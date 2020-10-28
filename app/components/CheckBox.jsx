@@ -5,12 +5,13 @@ import PropTypes from 'prop-types';
 import { Typography } from './Typography';
 
 import Checked from '../assets/images/checked.png';
+import { meansure } from '../tools/resolution';
 
 export const CheckBox = ({ onPress, label, style, checked, ...props }) => {
   return (
     <View style={[style, { flexDirection: 'row' }]}>
       <TouchableOpacity activeOpacity={0.9} disabled={checked} onPress={onPress}>
-        <View style={{ width: 45, height: 30, backgroundColor: 'white', justifyContent: 'center', alignItems: 'center', borderRadius: 10, marginRight: 15 }}>
+        <View style={styles.checkbox}>
           {checked && <Image source={Checked} resizeMode="contain" style={styles.checkIcon} />}
         </View>
       </TouchableOpacity>
@@ -32,7 +33,16 @@ CheckBox.defaultProps = {
 
 const styles = StyleSheet.create({
   checkIcon: {
-    height: 15,
-    width: 15
+    height: meansure(1),
+    width: meansure(1)
+  },
+  checkbox: {
+    width: meansure(3),
+    height: meansure(2),
+    backgroundColor: 'white',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: meansure(1) * 2 / 3,
+    marginRight: meansure(1)
   }
 });

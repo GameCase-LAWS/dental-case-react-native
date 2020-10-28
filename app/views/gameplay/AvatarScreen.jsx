@@ -4,6 +4,8 @@ import { styles, appColors, windowWidth } from '../../styles';
 import { Typography } from '../../components/Typography';
 import { Grid } from '../../components/Grid';
 import { ArrowIcon } from '../../assets/icons';
+import { meansure } from '../../tools/resolution';
+import { Container } from '../../components/Container';
 
 const avatars = [
   require('../../assets/images/avatars/avatar_000.png'),
@@ -14,33 +16,28 @@ const avatars = [
   require('../../assets/images/avatars/avatar_005.png')
 ];
 
-export const AvatarScreen = ({ navigation, ...props }) => {
+export const AvatarScreen = ({ route, navigation, ...props }) => {
   const [paginationIndex, setPaginationIndex] = React.useState(0);
 
   const handlePagination = () => setPaginationIndex(old => old === Math.floor(avatars.length / 3) - 1 ? 0 : ++old);
 
   const handleAvatarSelect = (avatar) => () => {
-    navigation.navigate("Gameplay", { avatar });
+    navigation.navigate("Gameplay", { avatar, caso: route.params.caso });
   }
 
   return (
-    <View style={[styles.container, { backgroundColor: appColors.backgroundBlue }]}>
-      <View style={{
-        backgroundColor: appColors.cardGray,
-        padding: 30,
-        borderRadius: 15,
-        width: 345,
-        height: 75
-      }}>
-        <Typography bold>Escolha seu avatar</Typography>
+    <Container style={{ paddingHorizontal: meansure(4), paddingVertical: meansure(3) }} containerStyle={{ backgroundColor: appColors.backgroundBlue }}>
+      <View style={styles.topLeftGrayContainer}>
+        <Typography variant="header20">Escolha seu avatar</Typography>
       </View>
-      <View style={[styles.spacedRow, { alignItems: 'stretch', marginTop: 90 }]}>
-        <Grid container spacingX={20} style={{ width: windowWidth - 240 }}>
+      
+      <View style={[styles.spacedRow, { alignItems: 'stretch', marginTop: meansure(7) }]}>
+        <Grid container spacingX={meansure(2)}>
           {avatars.slice(3 * paginationIndex, 3 * (1 + paginationIndex))
             .map((c, i) =>
               <Grid item size={4} key={i}>
                 <TouchableOpacity onPress={handleAvatarSelect(c)} activeOpacity={0.9}>
-                  <Image source={c} style={{ width: 300, height: 300, borderRadius: 16 }} resizeMode="contain" />
+                  <Image source={c} style={styles.avatar} resizeMode="contain" />
                 </TouchableOpacity>
                 {/* <CaseCard title={c.titulo} onPress={handleGameStart(c)} /> */}
               </Grid>
@@ -50,11 +47,11 @@ export const AvatarScreen = ({ navigation, ...props }) => {
         <View style={styles.center}>
           {avatars.length > 3 && (
             <TouchableOpacity activeOpacity={0.9} onPress={handlePagination}>
-              <ArrowIcon color='#fff' height={90} width={60} />
+              <ArrowIcon color='#fff' height={meansure(6)} width={meansure(4)} />
             </TouchableOpacity>
           )}
         </View>
       </View>
-    </View>
+    </Container>
   );
 }

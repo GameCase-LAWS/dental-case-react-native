@@ -1,19 +1,62 @@
 import React from 'react';
-import { Modal as RNModal, TouchableOpacity, StyleSheet, View } from 'react-native';
+import {
+  Modal as RNModal,
+  Animated,
+  TouchableOpacity,
+  StyleSheet,
+  View,
+  Platform
+} from 'react-native';
 import { Typography } from './Typography';
 import { Button } from './Button';
 import { Grid } from './Grid';
 import { CloseIcon } from '../assets/icons';
 
-export const Modal = ({ children, onConfirm, onCancel, visible, message, ...props }) => {
+export const Modal = ({ children, onClose, visible, ...props }) => {
+  const fadeAnim = React.useRef(new Animated.Value(0)).current;
+
+  function close() {
+    Animated.timing(fadeAnim, {
+      toValue: 0,
+      duration: 200,
+      useNativeDriver: true,
+    }).start(() => {
+      if (onClose) {
+        onClose();
+      }
+    });
+  }
+
+  function show() {
+    Animated.timing(fadeAnim, {
+      toValue: 1,
+      duration: 300,
+      useNativeDriver: true,
+    }).start();
+  };
+
+  if (Platform.OS === 'web') {
+    if (!visible) {
+      return null;
+    }
+    show();
+
+    return (
+      <Animated.View style={[styles.modal, { opacity: fadeAnim }]}>
+        {React.cloneElement(children, { onClose: close })}
+      </Animated.View>
+    );
+  }
+
   return (
     <RNModal
-      animationType='fade'
+      animationType="fade"
+      transparent={true}
       visible={visible}
-      transparent
-      style={styles.modal}
+      onRequestClose={close}
+      statusBarTranslucent={true}
     >
-      <View style={styles.centeredView}>
+      <View style={styles.modal}>
         {children}
       </View>
     </RNModal>
@@ -23,17 +66,13 @@ export const Modal = ({ children, onConfirm, onCancel, visible, message, ...prop
 const styles = StyleSheet.create({
   modal: {
     backgroundColor: '#000000D3',
-    borderWidth: 0,
     position: 'absolute',
     left: 0,
     right: 0,
     bottom: 0,
-    top: 0
-  },
-  centeredView: {
-    flex: 1,
+    top: 0,
     justifyContent: "center",
-    alignItems: "center",
+    alignItems: "center"
   },
   modalView: {
     width: 510,

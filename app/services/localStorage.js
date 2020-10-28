@@ -1,7 +1,10 @@
 import AsyncStorage from '@react-native-community/async-storage';
 
 export const localStorageKeys = {
-  LAST_CONNECTION: '@last_connection'
+  LAST_CONNECTION: '@last_connection',
+  VIBRATION_ENABLED: '@vibration_enabled',
+  SOUND_ENABLED: '@sound_enabled',
+  LANGUAGE: '@language'
 }
 
 export const LocalStorage = {
@@ -17,7 +20,7 @@ export const LocalStorage = {
   retrieve: async (key, defaultValue) => {
     try {
       const value = await AsyncStorage.getItem(key);
-      return value || defaultValue;
+      return JSON.parse(value) || defaultValue;
     } catch (e) {
       // error reading value
       console.error(e);

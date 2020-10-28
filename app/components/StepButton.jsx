@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Animated, StyleSheet, TouchableOpacity } from 'react-native';
 import { Typography } from './Typography';
+import { meansure } from '../tools/resolution';
 
 export const StepButton = ({
   title,
@@ -58,7 +59,7 @@ export const StepButton = ({
         <Animated.View style={[styles.bottom, {
           height: growAnim.interpolate({
             inputRange: [0, 1],
-            outputRange: [60, 75]
+            outputRange: [meansure(4), meansure(5)]
           }),
           backgroundColor: color
         }]} />
@@ -83,7 +84,7 @@ const styles = StyleSheet.create({
   absoluteContainer: {
     justifyContent: 'center',
     alignItems: 'center',
-    padding: 15,
+    padding: meansure(1),
     position: 'absolute',
     top: 0,
     left: 0,
@@ -92,9 +93,9 @@ const styles = StyleSheet.create({
   },
   top: {
     height: 0,
-    borderBottomWidth: 15,
-    borderLeftWidth: 15,
-    borderRightWidth: 15,
+    borderBottomWidth: meansure(1),
+    borderLeftWidth: meansure(1),
+    borderRightWidth: meansure(1),
     borderStyle: 'solid',
 
     borderRightColor: 'transparent',

@@ -1,4 +1,5 @@
 import { StyleSheet, Dimensions } from 'react-native';
+import { meansure } from './tools/resolution';
 
 // 16:9 Grid: 64x36m
 // where 1m = 30px
@@ -26,6 +27,10 @@ export const appColors = {
 };
 
 export const styles = StyleSheet.create({
+  flex: {
+    flex: 1,
+    backgroundColor: 'purple'
+  },
   container: {
     flex: 1,
     paddingHorizontal: 75,
@@ -66,5 +71,47 @@ export const styles = StyleSheet.create({
   underscored: {
     textDecorationStyle: 'solid',
     textDecorationLine: 'underline',
+  },
+  topLeftGrayContainer: {
+    backgroundColor: appColors.cardGray,
+    padding: meansure(1),
+    borderRadius: meansure(1),
+    justifyContent: 'center',
+    width: meansure(23),
+    height: meansure(5)
+  },
+  button: {
+    height: meansure(4)
+  },
+  scoreBar: {
+    position: 'absolute',
+    right: meansure(2),
+    top: meansure(2),
+    borderRadius: meansure(1),
+    backgroundColor: appColors.cardGray,
+    overflow: 'hidden',
+    flexDirection: 'column-reverse',
+    width: meansure(2),
+    height: meansure(16)
+  },
+  feedbackBox: {
+    position: 'absolute',
+    right: meansure(7),
+    bottom: meansure(19),
+    width: meansure(20),
+    paddingHorizontal: meansure(2),
+    paddingVertical: meansure(1),
+    minHeight: meansure(6),
+    // alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: meansure(2)
+  },
+  avatar: {
+    width: meansure(15),
+    height: meansure(15),
+    borderRadius: meansure(1)
+  },
+  circlePadding: {
+    paddingRight: meansure(0.5)
   }
 });

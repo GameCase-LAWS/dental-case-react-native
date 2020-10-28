@@ -6,6 +6,8 @@ import { Typography } from '../components/Typography';
 const Banner = require("../assets/images/banner.png");
 const BlueBackgroundImage = require('../assets/images/blue-bg.jpg');
 
+const SplashAPNG = require('../assets/images/splash.png');
+
 export const SplashScreen = ({ scene, navigation, ...props }) => {
 
   React.useEffect(() => {
@@ -20,7 +22,9 @@ export const SplashScreen = ({ scene, navigation, ...props }) => {
 
   return (
     <ImageBackground source={BlueBackgroundImage} style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Image source={Banner} style={{ height: 400, width: 600 }} resizeMode="contain" />
+      {/* <Image source={Banner} style={{ height: 400, width: 600 }} resizeMode="contain" /> */}
+      {/* <ApngComponent src={SplashAPNG} style={{ height: 400, width: 600 }} /> */}
+      <Image source={SplashAPNG} />
       <TouchableOpacity onPress={() => navigation.navigate('Menu')}>
         <Typography color='#fff'>Skip</Typography>
       </TouchableOpacity>

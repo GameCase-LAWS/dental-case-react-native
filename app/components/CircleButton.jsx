@@ -1,17 +1,56 @@
 import React from 'react';
-import { View, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, StyleSheet, TouchableOpacity, Animated } from 'react-native';
+import { Typography } from './Typography';
 import PropTypes from 'prop-types';
+import { normalize } from '../tools/functions';
+import { meansure } from '../tools/resolution';
+import { windowWidth } from '../styles';
 
 export const CircleButton = ({
   size,
   onPress,
   children,
+  containerStyle,
   style,
+  label,
   ...props
 }) => {
+
+  const growAnim = React.useRef(new Animated.Value(0)).current;
+
+  const handleGrow = () => {
+    Animated.timing(growAnim, {
+      toValue: meansure(10),
+      duration: 300,
+      useNativeDriver: false
+    }).start();
+  };
+
+  const handleRelease = () => {
+    Animated.timing(growAnim, {
+      toValue: 0,
+      duration: 200,
+      useNativeDriver: false
+    }).start();
+  }
+
+  if (label) {
+    return (
+      <TouchableOpacity activeOpacity={0.9} onPress={onPress} style={style} onLongPress={handleGrow} onPressOut={handleRelease}>
+        <View on style={[styles.container, containerStyle, { minWidth: size, height: size, borderRadius: size }]} {...props}>
+          <Animated.Text
+            numberOfLines={1}
+            style={[styles.label, { maxWidth: growAnim, marginHorizontal: meansure(0.25) }]}
+          >{label}</Animated.Text>
+          {children}
+        </View>
+      </TouchableOpacity>
+    );
+  }
+
   return (
-    <TouchableOpacity activeOpacity={0.9} onPress={onPress}>
-      <View style={[styles.container, style, { width: size, height: size, borderRadius: size }]} {...props}>
+    <TouchableOpacity activeOpacity={0.9} onPress={onPress} style={style}>
+      <View style={[styles.container, containerStyle, { width: size, height: size, borderRadius: size }]} {...props}>
         {children}
       </View>
     </TouchableOpacity>
@@ -20,7 +59,8 @@ export const CircleButton = ({
 
 CircleButton.propTypes = {
   size: PropTypes.number,
-  onPress: PropTypes.func
+  onPress: PropTypes.func,
+  label: PropTypes.string
 }
 
 CircleButton.defaultTypes = {
@@ -30,8 +70,14 @@ CircleButton.defaultTypes = {
 
 const styles = StyleSheet.create({
   container: {
+    flexDirection: 'row',
     backgroundColor: 'white',
     justifyContent: 'center',
     alignItems: 'center'
+  },
+  label: {
+    fontFamily: "roboto-regular",
+    fontSize: normalize(16),
+    letterSpacing: 0.15
   }
 });
