@@ -16,7 +16,6 @@ import { CreditsScreen } from './app/views/CreditsScreen';
 
 import { AuthStack } from "./app/views/auth";
 import { GameStack } from './app/views/gameplay';
-import { HistoryScreen } from './app/views/HistoryScreen';
 
 const Stack = createStackNavigator();
 
@@ -57,7 +56,6 @@ export default function App() {
         {/* Aditional Stacks */}
         <Stack.Screen name="Auth" component={AuthStack} />
         <Stack.Screen name="Game" component={GameStack} />
-        <Stack.Screen name="Splash" component={SplashScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
