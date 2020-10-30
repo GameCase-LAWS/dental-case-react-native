@@ -3,7 +3,7 @@ import { View, TouchableHighlight, StyleSheet } from 'react-native';
 import PropTypes from 'prop-types';
 import { appColors } from '../styles';
 import { Typography } from './Typography';
-import { measure } from '../tools/resolution';
+import { meansure } from '../tools/resolution';
 
 export function Button({
   label,
@@ -20,7 +20,7 @@ export function Button({
       {icon ? (
         <View style={[styles.buttonWithIcon, style]}>
           {icon}
-          <Typography variant='button14' color={textColor} style={{ marginLeft: measure(1), textAlign: 'center' }}>{label}</Typography>
+          <Typography variant='button14' color={textColor} style={{ marginLeft: meansure(1), textAlign: 'center' }}>{label}</Typography>
         </View>
       ) : (
         <View style={[disabled ? styles.buttonDisabled : styles.button, style]}>
@@ -45,25 +45,25 @@ Button.defaultProps = {
 
 const styles = StyleSheet.create({
   buttonStyle: {
-    borderRadius: measure(1),
+    borderRadius: meansure(1),
     overflow: 'hidden'
   },
   button: {
     justifyContent: "center",
     alignItems: "center",
-    padding: measure(1),
+    padding: meansure(1),
     backgroundColor: appColors.primary,
     color: appColors.highEmphasisWhiteText
   },
   buttonDisabled: {
     justifyContent: "center",
     alignItems: "center",
-    padding: measure(1),
+    padding: meansure(1),
     backgroundColor: '#84D0C3',
     color: appColors.highEmphasisWhiteText
   },
   buttonWithIcon: {
     flexDirection: 'row',
-    padding: measure(1)
+    padding: meansure(1)
   }
 });

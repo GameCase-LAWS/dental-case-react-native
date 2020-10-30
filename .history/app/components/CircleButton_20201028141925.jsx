@@ -3,7 +3,7 @@ import { View, StyleSheet, TouchableOpacity, Animated } from 'react-native';
 import { Typography } from './Typography';
 import PropTypes from 'prop-types';
 import { normalize } from '../tools/functions';
-import { measure } from '../tools/resolution';
+import { meansure } from '../tools/resolution';
 import { windowWidth } from '../styles';
 
 export const CircleButton = ({
@@ -20,7 +20,7 @@ export const CircleButton = ({
 
   const handleGrow = () => {
     Animated.timing(growAnim, {
-      toValue: measure(10),
+      toValue: meansure(10),
       duration: 300,
       useNativeDriver: false
     }).start();
@@ -40,7 +40,7 @@ export const CircleButton = ({
         <View on style={[styles.container, containerStyle, { minWidth: size, height: size, borderRadius: size }]} {...props}>
           <Animated.Text
             numberOfLines={1}
-            style={[styles.label, { maxWidth: growAnim, marginHorizontal: measure(0.25) }]}
+            style={[styles.label, { maxWidth: growAnim, marginHorizontal: meansure(0.25) }]}
           >{label}</Animated.Text>
           {children}
         </View>

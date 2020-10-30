@@ -5,8 +5,6 @@ import { measure } from './tools/resolution';
 // where 1m = 30px
 
 export const { width: windowWidth, height: windowHeight } = Dimensions.get('window');
-export const { width: screenWidth, height: screenHeight } = Dimensions.get('screen');
-
 
 const widthScaler = windowWidth / 30;
 const heightScaler = windowHeight / 30;

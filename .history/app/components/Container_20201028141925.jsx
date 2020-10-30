@@ -1,9 +1,8 @@
 import React, { Children } from 'react';
 import { View } from 'react-native';
-import { ScreenContext } from '../ScreenContextProvider';
+import { screenContainer } from '../tools/resolution';
 
 export const Container = ({ children, containerStyle, style, overflowChildren, ...props }) => {
-  const {screenContainer} = React.useContext(ScreenContext)
   return (
     <View style={[containerStyle, { flex: 1, overflow: 'hidden' }]} {...props}>
       <View style={[screenContainer, style]}>

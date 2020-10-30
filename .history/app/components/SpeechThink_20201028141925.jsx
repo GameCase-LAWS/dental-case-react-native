@@ -3,7 +3,7 @@ import { View } from 'react-native';
 
 export const SpeechThink = ({ props }) => {
   return (
-    <View style={[gameStyles.playerSpeechThinkBox, { zIndex: speechDone ? -1 : 1, backgroundColor: speechDone ? '#ACDCCE' : '#FFF', paddingLeft: measure(speechDone ? 6 : 4) }]}>
+    <View style={[gameStyles.playerSpeechThinkBox, { zIndex: speechDone ? -1 : 1, backgroundColor: speechDone ? '#ACDCCE' : '#FFF', paddingLeft: meansure(speechDone ? 6 : 4) }]}>
       <View style={[styles.spacedRow, { flexGrow: 1 }]}>
         {!speechDone
           ? (
@@ -49,10 +49,10 @@ export const SpeechThink = ({ props }) => {
           )
         }
 
-        <View style={{ justifyContent: 'center', alignItems: 'center', marginLeft: measure(2) }}>
+        <View style={{ justifyContent: 'center', alignItems: 'center', marginLeft: meansure(2) }}>
           {(!speechDone || currentStep !== 3 || gameData.diagnostico.options.filter(d => d.checked).length !== 0) && (
             <TouchableOpacity activeOpacity={0.9} onPress={handlePaginationPress}>
-              <ArrowIcon color='#1BA488' width={measure(4)} height={measure(6)} />
+              <ArrowIcon color='#1BA488' width={meansure(4)} height={meansure(6)} />
             </TouchableOpacity>
           )}
         </View>

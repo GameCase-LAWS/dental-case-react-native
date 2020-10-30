@@ -11,7 +11,7 @@ import { CheckBox } from '../../components/CheckBox';
 import { Modal } from '../../components/Modal';
 import { AlertScreen } from '../dialogs/AlertScreen';
 import { Container } from '../../components/Container';
-import { measure } from '../../tools/resolution';
+import { meansure } from '../../tools/resolution';
 import { ConfigurationScreen } from '../dialogs/ConfigurationScreen';
 
 const image = { uri: "https://reactjs.org/logo-og.png" };
@@ -204,20 +204,20 @@ export const GameScreen = ({ route, navigation, ...props }) => {
       <ImageBackground style={styles.flex} source={{ uri: gameData.images.background }}>
         <ImageBackground style={styles.flex} source={{ uri: gameData.images.character }} resizeMode="contain">
           {/* Ícone de prontuário (direita) */}
-          <CircleButton size={measure(5)} style={{ position: 'absolute', top: measure(2), left: measure(2) }} onPress={handleRecordPress}>
-            <Image source={MedicalRecordImage} style={{ height: measure(3), width: measure(3) }} resizeMode='contain' />
+          <CircleButton size={meansure(5)} style={{ position: 'absolute', top: meansure(2), left: meansure(2) }} onPress={handleRecordPress}>
+            <Image source={MedicalRecordImage} style={{ height: meansure(3), width: meansure(3) }} resizeMode='contain' />
           </CircleButton>
 
           {/* Ícones brancos da esquerda */}
-          <View style={[styles.spacedRow, { position: 'absolute', top: measure(2), right: measure(7) }]}>
-            <CircleButton size={measure(3)} style={{ marginRight: measure(1) }}>
-              <Image source={HelpImage} style={{ height: measure(2), width: measure(2) }} resizeMode='contain' />
+          <View style={[styles.spacedRow, { position: 'absolute', top: meansure(2), right: meansure(7) }]}>
+            <CircleButton size={meansure(3)} style={{ marginRight: meansure(1) }}>
+              <Image source={HelpImage} style={{ height: meansure(2), width: meansure(2) }} resizeMode='contain' />
             </CircleButton>
-            <CircleButton size={measure(3)} style={{ marginRight: measure(1) }} onPress={handleMenu}>
-              <Image source={HomeImage} style={{ height: measure(2), width: measure(2) }} resizeMode='contain' />
+            <CircleButton size={meansure(3)} style={{ marginRight: meansure(1) }} onPress={handleMenu}>
+              <Image source={HomeImage} style={{ height: meansure(2), width: meansure(2) }} resizeMode='contain' />
             </CircleButton>
-            <CircleButton size={measure(3)} onPress={handleConfiguration}>
-              <Image source={CogImage} style={{ height: measure(2), width: measure(2) }} resizeMode='contain' />
+            <CircleButton size={meansure(3)} onPress={handleConfiguration}>
+              <Image source={CogImage} style={{ height: meansure(2), width: meansure(2) }} resizeMode='contain' />
             </CircleButton>
           </View>
 
@@ -241,7 +241,7 @@ export const GameScreen = ({ route, navigation, ...props }) => {
           )}
 
           {/* Caixa de fala e pensamento do jogador */}
-          <View style={[gameStyles.playerSpeechThinkBox, { zIndex: speechDone ? -1 : 1, backgroundColor: speechDone ? '#ACDCCE' : '#FFF', paddingLeft: measure(speechDone ? 6 : 4) }]}>
+          <View style={[gameStyles.playerSpeechThinkBox, { zIndex: speechDone ? -1 : 1, backgroundColor: speechDone ? '#ACDCCE' : '#FFF', paddingLeft: meansure(speechDone ? 6 : 4) }]}>
             <View style={[styles.spacedRow, { flexGrow: 1 }]}>
               {!speechDone
                 ? (
@@ -287,10 +287,10 @@ export const GameScreen = ({ route, navigation, ...props }) => {
                 )
               }
 
-              <View style={{ justifyContent: 'center', alignItems: 'center', marginLeft: measure(2) }}>
+              <View style={{ justifyContent: 'center', alignItems: 'center', marginLeft: meansure(2) }}>
                 {(!speechDone || currentStep !== 3 || gameData.diagnostico.options.filter(d => d.checked).length !== 0) && (
                   <TouchableOpacity activeOpacity={0.9} onPress={handlePaginationPress}>
-                    <ArrowIcon color='#1BA488' width={measure(4)} height={measure(6)} />
+                    <ArrowIcon color='#1BA488' width={meansure(4)} height={meansure(6)} />
                   </TouchableOpacity>
                 )}
               </View>
@@ -346,25 +346,25 @@ export const GameScreen = ({ route, navigation, ...props }) => {
 
 const gameStyles = StyleSheet.create({
   avatar: {
-    width: measure(13),
-    height: measure(13),
-    borderRadius: measure(1),
+    width: meansure(13),
+    height: meansure(13),
+    borderRadius: meansure(1),
     elevation: 3
   },
   avatarContainer: {
     position: 'absolute',
-    left: measure(2),
-    bottom: measure(7)
+    left: meansure(2),
+    bottom: meansure(7)
   },
   playerSpeechThinkBox: {
     position: 'absolute',
-    right: measure(2),
-    left: measure(10),
-    bottom: measure(7),
-    height: measure(9),
-    paddingRight: measure(3),
-    paddingVertical: measure(1),
-    borderRadius: measure(4),
+    right: meansure(2),
+    left: meansure(10),
+    bottom: meansure(7),
+    height: meansure(9),
+    paddingRight: meansure(3),
+    paddingVertical: meansure(1),
+    borderRadius: meansure(4),
     elevation: 3,
     // shadowOffset: {
     //   width: 0,
@@ -373,8 +373,8 @@ const gameStyles = StyleSheet.create({
     // shadowOpacity: 0.8
   },
   thinkCircles: {
-    width: measure(4),
-    height: measure(4),
+    width: meansure(4),
+    height: meansure(4),
     resizeMode: 'contain',
     position: 'absolute',
     right: 0,

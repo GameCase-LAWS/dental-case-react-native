@@ -5,7 +5,7 @@ import { Typography } from '../../components/Typography';
 import { CloseIcon } from '../../assets/icons';
 import { Grid } from '../../components/Grid';
 import { Button } from '../../components/Button';
-import { measure } from '../../tools/resolution';
+import { meansure } from '../../tools/resolution';
 
 export const AlertScreen = ({ message, onCancel, onConfirm, onClose, ...props }) => {
   function handleClose() {
@@ -19,7 +19,7 @@ export const AlertScreen = ({ message, onCancel, onConfirm, onClose, ...props })
   return (
     <View style={styles.modalView}>
       <TouchableOpacity activeOpacity={0.9} style={styles.closeBtn} onPress={onClose}>
-        <CloseIcon width={measure(1.5)} height={measure(1.5)} color='#000' />
+        <CloseIcon width={meansure(1.5)} height={meansure(1.5)} color='#000' />
       </TouchableOpacity>
       <Typography variant="header24" style={{ textAlign: 'center' }}>{message}</Typography>
       <View style={styles.btnContainer}>
@@ -32,10 +32,10 @@ export const AlertScreen = ({ message, onCancel, onConfirm, onClose, ...props })
 
 const styles = StyleSheet.create({
   modalView: {
-    width: measure(34),
-    borderRadius: measure(2),
-    paddingVertical: measure(2),
-    paddingHorizontal: measure(3),
+    width: meansure(34),
+    borderRadius: meansure(2),
+    paddingVertical: meansure(2),
+    paddingHorizontal: meansure(3),
 
     position: 'relative',
     backgroundColor: "white",
@@ -50,16 +50,16 @@ const styles = StyleSheet.create({
   },
   closeBtn: {
     position: 'absolute',
-    right: measure(2),
-    top: measure(2)
+    right: meansure(2),
+    top: meansure(2)
   },
   btn: {
-    width: measure(11)
+    width: meansure(11)
   },
   btnContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginTop: measure(2),
-    marginHorizontal: measure(2)
+    marginTop: meansure(2),
+    marginHorizontal: meansure(2)
   }
 });

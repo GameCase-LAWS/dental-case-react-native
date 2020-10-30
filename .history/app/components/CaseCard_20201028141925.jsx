@@ -3,12 +3,12 @@ import { StyleSheet, Image, View, TouchableOpacity } from 'react-native';
 import PropTypes from 'prop-types';
 
 import { Typography } from "./Typography";
-import { measure } from '../tools/resolution';
+import { meansure } from '../tools/resolution';
 
 const defaultSource = require('../assets/icons/icon.png');
 
 export const CaseCard = ({ title, image, onPress }) => {
-  const [marginBottom, setMarginBottom] = React.useState(measure(1));
+  const [marginBottom, setMarginBottom] = React.useState(meansure(1));
 
   const handleLoad = () => {
     setMarginBottom(0);
@@ -38,20 +38,20 @@ const styles = StyleSheet.create({
   caseCard: {
     overflow: 'hidden',
     backgroundColor: '#77BEB3',
-    borderRadius: measure(1),
-    height: measure(15),
-    width: measure(15)
+    borderRadius: meansure(1),
+    height: meansure(15),
+    width: meansure(15)
   },
   textContainer: {
-    padding: measure(1),
-    height: measure(6),
+    padding: meansure(1),
+    height: meansure(6),
     backgroundColor: '#DDE0E3',
     justifyContent: "center",
     alignItems: "center"
   },
   cardImage: {
     flexGrow: 1,
-    marginTop: measure(1),
+    marginTop: meansure(1),
     resizeMode: 'contain'
   }
 });

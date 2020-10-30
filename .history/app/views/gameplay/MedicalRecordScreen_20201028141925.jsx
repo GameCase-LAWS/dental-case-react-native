@@ -6,7 +6,7 @@ import { Cases } from '../../services/firestore';
 import { CloseIcon, ArrowIcon } from '../../assets/icons';
 import { Typography } from '../../components/Typography';
 import { Container } from '../../components/Container';
-import { measure } from '../../tools/resolution';
+import { meansure } from '../../tools/resolution';
 
 const gameplayScreenplay = require('../../screenplay/gameplay.json');
 
@@ -64,16 +64,16 @@ export const MedicalRecordScreen = ({ route, navigation, ...props }) => {
           )}
         </View>
 
-        <View style={{ alignItems: 'center', marginBottom: measure(7) }}>
+        <View style={{ alignItems: 'center', marginBottom: meansure(7) }}>
           <TouchableOpacity activeOpacity={0.9} onPress={handlePagination}>
-            <ArrowIcon color='#fff' width={measure(4)} height={measure(6)} />
+            <ArrowIcon color='#fff' width={meansure(4)} height={meansure(6)} />
           </TouchableOpacity >
         </View>
       </View>
 
       {/* Botão de fechar */}
       <TouchableOpacity activeOpacity={0.9} onPress={handleBack} style={styles.closeBtn}>
-        <CloseIcon color={'#025850'} height={measure(2)} width={measure(2)} />
+        <CloseIcon color={'#025850'} height={meansure(2)} width={meansure(2)} />
       </TouchableOpacity>
     </Container>
   );
@@ -81,26 +81,26 @@ export const MedicalRecordScreen = ({ route, navigation, ...props }) => {
 
 const styles = StyleSheet.create({
   container: {
-    padding: measure(2),
+    padding: meansure(2),
     flexDirection: 'row',
     alignItems: 'stretch'
   },
   panel: {
     backgroundColor: '#A9E1DE',
-    padding: measure(2),
-    borderRadius: measure(2),
-    width: measure(43)
+    padding: meansure(2),
+    borderRadius: meansure(2),
+    width: meansure(43)
   },
   closeBtn: {
     position: 'absolute',
-    top: measure(2),
-    right: measure(2)
+    top: meansure(2),
+    right: meansure(2)
   },
   rightColumn: {
     flexGrow: 1,
     flexShrink: 1,
     alignItems: 'center',
     justifyContent: 'flex-end',
-    paddingHorizontal: measure(2)
+    paddingHorizontal: meansure(2)
   }
 });

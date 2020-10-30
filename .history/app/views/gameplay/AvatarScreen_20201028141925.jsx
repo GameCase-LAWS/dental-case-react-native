@@ -4,7 +4,7 @@ import { styles, appColors, windowWidth } from '../../styles';
 import { Typography } from '../../components/Typography';
 import { Grid } from '../../components/Grid';
 import { ArrowIcon } from '../../assets/icons';
-import { measure } from '../../tools/resolution';
+import { meansure } from '../../tools/resolution';
 import { Container } from '../../components/Container';
 
 const avatars = [
@@ -26,13 +26,13 @@ export const AvatarScreen = ({ route, navigation, ...props }) => {
   }
 
   return (
-    <Container style={{ paddingHorizontal: measure(4), paddingVertical: measure(3) }} containerStyle={{ backgroundColor: appColors.backgroundBlue }}>
+    <Container style={{ paddingHorizontal: meansure(4), paddingVertical: meansure(3) }} containerStyle={{ backgroundColor: appColors.backgroundBlue }}>
       <View style={styles.topLeftGrayContainer}>
         <Typography variant="header20">Escolha seu avatar</Typography>
       </View>
       
-      <View style={[styles.spacedRow, { alignItems: 'stretch', marginTop: measure(7) }]}>
-        <Grid container spacingX={measure(2)}>
+      <View style={[styles.spacedRow, { alignItems: 'stretch', marginTop: meansure(7) }]}>
+        <Grid container spacingX={meansure(2)}>
           {avatars.slice(3 * paginationIndex, 3 * (1 + paginationIndex))
             .map((c, i) =>
               <Grid item size={4} key={i}>
@@ -47,7 +47,7 @@ export const AvatarScreen = ({ route, navigation, ...props }) => {
         <View style={styles.center}>
           {avatars.length > 3 && (
             <TouchableOpacity activeOpacity={0.9} onPress={handlePagination}>
-              <ArrowIcon color='#fff' height={measure(6)} width={measure(4)} />
+              <ArrowIcon color='#fff' height={meansure(6)} width={meansure(4)} />
             </TouchableOpacity>
           )}
         </View>

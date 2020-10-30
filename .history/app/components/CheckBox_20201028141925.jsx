@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import { Typography } from './Typography';
 
 import Checked from '../assets/images/checked.png';
-import { measure } from '../tools/resolution';
+import { meansure } from '../tools/resolution';
 
 export const CheckBox = ({ onPress, label, style, checked, ...props }) => {
   return (
@@ -33,16 +33,16 @@ CheckBox.defaultProps = {
 
 const styles = StyleSheet.create({
   checkIcon: {
-    height: measure(1),
-    width: measure(1)
+    height: meansure(1),
+    width: meansure(1)
   },
   checkbox: {
-    width: measure(3),
-    height: measure(2),
+    width: meansure(3),
+    height: meansure(2),
     backgroundColor: 'white',
     justifyContent: 'center',
     alignItems: 'center',
-    borderRadius: measure(1) * 2 / 3,
-    marginRight: measure(1)
+    borderRadius: meansure(1) * 2 / 3,
+    marginRight: meansure(1)
   }
 });

@@ -5,7 +5,7 @@ import { Typography } from '../../components/Typography';
 import { Button } from '../../components/Button';
 import { Grid } from '../../components/Grid';
 import { Container } from '../../components/Container';
-import { measure } from '../../tools/resolution';
+import { meansure } from '../../tools/resolution';
 import { Modal } from '../../components/Modal';
 
 const Column = ({ color, fill, label }) => {
@@ -42,16 +42,16 @@ export const EndingScreen = ({ route, navigation, ...props }) => {
   return (
     <Container
       containerStyle={{ backgroundColor: '#D9DBD5' }}
-      style={{ flex: 1, paddingVertical: measure(3), backgroundColor: 'tomato' }}
+      style={{ flex: 1, paddingVertical: meansure(3), backgroundColor: 'tomato' }}
       overflowChildren={modalComponent}
     >
-      <Typography bold variant="header24" style={{ textAlign: 'center', marginBottom: measure(1), height: measure(4), backgroundColor: 'pink' }}>Fim do atendimento!</Typography>
-      <Grid container spacingX={measure(3)} style={{ flexGrow: 1, backgroundColor: 'red' }}>
+      <Typography bold variant="header24" style={{ textAlign: 'center', marginBottom: meansure(1), height: meansure(4), backgroundColor: 'pink' }}>Fim do atendimento!</Typography>
+      <Grid container spacingX={meansure(3)} style={{ flexGrow: 1, backgroundColor: 'red' }}>
         <Grid item size={6} style={{ backgroundColor: 'blue' }}>
-          <View style={{ marginLeft: measure(4) }}>
-            <Typography bold variant="header34" style={{ textAlign: 'center', height: measure(2) }}>Desempenho médio</Typography>
-            <Typography bold variant="header48" style={{ textAlign: 'center', height: measure(3) }}>89.66%</Typography>
-            <View style={{ justifyContent: 'space-between', flexGrow: 1, height: measure(19), marginTop: measure(1) }}>
+          <View style={{ marginLeft: meansure(4) }}>
+            <Typography bold variant="header34" style={{ textAlign: 'center', height: meansure(2) }}>Desempenho médio</Typography>
+            <Typography bold variant="header48" style={{ textAlign: 'center', height: meansure(3) }}>89.66%</Typography>
+            <View style={{ justifyContent: 'space-between', flexGrow: 1, height: meansure(19), marginTop: meansure(1) }}>
               <Button onPress={pass} label='Detalhes do atendimento' style={styles.button} />
               <Button onPress={pass} label='Refazer o atendimento' style={styles.button} />
               <Button onPress={pass} label='Novo paciente' style={styles.button} />

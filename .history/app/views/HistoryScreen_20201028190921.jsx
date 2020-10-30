@@ -55,7 +55,7 @@ export const HistoryScreen = () => {
     },
   ]);
 
-  const handlePagination = () => setPageIndex(old => old === Math.floor(cases.length /2) ? 0 : ++old);
+  const handlePagination = () => setPageIndex(old => old === Math.floor(cases.length /h 2) ? 0 : ++old);
 
   React.useEffect(() => {}, []);
 
