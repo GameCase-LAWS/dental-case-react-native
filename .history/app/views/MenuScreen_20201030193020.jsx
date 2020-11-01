@@ -1,6 +1,6 @@
 import React from "react";
 import { View, TouchableOpacity, Alert, Image } from "react-native";
-import { styles, appColors, windowWidth } from "../styles";
+import { appColors, windowWidth } from "../styles";
 import { CaseCard } from "../components/CaseCard";
 import { Cases } from "../services/firestore";
 import { Button } from "../components/Button";
@@ -15,12 +15,13 @@ import { findObjectInListByTag } from "../tools/functions";
 import { ConfigurationScreen } from "./dialogs/ConfigurationScreen";
 import { Modal } from "../components/Modal";
 import { AlertScreen } from "./dialogs/AlertScreen";
-import { measure } from "../tools/resolution";
+import { ScreenContext } from "../ThemeContext";
 
 const CogSource = require("../assets/images/cog.png");
 const LogoutSource = require("../assets/images/logout.png");
 
 export const MenuScreen = ({ navigation, ...props }) => {
+  const { measure , styles } = React.useContext(ScreenContext);
 
   const [loadedCases, setLoadedCases] = React.useState(null);
   const [paginationIndex, setPaginationIndex] = React.useState(0);
