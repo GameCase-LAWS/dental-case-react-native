@@ -49,22 +49,27 @@ export const AvatarScreen = ({ route, navigation, ...props }) => {
             .slice(3 * paginationIndex, 3 * (1 + paginationIndex))
             .map((c, i) => (
               <Grid item size={4} key={i}>
-                <Shadow
-                  shadowOffset={[5, 5]}
-                  shadowOpacity={0.2}
-                  shadowRadius={2}
+                <TouchableOpacity
+                  onPress={handleAvatarSelect(c)}
+                  activeOpacity={0.9}
+                  style={[
+                    styles.avatar,
+                    {
+                      shadowOffset: {
+                        width: 0,
+                        height: 0,
+                      },
+                      shadowOpacity: 0.5,
+                      shadowRadius: 10,
+                    },
+                  ]}
                 >
-                  <TouchableOpacity
-                    onPress={handleAvatarSelect(c)}
-                    activeOpacity={0.9}
-                  >
-                    <Image
-                      source={c}
-                      style={styles.avatar}
-                      resizeMode='contain'
-                    />
-                  </TouchableOpacity>
-                </Shadow>
+                  <Image
+                    source={c}
+                    style={styles.avatar}
+                    resizeMode='contain'
+                  />
+                </TouchableOpacity>
                 {/* <CaseCard title={c.titulo} onPress={handleGameStart(c)} /> */}
               </Grid>
             ))}

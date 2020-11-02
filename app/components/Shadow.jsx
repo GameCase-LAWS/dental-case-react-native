@@ -9,25 +9,23 @@ export const Shadow = ({
   shadowOffset,
   shadowRadius,
   shadowOpacity,
+  borderRadius,
 }) => {
   return (
-     <>
-     {children && children.map((e,k) => React.cloneElement(e,))}
-     </> 
-    // <View
-    //   style={[
-    //     {
-    //       shadowOffset: {
-    //         width: shadowOffset[0],
-    //         height: -shadowOffset[1],
-    //       },
-    //       shadowOpacity,
-    //       shadowRadius,
-    //     },
-    //   ]}
-    // >
-    // {children}
-    // </View>
+    <View
+      style={[
+        {
+          shadowOffset: {
+            width: shadowOffset[0],
+            height: -shadowOffset[1],
+          },
+          shadowOpacity,
+          shadowRadius,
+        },
+      ]}
+    >
+    {children}
+    </View>
   );
 };
 

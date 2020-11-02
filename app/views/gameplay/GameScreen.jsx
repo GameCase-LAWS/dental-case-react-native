@@ -1,29 +1,47 @@
-import React from 'react';
-import { View, Image, ImageBackground, TouchableOpacity, Animated, StyleSheet, Dimensions } from 'react-native';
-import { styles, appColors, windowWidth } from '../../styles';
-import { Cases } from '../../services/firestore';
-import { StepButton } from '../../components/StepButton';
-import { Typography } from '../../components/Typography';
-import { CircleButton } from '../../components/CircleButton';
-import { ArrowIcon } from '../../assets/icons';
-import { shuffle, mapForAnamense, mapForExame, mapForConduta, mapForDiagnostico, mapForComunicacoes, getScore, getMaxScore, findObjectInListByTag } from '../../tools/functions';
-import { CheckBox } from '../../components/CheckBox';
-import { Modal } from '../../components/Modal';
-import { AlertScreen } from '../dialogs/AlertScreen';
-import { Container } from '../../components/Container';
-import { measure } from '../../tools/resolution';
-import { ConfigurationScreen } from '../dialogs/ConfigurationScreen';
+import React from "react";
+import {
+  View,
+  Image,
+  ImageBackground,
+  TouchableOpacity,
+  Animated,
+  StyleSheet,
+  Dimensions,
+} from "react-native";
+import { styles, appColors, windowWidth } from "../../styles";
+import { Cases } from "../../services/firestore";
+import { StepButton } from "../../components/StepButton";
+import { Typography } from "../../components/Typography";
+import { CircleButton } from "../../components/CircleButton";
+import { ArrowIcon } from "../../assets/icons";
+import {
+  shuffle,
+  mapForAnamense,
+  mapForExame,
+  mapForConduta,
+  mapForDiagnostico,
+  mapForComunicacoes,
+  getScore,
+  getMaxScore,
+  findObjectInListByTag,
+} from "../../tools/functions";
+import { CheckBox } from "../../components/CheckBox";
+import { Modal } from "../../components/Modal";
+import { AlertScreen } from "../dialogs/AlertScreen";
+import { Container } from "../../components/Container";
+import { measure } from "../../tools/resolution";
+import { ConfigurationScreen } from "../dialogs/ConfigurationScreen";
 
 const image = { uri: "https://reactjs.org/logo-og.png" };
 
-const ThinkCircles = require('../../assets/images/think-circles.png');
+const ThinkCircles = require("../../assets/images/think-circles.png");
 
-const CogImage = require('../../assets/images/cog.png');
-const HelpImage = require('../../assets/images/help.png');
-const HomeImage = require('../../assets/images/home.png');
-const MedicalRecordImage = require('../../assets/images/record.png');
+const CogImage = require("../../assets/images/cog.png");
+const HelpImage = require("../../assets/images/help.png");
+const HomeImage = require("../../assets/images/home.png");
+const MedicalRecordImage = require("../../assets/images/record.png");
 
-const gameplayScreenplay = require('../../screenplay/gameplay.json');
+const gameplayScreenplay = require("../../screenplay/gameplay.json");
 
 const IsPlayerSpeech = (step) => step <= 1 || step >= 6;
 const IsPatientSpeech = (step) => step <= 1 || step >= 6;
@@ -36,22 +54,26 @@ export const GameScreen = ({ route, navigation, ...props }) => {
   const [speechDone, setSpeechDone] = React.useState(false);
   const [feedbackContent, setFeedbackContent] = React.useState({
     isSpeech: true,
-    text: '',
-    visible: false
+    text: "",
+    visible: false,
   });
   const [paginationIndex, setPaginationIndex] = React.useState(0);
   const [modal, setModal] = React.useState({
     visible: false,
-    modal: null
+    modal: null,
   });
 
   const scoreAnim = React.useRef(new Animated.Value(0)).current;
 
   const getOptions = () => {
     const { options } = gameData[gameplayScreenplay.etapas[currentStep].key];
-    if (!options) { console.log("No options for " + gameplayScreenplay.etapas[currentStep].key) }
+    if (!options) {
+      console.log(
+        "No options for " + gameplayScreenplay.etapas[currentStep].key,
+      );
+    }
     return options || [];
-  }
+  };
 
   React.useEffect(() => {
     async function loadCasesAsync() {
@@ -63,44 +85,93 @@ export const GameScreen = ({ route, navigation, ...props }) => {
       const optionsShuffled = {
         anamnese: shuffle(mapForAnamense(currentCase.anamnese)),
         exame_clinico: shuffle(mapForExame(currentCase.exame_fisico)),
-        exame_complementar: shuffle(mapForExame(currentCase.exame_complementar)),
-        diagnostico: shuffle(mapForDiagnostico(currentCase.diagnostico_inicial)),
+        exame_complementar: shuffle(
+          mapForExame(currentCase.exame_complementar),
+        ),
+        diagnostico: shuffle(
+          mapForDiagnostico(currentCase.diagnostico_inicial),
+        ),
         tratamento: shuffle(mapForConduta(currentCase.tratamento)),
-        comunicacao: mapForComunicacoes(currentCase.comunicacao_tratamento.comunicacoes)
+        comunicacao: mapForComunicacoes(
+          currentCase.comunicacao_tratamento.comunicacoes,
+        ),
       };
       setGameData({
         avatar,
-        anamnese: { options: optionsShuffled.anamnese, score: 0, maxScore: getMaxScore(optionsShuffled.anamnese), aux: {} },
-        exame_clinico: { options: optionsShuffled.exame_clinico, score: 0, maxScore: getMaxScore(optionsShuffled.exame_clinico), aux: {} },
-        exame_complementar: { options: optionsShuffled.exame_complementar, score: 0, maxScore: getMaxScore(optionsShuffled.exame_complementar), aux: {} },
-        diagnostico: { options: optionsShuffled.diagnostico, score: 0, maxScore: getMaxScore(optionsShuffled.diagnostico), aux: {} },
-        tratamento: { options: optionsShuffled.tratamento, score: 0, maxScore: getMaxScore(optionsShuffled.tratamento), aux: {} },
-        comunicacao: { options: optionsShuffled.comunicacao, score: 0, maxScore: 90 },
+        anamnese: {
+          options: optionsShuffled.anamnese,
+          score: 0,
+          maxScore: getMaxScore(optionsShuffled.anamnese),
+          aux: {},
+        },
+        exame_clinico: {
+          options: optionsShuffled.exame_clinico,
+          score: 0,
+          maxScore: getMaxScore(optionsShuffled.exame_clinico),
+          aux: {},
+        },
+        exame_complementar: {
+          options: optionsShuffled.exame_complementar,
+          score: 0,
+          maxScore: getMaxScore(optionsShuffled.exame_complementar),
+          aux: {},
+        },
+        diagnostico: {
+          options: optionsShuffled.diagnostico,
+          score: 0,
+          maxScore: getMaxScore(optionsShuffled.diagnostico),
+          aux: {},
+        },
+        tratamento: {
+          options: optionsShuffled.tratamento,
+          score: 0,
+          maxScore: getMaxScore(optionsShuffled.tratamento),
+          aux: {},
+        },
+        comunicacao: {
+          options: optionsShuffled.comunicacao,
+          score: 0,
+          maxScore: 90,
+        },
         images: {
-          background: findObjectInListByTag(currentCase.imagens, 'identificador', 'default-background').arquivo.replace(/(\/media)+/, '/media'),
-          character: findObjectInListByTag(currentCase.imagens, 'identificador', 'default-character').arquivo.replace(/(\/media)+/, '/media')
-        }
+          background: findObjectInListByTag(
+            currentCase.imagens,
+            "identificador",
+            "default-background",
+          ).arquivo.replace(/(\/media)+/, "/media"),
+          character: findObjectInListByTag(
+            currentCase.imagens,
+            "identificador",
+            "default-character",
+          ).arquivo.replace(/(\/media)+/, "/media"),
+        },
       });
     }
 
     loadCasesAsync();
   }, []);
 
-  const handleRecordPress = () => navigation.navigate('MedicalRecord', {
-    data: gameData
-  });
+  const handleRecordPress = () =>
+    navigation.navigate("MedicalRecord", {
+      data: gameData,
+    });
 
   function handleMenu() {
     setModal({
       visible: true,
-      modal: <AlertScreen message={'Voltar para o menu?'} onConfirm={() => navigation.navigate('Menu')} />
+      modal: (
+        <AlertScreen
+          message={"Voltar para o menu?"}
+          onConfirm={() => navigation.navigate("Menu")}
+        />
+      ),
     });
   }
 
   function handleConfiguration() {
     setModal({
       visible: true,
-      modal: <ConfigurationScreen />
+      modal: <ConfigurationScreen />,
     });
   }
 
@@ -109,23 +180,25 @@ export const GameScreen = ({ route, navigation, ...props }) => {
       if (currentStep === 3 || currentStep === 5) {
         handleNextStep();
       } else {
-        setPaginationIndex(old => old === Math.floor(getOptions().length / 2) - 1 ? 0 : ++old);
+        setPaginationIndex((old) =>
+          old === Math.floor(getOptions().length / 2) - 1 ? 0 : ++old,
+        );
       }
     } else {
       setSpeechDone(true);
     }
-  }
+  };
 
   const handleOptionPress = (optionIndex) => () => {
     const option = getOptions()[optionIndex];
-    setGameData(old => {
+    setGameData((old) => {
       const stepData = old[gameplayScreenplay.etapas[currentStep].key];
       stepData.options[optionIndex] = { ...option, checked: true };
       stepData.score += getScore(option);
       Animated.timing(scoreAnim, {
         duration: 300,
         useNativeDriver: false,
-        toValue: stepData.score
+        toValue: stepData.score,
       }).start();
 
       return old;
@@ -136,43 +209,54 @@ export const GameScreen = ({ route, navigation, ...props }) => {
     setFeedbackContent({
       isSpeech: IsPatientSpeech(currentStep),
       text: option.feedback,
-      visible: true
+      visible: true,
     });
 
     // setGameData(old => {
     //   old.anamnese[optionIndex] = { ...options, checked: true };
     //   return ({ ...old, anamnese: }); // This creates a new list equals the old one, if we use the old, the component won't update it's state.
     // });
-  }
+  };
 
   const handleEndGame = () => {
     const { caso } = route.params;
-    navigation.navigate('Ending', { caso, data: gameData });
-  }
+    navigation.navigate("Ending", { caso, data: gameData });
+  };
 
   const handleOptionPressAsRadio = (optionIndex) => () => {
     const option = getOptions()[optionIndex];
-    setGameData(old => {
+    setGameData((old) => {
       const stepData = old[gameplayScreenplay.etapas[currentStep].key];
-      stepData.options = stepData.options.map((o, i) => ({ ...o, checked: i === optionIndex }))
+      stepData.options = stepData.options.map((o, i) => ({
+        ...o,
+        checked: i === optionIndex,
+      }));
       if (currentStep === 3) {
         stepData.aux.initialDiagnosis = option;
-
       }
       stepData.score = getScore(option);
       stepData.aux.finalDiagnosis = option;
-      return { ...old, [gameplayScreenplay.etapas[currentStep].key]: { ...stepData, aux: { ...stepData.aux, initial: stepData[optionIndex] } } };
+      return {
+        ...old,
+        [gameplayScreenplay.etapas[currentStep].key]: {
+          ...stepData,
+          aux: { ...stepData.aux, initial: stepData[optionIndex] },
+        },
+      };
     });
-  }
+  };
 
   const handleNextStep = () => {
     setSpeechDone(false);
     setPaginationIndex(0);
-    if (currentStep === 5 && gameData.diagnostico.aux.finalDiagnosis?.tipo !== "+") {
+    if (
+      currentStep === 5 &&
+      gameData.diagnostico.aux.finalDiagnosis?.tipo !== "+"
+    ) {
       handleEndGame();
       return;
     }
-    setCurrentStep(old => {
+    setCurrentStep((old) => {
       ++old;
       if (gameData[gameplayScreenplay.etapas[old].key].length === 0) {
         ++old;
@@ -181,12 +265,12 @@ export const GameScreen = ({ route, navigation, ...props }) => {
     });
 
     if (currentStep != 3 && currentStep != 7) {
-      navigation.navigate('MedicalRecord', {
+      navigation.navigate("MedicalRecord", {
         data: gameData,
-        page: currentStep > 3 ? currentStep - 1 : currentStep
+        page: currentStep > 3 ? currentStep - 1 : currentStep,
       });
     }
-  }
+  };
 
   React.useEffect(() => {
     if (gameData) {
@@ -198,99 +282,174 @@ export const GameScreen = ({ route, navigation, ...props }) => {
     return null;
   }
 
-  console.log('render');
+  console.log("render");
   return (
-    <Container containerStyle={{ backgroundColor: 'black' }}>
-      <ImageBackground style={styles.flex} source={{ uri: gameData.images.background }}>
-        <ImageBackground style={styles.flex} source={{ uri: gameData.images.character }} resizeMode="contain">
+    <Container containerStyle={{ backgroundColor: "black" }}>
+      <ImageBackground
+        style={styles.flex}
+        source={{ uri: gameData.images.background }}
+      >
+        <ImageBackground
+          style={styles.flex}
+          source={{ uri: gameData.images.character }}
+          resizeMode='contain'
+        >
           {/* Ícone de prontuário (direita) */}
-          <CircleButton size={measure(5)} style={{ position: 'absolute', top: measure(2), left: measure(2) }} onPress={handleRecordPress}>
-            <Image source={MedicalRecordImage} style={{ height: measure(3), width: measure(3) }} resizeMode='contain' />
+          <CircleButton
+            size={measure(5)}
+            style={{ position: "absolute", top: measure(2), left: measure(2) }}
+            onPress={handleRecordPress}
+          >
+            <Image
+              source={MedicalRecordImage}
+              style={{ height: measure(3), width: measure(3) }}
+              resizeMode='contain'
+            />
           </CircleButton>
 
           {/* Ícones brancos da esquerda */}
-          <View style={[styles.spacedRow, { position: 'absolute', top: measure(2), right: measure(7) }]}>
+          <View
+            style={[
+              styles.spacedRow,
+              { position: "absolute", top: measure(2), right: measure(7) },
+            ]}
+          >
             <CircleButton size={measure(3)} style={{ marginRight: measure(1) }}>
-              <Image source={HelpImage} style={{ height: measure(2), width: measure(2) }} resizeMode='contain' />
+              <Image
+                source={HelpImage}
+                style={{ height: measure(2), width: measure(2) }}
+                resizeMode='contain'
+              />
             </CircleButton>
-            <CircleButton size={measure(3)} style={{ marginRight: measure(1) }} onPress={handleMenu}>
-              <Image source={HomeImage} style={{ height: measure(2), width: measure(2) }} resizeMode='contain' />
+            <CircleButton
+              size={measure(3)}
+              style={{ marginRight: measure(1) }}
+              onPress={handleMenu}
+            >
+              <Image
+                source={HomeImage}
+                style={{ height: measure(2), width: measure(2) }}
+                resizeMode='contain'
+              />
             </CircleButton>
             <CircleButton size={measure(3)} onPress={handleConfiguration}>
-              <Image source={CogImage} style={{ height: measure(2), width: measure(2) }} resizeMode='contain' />
+              <Image
+                source={CogImage}
+                style={{ height: measure(2), width: measure(2) }}
+                resizeMode='contain'
+              />
             </CircleButton>
           </View>
 
           {/* Barra de pontuação */}
           <View style={styles.scoreBar}>
-            <Animated.View style={{
-              height: currentStep === 0 ? 0 : scoreAnim.interpolate({
-                inputRange: [0, gameData[gameplayScreenplay.etapas[currentStep].key].maxScore],
-                outputRange: ['0%', '100%'],
-                extrapolate: 'clamp'
-              }),
-              backgroundColor: appColors.activeStep
-            }} />
+            <Animated.View
+              style={{
+                height:
+                  currentStep === 0
+                    ? 0
+                    : scoreAnim.interpolate({
+                        inputRange: [
+                          0,
+                          gameData[gameplayScreenplay.etapas[currentStep].key]
+                            .maxScore,
+                        ],
+                        outputRange: ["0%", "100%"],
+                        extrapolate: "clamp",
+                      }),
+                backgroundColor: appColors.activeStep,
+              }}
+            />
           </View>
 
           {/* Caixa de feedback do paciente e resultado de exames */}
           {feedbackContent.visible && (
-            <View style={[styles.feedbackBox, { backgroundColor: feedbackContent.isSpeech ? '#ACDCCE' : appColors.cardGray }]}>
+            <View
+              style={[
+                styles.feedbackBox,
+                {
+                  backgroundColor: feedbackContent.isSpeech
+                    ? "#ACDCCE"
+                    : appColors.cardGray,
+                },
+              ]}
+            >
               <Typography>{feedbackContent.text}</Typography>
             </View>
           )}
 
           {/* Caixa de fala e pensamento do jogador */}
-          <View style={[gameStyles.playerSpeechThinkBox, { zIndex: speechDone ? -1 : 1, backgroundColor: speechDone ? '#ACDCCE' : '#FFF', paddingLeft: measure(speechDone ? 6 : 4) }]}>
+          <View
+            style={[
+              gameStyles.playerSpeechThinkBox,
+              {
+                zIndex: speechDone ? -1 : 1,
+                backgroundColor: speechDone ? "#ACDCCE" : "#FFF",
+                paddingLeft: measure(speechDone ? 6 : 4),
+              },
+            ]}
+          >
             <View style={[styles.spacedRow, { flexGrow: 1 }]}>
-              {!speechDone
-                ? (
-                  <View style={{ flexShrink: 1, justifyContent: 'center' }}>
-                    <Typography variant="header34">{gameplayScreenplay.etapas[currentStep].fala_inicial}</Typography>
-                  </View>
-                )
-                : (
-                  currentStep !== 0
-                    ? (
-                      <View style={{ flexShrink: 1, justifyContent: 'space-between' }}>
-                        {(currentStep === 3 || currentStep == 5)
-                          ? (
-                            getOptions().map((option, i) => (
-                              <CheckBox
-                                label={option.texto}
-                                onPress={handleOptionPressAsRadio(i)}
-                                checked={option.checked}
-                                style={{ flexGrow: 1 }}
-                                key={i}
-                              />
-                            ))
-                          )
-                          : (
-                            getOptions().slice(2 * paginationIndex, 2 * (1 + paginationIndex)).map((option, i) => (
-                              <CheckBox
-                                label={option.texto}
-                                onPress={handleOptionPress(2 * paginationIndex + i)}
-                                checked={option.checked}
-                                style={{ flexGrow: 1 }}
-                                key={i}
-                              />
-                            ))
-                          )
-                        }
-                      </View>
-                    )
-                    : (
-                      <View style={{ flexShrink: 1, justifyContent: 'center' }}>
-                        <Typography variant="header34">Olá! Como você se chama?</Typography>
-                      </View>
-                    )
-                )
-              }
+              {!speechDone ? (
+                <View style={{ flexShrink: 1, justifyContent: "center" }}>
+                  <Typography variant='header34'>
+                    {gameplayScreenplay.etapas[currentStep].fala_inicial}
+                  </Typography>
+                </View>
+              ) : currentStep !== 0 ? (
+                <View
+                  style={{ flexShrink: 1, justifyContent: "space-between" }}
+                >
+                  {currentStep === 3 || currentStep == 5
+                    ? getOptions().map((option, i) => (
+                        <CheckBox
+                          label={option.texto}
+                          onPress={handleOptionPressAsRadio(i)}
+                          checked={option.checked}
+                          style={{ flexGrow: 1 }}
+                          key={i}
+                        />
+                      ))
+                    : getOptions()
+                        .slice(2 * paginationIndex, 2 * (1 + paginationIndex))
+                        .map((option, i) => (
+                          <CheckBox
+                            label={option.texto}
+                            onPress={handleOptionPress(2 * paginationIndex + i)}
+                            checked={option.checked}
+                            style={{ flexGrow: 1 }}
+                            key={i}
+                          />
+                        ))}
+                </View>
+              ) : (
+                <View style={{ flexShrink: 1, justifyContent: "center" }}>
+                  <Typography variant='header34'>
+                    Olá! Como você se chama?
+                  </Typography>
+                </View>
+              )}
 
-              <View style={{ justifyContent: 'center', alignItems: 'center', marginLeft: measure(2) }}>
-                {(!speechDone || currentStep !== 3 || gameData.diagnostico.options.filter(d => d.checked).length !== 0) && (
-                  <TouchableOpacity activeOpacity={0.9} onPress={handlePaginationPress}>
-                    <ArrowIcon color='#1BA488' width={measure(4)} height={measure(6)} />
+              <View
+                style={{
+                  justifyContent: "center",
+                  alignItems: "center",
+                  marginLeft: measure(2),
+                }}
+              >
+                {(!speechDone ||
+                  currentStep !== 3 ||
+                  gameData.diagnostico.options.filter((d) => d.checked)
+                    .length !== 0) && (
+                  <TouchableOpacity
+                    activeOpacity={0.9}
+                    onPress={handlePaginationPress}
+                  >
+                    <ArrowIcon
+                      color='#1BA488'
+                      width={measure(4)}
+                      height={measure(6)}
+                    />
                   </TouchableOpacity>
                 )}
               </View>
@@ -299,34 +458,73 @@ export const GameScreen = ({ route, navigation, ...props }) => {
 
           {/* Imagem do médico */}
           <View style={gameStyles.avatarContainer}>
-            <View style={{ position: 'relative' }}>
+            <View
+              style={gameStyles.avatarShadow}
+            >
               <Image source={gameData.avatar} style={gameStyles.avatar} />
-              {!speechDone && <Image source={ThinkCircles} style={gameStyles.thinkCircles} />}
+              {!speechDone && (
+                <Image source={ThinkCircles} style={gameStyles.thinkCircles} />
+              )}
             </View>
           </View>
 
-          <View style={[styles.spacedRow, { position: 'absolute', bottom: 0, left: 0, right: 0, alignItems: 'flex-end' }]}>
-            <StepButton style={{ flexGrow: 1 }} title={'Anamnese'} step={1} activeStep={currentStep}
+          <View
+            style={[
+              styles.spacedRow,
+              {
+                position: "absolute",
+                bottom: 0,
+                left: 0,
+                right: 0,
+                alignItems: "flex-end",
+              },
+            ]}
+          >
+            <StepButton
+              style={{ flexGrow: 1 }}
+              title={"Anamnese"}
+              step={1}
+              activeStep={currentStep}
               currentStep={currentStep}
               onPress={handleNextStep}
             />
-            <StepButton style={{ flexGrow: 1 }} title={'Exame Clínico'} step={2} activeStep={currentStep}
+            <StepButton
+              style={{ flexGrow: 1 }}
+              title={"Exame Clínico"}
+              step={2}
+              activeStep={currentStep}
               currentStep={currentStep}
               onPress={handleNextStep}
             />
-            <StepButton style={{ flexGrow: 1 }} title={'Exames Complementares'} step={4} activeStep={currentStep}
+            <StepButton
+              style={{ flexGrow: 1 }}
+              title={"Exames Complementares"}
+              step={4}
+              activeStep={currentStep}
               currentStep={currentStep}
               onPress={handleNextStep}
             />
-            <StepButton style={{ flexGrow: 1 }} title={'Diagnóstico'} step={5} activeStep={currentStep}
+            <StepButton
+              style={{ flexGrow: 1 }}
+              title={"Diagnóstico"}
+              step={5}
+              activeStep={currentStep}
               currentStep={currentStep}
               onPress={handleNextStep}
             />
-            <StepButton style={{ flexGrow: 1 }} title={'Conduta'} step={6} activeStep={currentStep}
+            <StepButton
+              style={{ flexGrow: 1 }}
+              title={"Conduta"}
+              step={6}
+              activeStep={currentStep}
               currentStep={currentStep}
               onPress={handleNextStep}
             />
-            <StepButton style={{ flexGrow: 1 }} title={'Comunicação'} step={7} activeStep={currentStep}
+            <StepButton
+              style={{ flexGrow: 1 }}
+              title={"Comunicação"}
+              step={7}
+              activeStep={currentStep}
               currentStep={currentStep}
               onPress={handleNextStep}
             />
@@ -342,22 +540,31 @@ export const GameScreen = ({ route, navigation, ...props }) => {
       </Modal>
     </Container>
   );
-}
+};
 
 const gameStyles = StyleSheet.create({
   avatar: {
     width: measure(13),
     height: measure(13),
     borderRadius: measure(1),
-    elevation: 3
+    elevation: 3,
+  },
+  avatarShadow: {
+    position: "relative",
+    shadowOffset: {
+      width: 0,
+      height: 0,
+    },
+    shadowOpacity: 0.5,
+    shadowRadius: 10,
   },
   avatarContainer: {
-    position: 'absolute',
+    position: "absolute",
     left: measure(2),
-    bottom: measure(7)
+    bottom: measure(7),
   },
   playerSpeechThinkBox: {
-    position: 'absolute',
+    position: "absolute",
     right: measure(2),
     left: measure(10),
     bottom: measure(7),
@@ -375,9 +582,9 @@ const gameStyles = StyleSheet.create({
   thinkCircles: {
     width: measure(4),
     height: measure(4),
-    resizeMode: 'contain',
-    position: 'absolute',
+    resizeMode: "contain",
+    position: "absolute",
     right: 0,
-    top: 0
-  }
+    top: 0,
+  },
 });
