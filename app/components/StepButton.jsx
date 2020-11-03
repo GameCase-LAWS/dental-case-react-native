@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Animated, StyleSheet, TouchableOpacity } from 'react-native';
 import { Typography } from './Typography';
-import { meansure } from '../tools/resolution';
+import { ThemeContext } from '../ThemeContext';
 
 export const StepButton = ({
   title,
@@ -11,6 +11,8 @@ export const StepButton = ({
   onPress,
   ...props
 }) => {
+  const { theme } = React.useContext(ThemeContext);
+
   const growAnim = React.useRef(new Animated.Value(0)).current;
   const colorAnim = React.useRef(new Animated.Value(state)).current;
 
@@ -52,18 +54,18 @@ export const StepButton = ({
   return (
     <View {...props}>
       <TouchableOpacity activeOpacity={0.9} onPress={onPress} disabled={currentStep !== step}>
-      <View style={styles.container}>
-        <Animated.View style={[styles.top, {
+      <View style={theme.styles.componentStepButtonContainer}>
+        <Animated.View style={[theme.styles.componentStepButtonTop, {
           borderBottomColor: color
         }]} />
-        <Animated.View style={[styles.bottom, {
+        <Animated.View style={{
           height: growAnim.interpolate({
             inputRange: [0, 1],
-            outputRange: [meansure(4), meansure(5)]
+            outputRange: [theme.measure(4), theme.measure(5)]
           }),
           backgroundColor: color
-        }]} />
-        <View style={styles.absoluteContainer}>
+        }} />
+        <View style={theme.styles.componentStepButtonAbsoluteContainer}>
           <Typography style={{ textAlign: 'center' }}>{title}</Typography>
         </View>
       </View>
@@ -75,31 +77,3 @@ export const StepButton = ({
 StepButton.defaultProps = {
   state: 0
 }
-
-const styles = StyleSheet.create({
-  container: {
-    alignItems: 'stretch',
-    flexGrow: 1
-  },
-  absoluteContainer: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    padding: meansure(1),
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0
-  },
-  top: {
-    height: 0,
-    borderBottomWidth: meansure(1),
-    borderLeftWidth: meansure(1),
-    borderRightWidth: meansure(1),
-    borderStyle: 'solid',
-
-    borderRightColor: 'transparent',
-    borderLeftColor: 'transparent',
-    backgroundColor: 'transparent'
-  }
-})

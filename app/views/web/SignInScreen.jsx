@@ -3,7 +3,7 @@ import { View, ImageBackground, Image, Animated, TextInput } from 'react-native'
 
 import * as GoogleSignIn from "expo-google-sign-in";
 
-import { styles, appColors } from '../../styles';
+import { appColors } from '../../styles';
 
 import { Typography } from '../../components/Typography';
 import { Grid } from "../../components/Grid";
@@ -14,6 +14,8 @@ import {
   googleProvider,
   facebookProvider,
 } from "../../services/auth";
+import { ThemeContext } from '../../ThemeContext';
+import { UserContext } from '../../UserContext';
 
 // Import images
 const GoogleIcon = require("../../assets/images/providers/google.png");
@@ -29,27 +31,34 @@ const fachadas = [
 ];
 
 export const SignInScreen = ({ navigation, ...props }) => {
+  const { theme } = React.useContext(ThemeContext);
+  const { user, setUser } = React.useContext(UserContext);
+
   const [index, setIndex] = React.useState(0);
   const [message, setMessage] = React.useState(null);
   const [authentication, setAuthentication] = React.useState({
-    email: null,
-    password: null,
+    email: '',
+    password: '',
   });
-  const fadeAnimIn = React.useRef(new Animated.Value(1)).current;
 
   const onChangeText = (change) => (e) => {
     setAuthentication((old) => ({ ...old, [change]: e }));
   };
 
   async function handleSignIn() {
-    // Authentication.signIn(authentication);
-    navigation.navigate("Splash");
+    setMessage('Entrando...');
+    try {
+      const user = await Authentication.signIn(authentication);
+      setUser(user);
+    } catch ({ message }) {
+      setMessage(message);
+    }
   }
 
   async function _syncUserWithStateAsync() {
     const user = await GoogleSignIn.signInSilentlyAsync();
     if (user) {
-      navigation.navigate("Splash");
+      setUser(user);
     }
   }
 
@@ -58,22 +67,18 @@ export const SignInScreen = ({ navigation, ...props }) => {
   };
 
   React.useEffect(() => {
-    async function startLoopAsync(inOut) {
-      Animated.timing(fadeAnimIn, {
-        toValue: inOut ? 1 : 0.66,
-        delay: inOut ? 0 : 10000,
-        duration: inOut ? 2000 : 2000,
-        useNativeDriver: false
-      }).start(() => {
-        if (!inOut) {
-          setIndex(old => old === 2 ? 0 : ++old);
-        }
-        startLoopAsync(!inOut);
-      });
+    async function checkUserLogged() {
+      const user = await Authentication.currentUser();
+      if (user) {
+        setMessage('Entrou com sucesso!')
+        navigation.navigate("Splash");
+      } else {
+        console.log('Verificar usuário');
+      }
     }
 
-    startLoopAsync(true);
-  }, []);
+    checkUserLogged();
+  }, [user]);
 
   return (
     <Animated.View style={{ flex: 1, backgroundColor: '#ffffff' }}>
@@ -88,18 +93,18 @@ export const SignInScreen = ({ navigation, ...props }) => {
             <TextInput
               value={authentication["email"]}
               onChangeText={onChangeText("email")}
-              style={styles.textInput}
+              style={theme.styles.textInput}
               placeholder={"Usuário ou E-mail"}
             />
             <TextInput
               secureTextEntry={true}
               value={authentication["password"]}
               onChangeText={onChangeText("password")}
-              style={styles.textInput}
+              style={theme.styles.textInput}
               placeholder={"Senha"}
             />
             <View style={{ justifyContent: "space-between", flexDirection: "row", marginVertical: 8 }} >
-              <Typography style={styles.underscored}>Esqueceu a senha?</Typography>
+              <Typography style={theme.styles.underscored}>Esqueceu a senha?</Typography>
               <Typography bold color={appColors.primary}>Registrar</Typography>
             </View>
           </View>
@@ -107,6 +112,7 @@ export const SignInScreen = ({ navigation, ...props }) => {
             backgroundColor={appColors.primary}
             label='Login'
             onPress={handleSignIn}
+            fontVariant='button14'
           />
           <Typography
             color={appColors.secondary}

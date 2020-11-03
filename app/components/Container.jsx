@@ -1,11 +1,13 @@
-import React, { Children } from 'react';
+import React from 'react';
 import { View } from 'react-native';
-import { screenContainer } from '../tools/resolution';
+import { ThemeContext } from '../ThemeContext';
 
 export const Container = ({ children, containerStyle, style, overflowChildren, ...props }) => {
+  const { theme } = React.useContext(ThemeContext);
+
   return (
     <View style={[containerStyle, { flex: 1, overflow: 'hidden' }]} {...props}>
-      <View style={[screenContainer, style]}>
+      <View style={[theme.screenContainer, style]}>
         {children}
       </View>
       {overflowChildren}

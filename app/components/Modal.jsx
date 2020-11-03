@@ -7,10 +7,6 @@ import {
   View,
   Platform
 } from 'react-native';
-import { Typography } from './Typography';
-import { Button } from './Button';
-import { Grid } from './Grid';
-import { CloseIcon } from '../assets/icons';
 
 export const Modal = ({ children, onClose, visible, ...props }) => {
   const fadeAnim = React.useRef(new Animated.Value(0)).current;

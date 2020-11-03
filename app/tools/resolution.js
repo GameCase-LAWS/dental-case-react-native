@@ -8,23 +8,26 @@ const {
   height: SCREEN_HEIGHT,
 } = Dimensions.get('window');
 
-const resolution = SCREEN_WIDTH / SCREEN_HEIGHT;
-// console.log(resolution);
+export function calcResolutionUtils(isLandscape) {
+  const refHeight = isLandscape ? SCREEN_WIDTH : SCREEN_HEIGHT;
+  const refWidth = isLandscape ? SCREEN_HEIGHT : SCREEN_WIDTH;
 
-let height, width, _meansure;
+  const resolution = refWidth / refHeight;
 
-if (resolution < 16 / 9) { // HEIGHT acima do adequado, ajustar em HEIGHT
-  height = 9 / 16 * SCREEN_WIDTH;
-  width = SCREEN_WIDTH;
-  _meansure = SCREEN_WIDTH / 64;
-} else { // WIDTH acima do adequado, ajustar em WIDTH
-  width = 16 / 9 * SCREEN_HEIGHT;
-  height = SCREEN_HEIGHT;
-  _meansure = SCREEN_HEIGHT / 36;
+  let height, width, measure;
+
+  if (resolution < 16 / 9) { // HEIGHT acima do adequado, ajustar em HEIGHT
+    height = 9 / 16 * SCREEN_WIDTH;
+    width = SCREEN_WIDTH;
+    measure = SCREEN_WIDTH / 64;
+  } else { // WIDTH acima do adequado, ajustar em WIDTH
+    width = 16 / 9 * SCREEN_HEIGHT;
+    height = SCREEN_HEIGHT;
+    measure = SCREEN_HEIGHT / 36;
+  }
+
+  return { height, width, measure };
 }
-
-export const screenContainer = { width, height, marginRight: 'auto', marginLeft: 'auto' };
-export const meansure = (meansures) => _meansure * meansures;
 
 export function normalize(size) {
   const newSize = size;

@@ -1,0 +1,256 @@
+{
+  "actions": [
+    "NONE",
+    "START_VIBRATION",
+    "STOP_EFFECTS_ON_END",
+    "END_VIBRATION",
+    "END_SCREEN_EFFECTS",
+    "END_GAME"
+  ],
+  "interferences": [
+    {
+      "etapa": "BOTH",
+      "vibrate": true,
+      "key": "LIGACAO_CHEGANDO",
+      "restrict": null,
+      "inner_voice": null,
+      "screen_text": null,
+      "respostas": null,
+      "is_speech": false
+    },
+    {
+      "etapa": "BOTH",
+      "vibrate": true,
+      "key": "ACOMPANHANTE_ATENDE_CELULAR",
+      "restrict": null,
+      "inner_voice": "Será que vai atender? O que vou dizer?",
+      "screen_text": "O acompanhante atende o celular no meio da consulta!!",
+      "respostas": [
+        {
+          "texto": "Poderia desligar o celular por favor!",
+          "action": "END_VIBRATION",
+          "tipo": "+"
+        },
+        {
+          "texto": "Se é emergência poderia atender fora do consultório.",
+          "action": "END_VIBRATION",
+          "tipo": "0"
+        },
+        {
+          "texto": "Melhor voltarem outro dia!",
+          "action": "END_GAME",
+          "tipo": "-"
+        }
+      ],
+      "is_speech": true
+    },
+    {
+      "etapa": "BOTH",
+      "vibrate": true,
+      "key": "PACIENTE_ATENDE_CELULAR",
+      "restrict": null,
+      "inner_voice": "Será que vai atender? O que vou dizer?",
+      "screen_text": "O paciente atende o celular no meio da consulta!!",
+      "respostas": [
+        {
+          "texto": "Poderia desligar o celular por favor!",
+          "action": "END_VIBRATION",
+          "tipo": "+"
+        },
+        {
+          "texto": "Se é emergência poderia atender fora do consultório.",
+          "action": "END_VIBRATION",
+          "tipo": "0"
+        },
+        {
+          "texto": "Melhor voltar outro dia!",
+          "action": "END_GAME",
+          "tipo": "-"
+        }
+      ],
+      "is_speech": true
+    },
+    {
+      "etapa": "BOTH",
+      "vibrate": true,
+      "key": "ALGUEM_ABRE_PORTA",
+      "restrict": null,
+      "inner_voice": "Não sabem que estou em consulta?",
+      "screen_text": "Alguém abre a porta do consultório para lhe contar algo!!",
+      "respostas": [
+        {
+          "texto": "Falo contigo quando terminar a consulta!",
+          "action": "END_VIBRATION",
+          "tipo": "+"
+        },
+        {
+          "texto": "Por favor, não me interrompa.",
+          "action": "END_VIBRATION",
+          "tipo": "0"
+        },
+        {
+          "texto": "Entre, do que se trata?",
+          "action": "END_GAME",
+          "tipo": "-"
+        }
+      ],
+      "is_speech": true
+    },
+    {
+      "etapa": "ANAMNESE",
+      "vibrate": false,
+      "key": "RUIDOS_EXTERNOS",
+      "restrict": null,
+      "inner_voice": "Nossa! Com este barulho não consigo entender direito!",
+      "screen_text": "As obras da profeititura reiniciaram e o atendimento fica bem compromentido pelo intenso barulho!!",
+      "respostas": [
+        {
+          "texto": "Vou falar mais devagar e me aproximar do paciente",
+          "action": "END_SCREEN_EFFECTS",
+          "tipo": "+"
+        },
+        {
+          "texto": "Terei de falar mais alto",
+          "action": "STOP_EFFECTS_ON_END",
+          "tipo": "0"
+        },
+        {
+          "texto": "Vou dispensar o paciente e pedir pra remarcar",
+          "action": "END_GAME",
+          "tipo": "-"
+        }
+      ],
+      "is_speech": false
+    },
+    {
+      "etapa": "ANAMNESE",
+      "vibrate": false,
+      "key": "DOIS_ACOMPANHANTES_QUEREM_RESPONDER",
+      "restrict": null,
+      "inner_voice": "Os acompanhantes estão muito nervosos! O que devo dizer?",
+      "screen_text": null,
+      "respostas": [
+        {
+          "texto": "Calma, poderiam falar um de cada vez, por favor!",
+          "action": null,
+          "tipo": "+"
+        },
+        {
+          "texto": "Se acalmem, por favor.",
+          "action": null,
+          "tipo": "0"
+        },
+        {
+          "texto": "Não entendo nada. Parem com isso!",
+          "action": null,
+          "tipo": "-"
+        }
+      ],
+      "is_speech": true
+    },
+    {
+      "etapa": "ANAMNESE",
+      "vibrate": false,
+      "key": "MAU_ACOMPANHANTE",
+      "restrict": null,
+      "inner_voice": "Hum, não sabe me informar sobre a criança e sua queixa. O que devo fazer?",
+      "screen_text": null,
+      "respostas": [
+        {
+          "texto": "Vou perguntar a criança sobre a queixa e pedir para no retorno vir com quem conheça os hábitos da criança.",
+          "action": null,
+          "tipo": "+"
+        },
+        {
+          "texto": "Vou considerar o caso como grave.",
+          "action": null,
+          "tipo": "0"
+        },
+        {
+          "texto": "Mandar que a criança volte outro dia com outro acompanhante.",
+          "action": "END_GAME",
+          "tipo": "-"
+        }
+      ],
+      "is_speech": false
+    },
+    {
+      "etapa": "ANAMNESE",
+      "vibrate": false,
+      "key": "CRIANCA_NAO_PARA_QUIETA",
+      "restrict": null,
+      "inner_voice": "O que devo dizer?",
+      "screen_text": null,
+      "respostas": [
+        {
+          "texto": "Poderia acalmar esta criança?",
+          "action": "END_SCREEN_EFFECTS",
+          "tipo": "+"
+        },
+        {
+          "texto": "Tente prestar a atenção só em mim.",
+          "action": "END_SCREEN_EFFECTS",
+          "tipo": "0"
+        },
+        {
+          "texto": "Agora sossega!",
+          "action": "END_SCREEN_EFFECTS",
+          "tipo": "-"
+        }
+      ],
+      "is_speech": true
+    },
+    {
+      "etapa": "CLINICAL",
+      "vibrate": false,
+      "key": "FALTA_LUZ",
+      "restrict": null,
+      "inner_voice": "Não acredito, falta de luz, e agora?",
+      "screen_text": null,
+      "respostas": [
+        {
+          "texto": "Vou abrir a janela para entrar mais luz",
+          "action": "END_SCREEN_EFFECTS",
+          "tipo": "+"
+        },
+        {
+          "texto": "Vou continuar o exame assim mesmo.",
+          "action": "STOP_EFFECTS_ON_END",
+          "tipo": "0"
+        },
+        {
+          "texto": "Vou dispensar o paciente e pedir pra remarcar",
+          "action": "END_GAME",
+          "tipo": "-"
+        }
+      ],
+      "is_speech": false
+    },
+    {
+      "etapa": "CLINICAL",
+      "vibrate": true,
+      "key": "PACIENTE_DESCONTROLE_EMOCIAL",
+      "restrict": null,
+      "inner_voice": "Como posso acalmar meu paciente?",
+      "screen_text": null,
+      "respostas": [
+        {
+          "texto": "Calma! Vamos fazer os exames verificar as possibilidades.",
+          "action": "END_VIBRATION",
+          "tipo": "+"
+        },
+        {
+          "texto": "Vou lhe dar um tempo para se acalmar. Já volto.",
+          "action": "END_VIBRATION",
+          "tipo": "0"
+        },
+        {
+          "texto": "Assim não dá. Melhor remarcar pra outro dia.",
+          "action": "END_GAME",
+          "tipo": "-"
+        }
+      ],
+      "is_speech": true
+    }
+  ]
+}

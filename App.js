@@ -17,6 +17,10 @@ import { CreditsScreen } from './app/views/CreditsScreen';
 import { AuthStack } from "./app/views/auth";
 import { GameStack } from './app/views/gameplay';
 
+import { ThemeContextProvider } from './app/ThemeContext';
+import { UserContextProvider } from './app/UserContext';
+import { HistoryScreen } from './app/views/HistoryScreen';
+
 const Stack = createStackNavigator();
 
 export default function App() {
@@ -47,16 +51,21 @@ export default function App() {
   }
 
   return (
-    <NavigationContainer>
-      <Stack.Navigator initialRouteName="Splash" screenOptions={{ headerShown: false, headerTitle: 'Dental Case' }}>
-        <Stack.Screen name="Splash" component={SplashScreen} />
-        <Stack.Screen name="Menu" component={MenuScreen} />
-        <Stack.Screen name="Credits" component={CreditsScreen} />
-        
-        {/* Aditional Stacks */}
-        <Stack.Screen name="Auth" component={AuthStack} />
-        <Stack.Screen name="Game" component={GameStack} />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <ThemeContextProvider>
+      <UserContextProvider>
+      <NavigationContainer>
+        <Stack.Navigator initialRouteName="Game" screenOptions={{ headerShown: false, headerTitle: 'Dental Case' }}>
+          <Stack.Screen name="Splash" component={SplashScreen} />
+          <Stack.Screen name="Menu" component={MenuScreen} />
+          <Stack.Screen name="Credits" component={CreditsScreen} />
+          <Stack.Screen name="History" component={HistoryScreen} />
+
+          {/* Aditional Stacks */}
+          <Stack.Screen name="Auth" component={AuthStack} />
+          <Stack.Screen name="Game" component={GameStack} />
+        </Stack.Navigator>
+      </NavigationContainer>
+      </UserContextProvider>
+    </ThemeContextProvider>
   );
 }

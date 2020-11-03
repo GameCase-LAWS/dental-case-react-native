@@ -6,11 +6,11 @@ export const googleProvider = new auth.GoogleAuthProvider();
 export const facebookProvider = new auth.FacebookAuthProvider();
 
 export const Authentication = {
+    currentUser: async () => {
+        return await auth().currentUser;
+    },
     signIn: async ({ email, password }) => {
-        await auth()
-            .signInWithEmailAndPassword(email, password)
-            .then(() => console.log("Logged In"))
-            .catch((e) => console.log("Login failed", e));
+        return await auth().signInWithEmailAndPassword(email, password);
     },
     signInWithProvider: async (provider, callback) => {
         if (Platform.OS === 'web') {
