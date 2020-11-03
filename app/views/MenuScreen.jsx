@@ -21,7 +21,6 @@ const CogSource = require("../assets/images/cog.png");
 const LogoutSource = require("../assets/images/logout.png");
 
 export const MenuScreen = ({ navigation, ...props }) => {
-
   const [loadedCases, setLoadedCases] = React.useState(null);
   const [paginationIndex, setPaginationIndex] = React.useState(0);
   const [modal, setModal] = React.useState({
@@ -137,9 +136,11 @@ export const MenuScreen = ({ navigation, ...props }) => {
             {loadedCases && loadedCases.length > 3 && (
               <TouchableOpacity activeOpacity={0.9} onPress={handlePagination}>
                 <ArrowIcon
+                  shadow={true}
                   color='#fff'
                   height={measure(6)}
                   width={measure(4)}
+                 
                 />
               </TouchableOpacity>
             )}
@@ -150,7 +151,13 @@ export const MenuScreen = ({ navigation, ...props }) => {
       <View style={{ flexDirection: "row", justifyContent: "flex-end" }}>
         <CircleButton
           size={measure(3)}
-          style={{ marginRight: measure(1) }}
+          style={{
+            marginRight: measure(1),
+            shadowOffset: { width: 0, height: 0 },
+            shadowOpacity: 0.5,
+            shadowRadius: 10,
+            borderRadius: measure(3),
+          }}
           label='Créditos'
           containerStyle={styles.circlePadding}
           onPress={() => navigation.navigate("Credits")}
@@ -159,19 +166,35 @@ export const MenuScreen = ({ navigation, ...props }) => {
         </CircleButton>
         <CircleButton
           size={measure(3)}
-          style={{ marginRight: measure(1) }}
+          style={{
+            marginRight: measure(1),
+            shadowOffset: { width: 0, height: 0 },
+            shadowOpacity: 0.5,
+            shadowRadius: 10,
+            borderRadius: measure(3),
+          }}
           label='Configurações'
           containerStyle={styles.circlePadding}
           onPress={handleConfiguration}
         >
           <Image
             source={CogSource}
-            style={{ width: measure(1.5), height: measure(1.5) }}
+            style={{
+              width: measure(1.5),
+              height: measure(1.5),
+            }}
           />
         </CircleButton>
         <CircleButton
           size={measure(3)}
           label='Desconectar'
+          style={{
+            marginRight: measure(1),
+            shadowOffset: { width: 0, height: 0 },
+            shadowOpacity: 0.5,
+            shadowRadius: 10,
+            borderRadius: measure(3),
+          }}
           containerStyle={styles.circlePadding}
           onPress={handleDisconnect}
         >

@@ -458,9 +458,7 @@ export const GameScreen = ({ route, navigation, ...props }) => {
 
           {/* Imagem do médico */}
           <View style={gameStyles.avatarContainer}>
-            <View
-              style={gameStyles.avatarShadow}
-            >
+            <View style={(gameStyles.dropShadow, { position: "relative" })}>
               <Image source={gameData.avatar} style={gameStyles.avatar} />
               {!speechDone && (
                 <Image source={ThinkCircles} style={gameStyles.thinkCircles} />
@@ -549,8 +547,7 @@ const gameStyles = StyleSheet.create({
     borderRadius: measure(1),
     elevation: 3,
   },
-  avatarShadow: {
-    position: "relative",
+  dropShadow: {
     shadowOffset: {
       width: 0,
       height: 0,

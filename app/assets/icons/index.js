@@ -1,15 +1,16 @@
 import * as React from "react"
-import Svg, { Path } from "react-native-svg"
+import Svg, { Path, Filter } from "react-native-svg"
 
-export function ArrowIcon({color, ...props}) {
+export function ArrowIcon({ color, ...props }) {
   return (
-    <Svg viewBox="0 0 100 150" {...props}>
-      <Path fill={color} d="M25 0H0l75 75-75 75h25l75-75L25 0z" />
+    <Svg viewBox="0 0 100 150" {...props} >
+      <Path fill={color} d="M25 0H0l75 75-75 75h25l75-75L25 0z"
+      />
     </Svg>
   )
 }
 
-export function CloseIcon({color, ...props}) {
+export function CloseIcon({ color, ...props }) {
   return (
     <Svg viewBox="0 0 100 100" {...props}>
       <Path
@@ -20,7 +21,7 @@ export function CloseIcon({color, ...props}) {
   )
 }
 
-export function BackIcon({color, ...props}) {
+export function BackIcon({ color, ...props }) {
   return (
     <Svg fill="none" viewBox="0 0 100 100" {...props}>
       <Path

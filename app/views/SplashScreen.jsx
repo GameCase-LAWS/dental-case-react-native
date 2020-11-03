@@ -19,12 +19,6 @@ const BlueBackgroundImage = require("../assets/images/blue-bg.jpg");
 const SplashAPNG = require("../assets/images/splash.png");
 
 export const SplashScreen = ({ scene, navigation, ...props }) => {
-  const { updateContext } = React.useContext(ScreenContext);
-  const shadowOffsetWidth= 10;
-  const shadowOffsetHeight= 10;
-  const shadowRadius= 10;
-  const shadowOpacity= 0.3;
-
   React.useEffect(() => {
     async function changeScreenOrientationAsync() {
       if (Platform.OS !== "web") {
@@ -49,15 +43,14 @@ export const SplashScreen = ({ scene, navigation, ...props }) => {
       {/* <Image source={Banner} style={{ height: 400, width: 600 }} resizeMode="contain" /> */}
       {/* <ApngComponent src={SplashAPNG} style={{ height: 400, width: 600 }} /> */}
       {/* <Image source={SplashAPNG} /> */}
-      <Shadow
-        shadowOffset={[shadowOffsetWidth, shadowOffsetHeight]}
-        shadowOpacity={shadowOpacity}
-        shadowRadius={shadowRadius}
+
+      <TouchableOpacity
+        onPress={() => navigation.navigate("Menu")}
       >
-        <TouchableOpacity onPress={() => navigation.navigate("Menu")}>
-          <Typography color='#fff' variant={'header20'}>Skip</Typography>
-        </TouchableOpacity>
-      </Shadow>
+        <Typography color='#fff' variant={"header20"}>
+          Skip
+        </Typography>
+      </TouchableOpacity>
     </ImageBackground>
   );
 };
