@@ -1,8 +1,16 @@
 import React from "react";
 import { View, Animated, StyleSheet, TouchableOpacity } from "react-native";
+import { Svg,Path } from 'react-native-svg'
 import { Typography } from "./Typography";
 import { ThemeContext } from "../ThemeContext";
 
+function TopBorder(props) {
+  return (
+    <Svg viewBox="0 0 512 512" {...props}>
+      <Path d="M0 100,100 z" />
+    </Svg>
+  )
+}
 export const StepButton = ({
   title,
   step,
@@ -67,6 +75,7 @@ export const StepButton = ({
               },
             ]}
           />
+          <TopBorder/>
           <Animated.View
             style={[
               {

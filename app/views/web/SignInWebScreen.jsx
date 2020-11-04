@@ -16,6 +16,7 @@ import { Typography } from "../../components/Typography";
 import { Grid } from "../../components/Grid";
 import { Button } from "../../components/Button";
 
+import { Svg, Path } from "react-native-svg";
 import {
   Authentication,
   googleProvider,
@@ -36,6 +37,24 @@ const fachadas = [
   require("../../assets/images/fachadas/fachada_1.jpg"),
   require("../../assets/images/fachadas/fachada_2.jpg"),
 ];
+
+const AnimatedPath = Animated.createAnimatedComponent(Path);
+
+function TopBorder({ props, color }) {
+  return (
+    <Svg
+      style={{ margin: 15, }}
+        width={230}
+        height={30}
+      {...props}
+    >
+      <AnimatedPath
+        fill={color}
+        d='M0 30 l30 -30 l170 0 l30 30 l0 200 l-230 0  Z'
+      />
+    </Svg>
+  );
+}
 
 export const SignInWebScreen = ({ navigation, ...props }) => {
   const { theme } = React.useContext(ThemeContext);
@@ -105,7 +124,9 @@ export const SignInWebScreen = ({ navigation, ...props }) => {
         <View
           style={{
             padding: 32,
-            // margin: 32,
+            // margin: 32,3
+            minHeight:600,
+            minWidth:500,
             backgroundColor: "#ffffff",
             borderRadius: theme.measure(0.5),
             elevation: 2,
@@ -153,6 +174,7 @@ export const SignInWebScreen = ({ navigation, ...props }) => {
               <Typography
                 style={theme.styles.underscored}
                 variant={"overline10"}
+                color={appColors.secondary}
                 onPress={() => navigation.navigate("RedefinePassword")}
               >
                 Esqueceu a senha?
@@ -234,6 +256,7 @@ export const SignInWebScreen = ({ navigation, ...props }) => {
           </Grid>
         </View>
       </View>
+      {/* <TopBorder /> */}
     </Animated.View>
   );
 };

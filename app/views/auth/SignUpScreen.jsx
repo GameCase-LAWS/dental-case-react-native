@@ -1,5 +1,5 @@
 import React from "react";
-import { Image, View, TextInput } from "react-native";
+import { Image, View, TextInput, TouchableOpacity } from "react-native";
 
 import { appColors, screenWidth, screenHeight } from "../../styles";
 import { Button } from "../../components/Button";
@@ -42,24 +42,35 @@ export const SignUpScreen = ({}) => {
           theme.styles.center,
         ]}
       >
-        <Image
-          style={{ width: 10 }}
-          source={logoIcon}
-          resizeMode={"contain"}
-        ></Image>
-
         <View
           style={{
             padding: 32,
             backgroundColor: "#ffffff",
-            width:300,
+            minHeight:600,
+            minWidth: 500,
             borderRadius: theme.measure(0.5),
           }}
         >
+          <TouchableOpacity onPress={() => navigator}>
+            <BackIcon
+              style={{ width: 24, height: 24 }}
+              fill={appColors.primary}
+            />
+          </TouchableOpacity>
+          <Image
+            source={Banner}
+            style={{
+              width: 280,
+              height: 170,
+              alignSelf: "center",
+              marginBottom: 16,
+            }}
+            resizeMode='contain'
+          ></Image>
           <Typography
             variant='header20'
-            color={appColors.primary}
-            style={{ marginBottom: 16 , alignSelf:'center'}}
+            color={appColors.secondary}
+            style={{ marginBottom: 16, alignSelf: "center" }}
           >
             Crie sua conta
           </Typography>
