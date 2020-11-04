@@ -54,7 +54,7 @@ export default function App() {
     <ThemeContextProvider>
       <UserContextProvider>
       <NavigationContainer>
-        <Stack.Navigator initialRouteName="Game" screenOptions={{ headerShown: false, headerTitle: 'Dental Case' }}>
+        <Stack.Navigator initialRouteName="Auth" screenOptions={{ headerShown: false, headerTitle: 'Dental Case' }}>
           <Stack.Screen name="Splash" component={SplashScreen} />
           <Stack.Screen name="Menu" component={MenuScreen} />
           <Stack.Screen name="Credits" component={CreditsScreen} />

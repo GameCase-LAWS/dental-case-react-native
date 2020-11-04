@@ -28,7 +28,7 @@ export function shuffle(array) {
 }
 
 export function map(options, etapa) {
-  console.log(`Mapping for etapa = ${etapa}`);
+  // console.log(`Mapping for etapa = ${etapa}`);
   if (etapa === 'anamnese') {
     const { perguntas_negativas, perguntas_positivas, perguntas_neutras } = options;
     const perguntas = [...perguntas_negativas, ...perguntas_neutras, ...perguntas_positivas].map(({ resposta, resposta_prontuario, ...per }) => ({
@@ -58,11 +58,11 @@ export function map(options, etapa) {
     return exames;
   } else if (etapa === 'diagnostico') {
     const { diagnosticos_negativos, diagnosticos_positivos, diagnosticos_neutros } = options;
-    return [
-      diagnosticos_negativos[Math.floor(Math.random() * diagnosticos_negativos.length)],
-      diagnosticos_positivos[Math.floor(Math.random() * diagnosticos_positivos.length)],
-      diagnosticos_neutros[Math.floor(Math.random() * diagnosticos_neutros.length)],
-    ];
+    const adeq = diagnosticos_positivos[Math.floor(Math.random() * diagnosticos_positivos.length)];
+
+    const others = shuffle([...diagnosticos_neutros, ...diagnosticos_negativos].filter(i => i));
+
+    return [adeq, ...others].slice(0, 3);
   } else if (etapa === 'tratamento') {
     const { condutas_negativas, condutas_positivas, condutas_neutras } = options;
     const condutas = [...condutas_negativas, ...condutas_neutras, ...condutas_positivas].map(({ nome, ...per }) => ({
@@ -81,7 +81,7 @@ export function map(options, etapa) {
     }]);
     return t[Math.floor(Math.random() * t.length)];
   } else {
-    console.log('Comunicacao');
+    // console.log('Comunicacao');
   }
 }
 
@@ -117,7 +117,6 @@ export function getScore(option, etapa) {
 }
 
 export function getMaxScore(options, etapa, extra) {
-  console.log(options);
   if (!options) {
     return 0;
   }
@@ -148,33 +147,4 @@ export function normalize(size) {
   } else {
     return Math.round(PixelRatio.roundToNearestPixel(newSize)) - 2;
   }
-}
-
-export function generateGameData(case_) {
-  const returnObject = {};
-  const caseEtapasKeys = gameplayScreenplay.etapas.filter(e => e.db_key).forEach(e => {
-    let options;
-    if (e.key === "anamnese") { options = mapForAnamense(case_.anamnese); }
-    if (e.key === "exame_clinico") { options = mapForExame(case_.exame_fisico); }
-    if (e.key === "diagnostico") { options = mapForDiagnostico(case_.diagnostico_inicial); }
-    if (e.key === "exame_complementar") { options = mapForExame(case_.exame_complementar); }
-    if (e.key === "tratamento") { options = mapForConduta(case_.tratamento); }
-
-    returnObject[e.key] = {
-      options: shuffle(options),
-      score: 0,
-      maxScore: getMaxScore(options),
-      aux: {}
-    }
-  });
-
-  returnObject.comunicacao = {
-    options: mapForComunicacoes(case_.comunicacao_tratamento.comunicacoes),
-    score: 0,
-    maxScore: 90
-  }
-
-  console.log(returnObject);
-
-  return returnObject;
 }

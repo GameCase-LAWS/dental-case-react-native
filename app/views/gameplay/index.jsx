@@ -11,7 +11,7 @@ const Stack = createStackNavigator();
 
 export const GameStack = () => {
   return (
-    <Stack.Navigator screenOptions={{ headerShown: false }} initialRouteName="Interference">
+    <Stack.Navigator screenOptions={{ headerShown: false }} initialRouteName="Avatar">
       <Stack.Screen name="Avatar" component={AvatarScreen} />
       <Stack.Screen name="Ending" component={EndingScreen} />
       <Stack.Screen name="Gameplay" component={GameScreen} />

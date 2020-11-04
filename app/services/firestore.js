@@ -37,7 +37,7 @@ export const User = {
 
 export const Attendance = {
   store: async (data, saves, userId, caso) => {
-    return await firestore.doc(`users/${userId}`).collection('attendance').add({
+    return await firestore.doc(`users/${userId || 'test_user'}`).collection('attendance').add({
       // selected_avatar: data.avatar,
       pontuacao: {
         anamnese: saves.anamnese?.score || 0,
@@ -50,8 +50,14 @@ export const Attendance = {
       caso_id: caso.id,
       caso_nome: caso.titulo,
       caso_image: findObjectInListByTag(caso.imagens, 'identificador', 'character-profile')?.arquivo || null,
+      paciente_nome: caso.paciente.nome,
       selections: data.selections,
+      interference: data.interference,
       data: new Date()
     });
+  },
+  index: async (userId) => {
+    return await firestore.collection(`users/${userId || 'test_user'}/attendance`).get()
+      .then(snap => snap.docs.map(d => ({ ...d.data(), id: d.id })));
   }
 }

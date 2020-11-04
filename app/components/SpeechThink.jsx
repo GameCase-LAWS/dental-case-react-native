@@ -5,7 +5,7 @@ import { ArrowIcon } from '../assets/icons';
 import { CheckBox } from './CheckBox';
 import { Typography } from './Typography';
 
-export const SpeechThink = ({ isSpeech, showText, text, arrowBlink, onArrowClick, showArrow, options, onOptionPress, ...props }) => {
+export const SpeechThink = ({ isSpeech, showText, text, arrowBlink, onArrowClick, showArrow, options, onOptionPress, styles, ...props }) => {
   const { theme } = React.useContext(ThemeContext);
   const fadeAnim = React.useRef(new Animated.Value(1)).current;
   const [blinkAnim, setBlinkAnim] = React.useState();
@@ -49,7 +49,7 @@ export const SpeechThink = ({ isSpeech, showText, text, arrowBlink, onArrowClick
   }
 
   return (
-    <View style={[theme.styles.GameScreenPlayerSpeechThinkBox, { zIndex, backgroundColor, paddingLeft: theme.measure(isSpeech ? 6 : 4) }]}>
+    <View style={[theme.styles.GameScreenPlayerSpeechThinkBox, { zIndex, backgroundColor, paddingLeft: theme.measure(isSpeech ? 6 : 4) }, styles]}>
       <View style={[theme.styles.spacedRow, { flexGrow: 1 }]}>
         {showText
           ? (

@@ -1,79 +1,43 @@
 import React from "react";
 import {
   Image,
-  Text,
   View,
-  TextInput,
-  SafeAreaView,
-  TouchableOpacity,
 } from "react-native";
 
-import { appColors } from "../styles";
-import { Button } from "./Button";
-import { CloseIcon, ArrowIcon } from "../assets/icons";
-import { Grid } from "./Grid";
 import { Typography } from "./Typography";
 import { ThemeContext } from "../ThemeContext";
+import { findObjectInListByTag } from "../tools/functions";
 
-const icon = require("../assets/images/avatars/avatar_000.png");
+const Row = ({ label, value, ...props }) => {
+  return (
+    <View style={{ flexDirection: "row" }} {...props}>
+      <Typography variant='header24' bold>{`${label} `}</Typography>
+      <Typography variant='header24'>{value}</Typography>
+    </View>
+  );
+}
 
-export const LoadHistoryCases = ({ cases, pageIndex }) => {
+export const LoadHistoryCases = ({ casoSave, ...props }) => {
   const { theme } = React.useContext(ThemeContext);
 
   return (
-    <View
-      style={[
-        theme.styles.container,
-        {
-          backgroundColor: "#fff",
-          position: "relative",
-          paddingHorizontal: 90,
-          paddingVertical: 15,
-        },
-      ]}
-    >
-      {cases &&
-        cases
-          .slice(2 * pageIndex, 2 * (1 + pageIndex))
-          .map((c, i) => (
-            <View style={{ flexDirection: "row", marginBottom: theme.measure(1) }}>
-              <Image
-                source={icon}
-                style={{
-                  height: theme.measure(11),
-                  width: theme.measure(11),
-                  marginRight: theme.measure(2),
-                }}
-                resizeMode='contain'
-              />
-              <View>
-                <View style={{ flexDirection: "row" }} key={i}>
-                  <Typography variant='header24' bold>
-                    Data:
-                </Typography>
-                  <Typography variant='header24'> {c.data}</Typography>
-                </View>
-                <View style={{ flexDirection: "row" }} key={i}>
-                  <Typography variant='header24' bold>
-                    Paciente:
-                </Typography>
-                  <Typography variant='header24'> {c.paciente}</Typography>
-                </View>
-                <View style={{ flexDirection: "row" }} key={i}>
-                  <Typography variant='header24' bold>
-                    Diagnóstico
-                </Typography>
-                  <Typography variant='header24'> {c.diagnostico}</Typography>
-                </View>
-                <View style={{ flexDirection: "row" }} key={i}>
-                  <Typography variant='header24' bold>
-                    Pontuação:
-                </Typography>
-                  <Typography variant='header24'> {c.pontuacao}</Typography>
-                </View>
-              </View>
-            </View>
-          ))}
+    <View style={{ flexDirection: "row", marginBottom: theme.measure(1) }} {...props}>
+      <Image
+        source={{ uri: casoSave.caso_image }}
+        style={{
+          height: theme.measure(11),
+          width: theme.measure(11),
+          marginRight: theme.measure(2),
+        }}
+        resizeMode='contain'
+      />
+      <View style={{ flexGrow: 1, flexShrink: 1 }}>
+        <Typography paragraph variant="header24" bold>{casoSave.caso_nome}</Typography>
+        <Row label={'Data:'} value={casoSave.data?.toDate().toLocaleString()} />
+        <Row label={'Paciente:'} value={casoSave.paciente_nome} />
+        <Row label={'Diagnóstico:'} value={casoSave.selections?.diagnostico?.texto} />
+        <Row label={'Pontuação:'} value={Object.values(casoSave.pontuacao).reduce((prev, curr) => prev + curr, 0).toLocaleString('pt-br')} />
+      </View>
     </View>
   );
 };
