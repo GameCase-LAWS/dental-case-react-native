@@ -1,6 +1,5 @@
 {
   "actions": [
-    "NONE",
     "START_VIBRATION",
     "STOP_EFFECTS_ON_END",
     "END_VIBRATION",
@@ -16,7 +15,10 @@
       "inner_voice": null,
       "screen_text": null,
       "respostas": null,
-      "is_speech": false
+      "forced_response": null,
+      "responses_until_start": 0,
+      "is_speech": false,
+      "need_acompanhante": false
     },
     {
       "etapa": "BOTH",
@@ -42,7 +44,10 @@
           "tipo": "-"
         }
       ],
-      "is_speech": true
+      "forced_response": null,
+      "responses_until_start": 0,
+      "is_speech": true,
+      "need_acompanhante": true
     },
     {
       "etapa": "BOTH",
@@ -68,7 +73,10 @@
           "tipo": "-"
         }
       ],
-      "is_speech": true
+      "forced_response": null,
+      "responses_until_start": 0,
+      "is_speech": true,
+      "need_acompanhante": false
     },
     {
       "etapa": "BOTH",
@@ -94,7 +102,10 @@
           "tipo": "-"
         }
       ],
-      "is_speech": true
+      "forced_response": null,
+      "responses_until_start": 0,
+      "is_speech": true,
+      "need_acompanhante": false
     },
     {
       "etapa": "ANAMNESE",
@@ -120,7 +131,10 @@
           "tipo": "-"
         }
       ],
-      "is_speech": false
+      "forced_response": true,
+      "responses_until_start": 1,
+      "is_speech": false,
+      "need_acompanhante": false
     },
     {
       "etapa": "ANAMNESE",
@@ -146,7 +160,10 @@
           "tipo": "-"
         }
       ],
-      "is_speech": true
+      "forced_response": null,
+      "responses_until_start": 0,
+      "is_speech": true,
+      "need_acompanhante": true
     },
     {
       "etapa": "ANAMNESE",
@@ -172,7 +189,10 @@
           "tipo": "-"
         }
       ],
-      "is_speech": false
+      "forced_response": "Não sei doutor!",
+      "responses_until_start": 4,
+      "is_speech": false,
+      "need_acompanhante": true
     },
     {
       "etapa": "ANAMNESE",
@@ -198,7 +218,10 @@
           "tipo": "-"
         }
       ],
-      "is_speech": true
+      "forced_response": "Como doutor? Desculpe não entendi",
+      "responses_until_start": 3,
+      "is_speech": true,
+      "need_acompanhante": true
     },
     {
       "etapa": "CLINICAL",
@@ -224,7 +247,10 @@
           "tipo": "-"
         }
       ],
-      "is_speech": false
+      "forced_response": null,
+      "responses_until_start": 0,
+      "is_speech": false,
+      "need_acompanhante": false
     },
     {
       "etapa": "CLINICAL",
@@ -250,7 +276,10 @@
           "tipo": "-"
         }
       ],
-      "is_speech": true
+      "forced_response": null,
+      "responses_until_start": 0,
+      "is_speech": true,
+      "need_acompanhante": false
     }
   ]
 }

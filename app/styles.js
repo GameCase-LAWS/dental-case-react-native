@@ -54,7 +54,8 @@ export const makeStyles = (measure) => StyleSheet.create({
     borderRadius:measure(2)
   },
   dropShadow: {
-    shadowOffset: { width: 0, height: 0 },
+    
+    // shadowOffset: { width: 0, height: 0 },
     shadowOpacity: 0.5,
     shadowRadius: 10,
   },
@@ -200,6 +201,7 @@ export const makeStyles = (measure) => StyleSheet.create({
   },
   componentStepButtonTop: {
     height: 0,
+    borderTopLeftRadius:measure(8),
     borderBottomWidth: measure(1),
     borderLeftWidth: measure(1),
     borderRightWidth: measure(1),

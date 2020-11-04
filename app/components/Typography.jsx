@@ -29,7 +29,7 @@ export function Typography({
 
 Typography.propTypes = {
   color: PropTypes.string,
-  variant: PropTypes.oneOf(['button14', 'header34', 'header24', 'header20', 'subtitle16', 'subtitle14', 'caption12', 'overline10']),
+  variant: PropTypes.oneOf(['button14', 'header34', 'header48', 'header24', 'header20', 'subtitle16', 'subtitle14', 'caption12', 'overline10']),
   bold: PropTypes.bool,
   paragraph: PropTypes.bool
 }

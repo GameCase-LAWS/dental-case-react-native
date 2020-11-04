@@ -14,6 +14,7 @@ export const SpeechThink = ({
   showArrow,
   options,
   onOptionPress,
+  styles,
   ...props
 }) => {
   const { theme } = React.useContext(ThemeContext);
@@ -61,14 +62,15 @@ export const SpeechThink = ({
   return (
     <View
       style={[
-        theme.styles.GameScreenPlayerSpeechThinkBox,
         theme.styles.dropShadow,
+        theme.styles.GameScreenPlayerSpeechThinkBox,
         {
+          shadowOffset: { width: 15, height: 5 },
           zIndex,
           backgroundColor,
           paddingLeft: theme.measure(isSpeech ? 6 : 4),
-          borderRadius:theme.measure(1)
         },
+        styles,
       ]}
     >
       <View style={[theme.styles.spacedRow, { flexGrow: 1 }]}>

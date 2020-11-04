@@ -76,14 +76,14 @@ export const EndingScreen = ({ route, navigation, ...props }) => {
     // const resetAction = CommonActions.reset({
     //   index: 0,
     //   routes: [
-    //     { name: 'Gameplay' }
+    //     { name: 'Game' }
     //   ]
     // });
     // navigation.dispatch(resetAction);
 
-    // Attendance.store(data, scores, user.uid, caso).catch(e => {
-    //   console.error(e.message);
-    // });
+    Attendance.store(data, scores, user?.uid, caso).catch(e => {
+      console.error(e.message);
+    });
   }, []);
 
   function handleAttendanceDetails() {
@@ -127,14 +127,26 @@ export const EndingScreen = ({ route, navigation, ...props }) => {
           closeBtnStyle={theme.styles.ConfigurationScreen_closeBtn}
         >
           <View>
-            {data.selections[etapa].map((e, k) => (
-              <View key={k}>
-                <Typography bold>{e.texto}</Typography>
-                <Typography paragraph>{e.feedback_pedagogico}</Typography>
-                <Typography bold>Referências Bibliográficas</Typography>
-                <Typography paragraph>{e.referencia_bibliografica}</Typography>
-              </View>
-            ))}
+            {etapa === 'diagnostico'
+              ? (
+                <View>
+                  <Typography bold>{data.selections[etapa].texto}</Typography>
+                  <Typography paragraph>{data.selections[etapa].feedback_pedagogico}</Typography>
+                  <Typography bold>Referências Bibliográficas</Typography>
+                  <Typography paragraph>{data.selections[etapa].referencia_bibliografica}</Typography>
+                </View>
+              )
+              : (
+                data.selections[etapa === 'comunicacao' ? 'anamnese' : etapa].map((e, k) => (
+                  <View key={k}>
+                    <Typography bold>{e.texto}</Typography>
+                    <Typography paragraph>{e.feedback_pedagogico}</Typography>
+                    <Typography bold>Referências Bibliográficas</Typography>
+                    <Typography paragraph>{e.referencia_bibliografica}</Typography>
+                  </View>
+                ))
+              )
+            }
           </View>
         </FeedbackModal>
       )

@@ -14,13 +14,6 @@ import { StepButton } from "../../components/StepButton";
 import { Typography } from "../../components/Typography";
 import { CircleButton } from "../../components/CircleButton";
 import { ArrowIcon } from "../../assets/icons";
-import {
-  shuffle,
-  map,
-  getMaxScore,
-  findObjectInListByTag,
-  getScore,
-} from "../../tools/functions";
 import { Modal } from "../../components/Modal";
 import { AlertScreen } from "../dialogs/AlertScreen";
 import { Container } from "../../components/Container";
@@ -28,7 +21,15 @@ import { ConfigurationScreen } from "../dialogs/ConfigurationScreen";
 import { ThemeContext } from "../../ThemeContext";
 import { SpeechThink } from "../../components/SpeechThink";
 
+import {
+  shuffle,
+  map,
+  getMaxScore,
+  findObjectInListByTag,
+  getScore,
+} from "../../tools/functions";
 import { getRandomInterference } from "../../tools/interference";
+import { GameVibration } from "../../services/utilities";
 
 const ThinkCircles = require("../../assets/images/think-circles.png");
 
@@ -108,13 +109,18 @@ export const GameScreen = ({ route, navigation, ...props }) => {
       comunicacao: null,
     },
     avatar: avatar,
+    interferenceState: 0,
+    // 0 -> Não iniciada
+    // 1 -> Ocorrendo
+    // 2 -> Finalizada
+    // 3 -> Acaba no final
     interference: null,
   });
   // Controla a animação da barra de score
   const scoreAnim = React.useRef(new Animated.Value(0)).current;
 
   React.useEffect(() => {
-    const etapaInicialIndex = 6;
+    const etapaInicialIndex = 1;
     setEtapa({
       key: gameplayScreenplay.etapas[etapaInicialIndex].key,
       db_key: gameplayScreenplay.etapas[etapaInicialIndex].db_key,
@@ -134,27 +140,37 @@ export const GameScreen = ({ route, navigation, ...props }) => {
           ? mCaso.comunicacao_tratamento.comunicacoes
           : mCaso[etapa.db_key],
         etapa.key,
-      );
+      ).filter((i) => i);
       if (options || etapa.index === 0) {
-        setScores((old) => ({
-          ...old,
-          [etapa.key]: {
-            maxScore: getMaxScore(
-              options,
-              etapa.key,
-              etapa.index === 7
-                ? getMaxScore(map(mCaso.anamnese, "anamnese"), "anamnese", 0)
-                : 0,
-            ),
-            score: 0,
-          },
-        }));
-
         setOptions({
           options: shuffle(options),
           pagination: 0,
           perPage: etapa.index == 3 || etapa.index == 5 ? 3 : 2,
         });
+
+        if (etapa.index === 1) {
+          // Se for anamnese, calcule o máximo de comunicacao também
+          const maxAnamnese = getMaxScore(options, etapa.key, 0);
+          setScores((old) => ({
+            ...old,
+            [etapa.key]: {
+              maxScore: maxAnamnese,
+              score: 0,
+            },
+            comunicacao: {
+              score: 0,
+              maxScore: maxAnamnese + 20000,
+            },
+          }));
+        } else if (etapa.index !== 7 && etapa.index !== 5) {
+          setScores((old) => ({
+            ...old,
+            [etapa.key]: {
+              maxScore: getMaxScore(options, etapa.key, 0),
+              score: 0,
+            },
+          }));
+        }
       } else {
         handleNextStep();
       }
@@ -165,16 +181,88 @@ export const GameScreen = ({ route, navigation, ...props }) => {
     navigation.navigate("MedicalRecord", { data: gameData, scores: scores });
 
   function tryStartInterference(force) {
+    if (gameData.interferenceState === 2) {
+      return false;
+    }
     if (gameData.interference) {
       if (gameData.interference.etapa === etapa.index) {
-        const shouldOccure = force || Math.random() <= 0.2;
+        const randomChance = Math.random() <= 0.3;
+        const shouldOccure =
+          gameData.interferenceState === 1 || force || randomChance;
         if (shouldOccure) {
-          navigation.navigate("Interference", {
-            interference: gameData.interference,
-          });
+          if (gameData.interference.responses_until_start === 0 || force) {
+            navigation.navigate("Interference", {
+              interference: gameData.interference,
+              avatar: gameData.avatar,
+              backgroundImage: findObjectInListByTag(
+                mCaso.imagens,
+                "identificador",
+                gameData.interference.key === "PACIENTE_DESCONTROLE_EMOCIAL"
+                  ? "character-interference"
+                  : gameplayScreenplay.etapas[etapa.index].background_image,
+              ).arquivo,
+              backgroundImagePatient:
+                gameData.interference.key !== "PACIENTE_DESCONTROLE_EMOCIAL" &&
+                findObjectInListByTag(
+                  mCaso.imagens,
+                  "identificador",
+                  gameplayScreenplay.etapas[etapa.index].patient_image,
+                ).arquivo,
+              onSelect: onInterferenceOptionSelect,
+            });
+            return false;
+          } else {
+            // A interferência vai ocorrer, mas depende de um determinado número de respostas do paciente
+            return true;
+          }
         }
       }
     }
+    return false;
+  }
+
+  function onInterferenceOptionSelect({ option, extraAction }) {
+    if (!option) {
+      execAction(extraAction);
+      return;
+    }
+    execAction(option.action);
+    execAction(extraAction);
+
+    const score = scores[etapa.key].score + getScore(option, etapa.key);
+
+    // Adiciona score e renderizar a tela
+    setScores((old) => ({
+      ...old,
+      [etapa.key]: {
+        score: score,
+        maxScore: old[etapa.key].maxScore + 20000,
+      },
+    }));
+    animateScore(score);
+  }
+
+  function execAction(action) {
+    switch (action) {
+      case "END_VIBRATION":
+        GameVibration.stop();
+        break;
+      case "END_GAME":
+        console.log("Encerrando caso!");
+        GameVibration.stop();
+        handleEndGame();
+        break;
+      case "STOP_EFFECTS_ON_END":
+        GameVibration.stop();
+        break;
+      case "END_SCREEN_EFFECTS":
+        GameVibration.stop();
+        break;
+    }
+    setGameData((old) => ({
+      ...old,
+      interferenceState: action === "STOP_EFFECTS_ON_END" ? 3 : 2,
+    }));
   }
 
   function handleMenu() {
@@ -247,27 +335,57 @@ export const GameScreen = ({ route, navigation, ...props }) => {
         ...old,
         options: allOptions.map((o, i) => ({ ...o, checked: i === opIndex })),
       }));
+      if (etapa.index === 7) {
+        if (gameData.selections.comunicacao) {
+          scores[etapa.key].score +=
+            getScore(option, etapa.key) -
+            getScore(gameData.selections.comunicacao, etapa.key);
+        } else {
+          scores[etapa.key].score += getScore(option, etapa.key);
+        }
+      } else {
+        scores[etapa.key].score = getScore(option, etapa.key);
+      }
     } else {
       // Altera a pontuação do jogador, mas não renderiza a tela.
       scores[etapa.key].score += getScore(option, etapa.key);
       if (etapa.index == 1) {
-        // Opções espe
-        scores[7].score += getScore(option, etapa.key);
+        // Opções especiais
+        scores.comunicacao.score += getScore(option, etapa.key);
       }
-
-      Animated.timing(scoreAnim, {
-        duration: 300,
-        useNativeDriver: false,
-        toValue: scores[etapa.key].score,
-      }).start();
     }
+    animateScore(scores[etapa.key].score);
 
-    if (option.feedback) {
-      setFeedbackContent({
-        isSpeech: IsPatientSpeech(etapa.index),
-        text: option.feedback,
-        visible: true,
-      });
+    const interfStart = tryStartInterference();
+    if (interfStart) {
+      if (gameData.interference.forced_response) {
+        if (gameData.interference.responses_until_start > 0) {
+          // Muda execução mas não renderiza componente
+          gameData.interferenceState = 1;
+          gameData.interference.responses_until_start -= 1;
+          if (option.feedback) {
+            const text =
+              gameData.interference.key === "RUIDOS_EXTERNOS"
+                ? shuffle(option.feedback.split("")).join("")
+                : gameData.interference.forced_response;
+            setFeedbackContent({
+              isSpeech: IsPatientSpeech(etapa.index),
+              text,
+              visible: true,
+            });
+          }
+        } else {
+          tryStartInterference(true);
+        }
+      }
+    } else {
+      if (option.feedback) {
+        setFeedbackContent({
+          isSpeech: IsPatientSpeech(etapa.index),
+          text: option.feedback,
+          visible: true,
+        });
+      }
     }
 
     // Isso marca a opção como selecionada, mas não renderiza novamente a tela.
@@ -283,7 +401,7 @@ export const GameScreen = ({ route, navigation, ...props }) => {
         newData.push(option);
       }
       return {
-        avatar: old.avatar,
+        ...old,
         selections: {
           ...old.selections,
           [etapa.key]: newData,
@@ -299,6 +417,19 @@ export const GameScreen = ({ route, navigation, ...props }) => {
 
   const handleNextStep = () => {
     const { index } = etapa;
+    if (gameData.interference) {
+      if (gameData.interferenceState === 3) {
+        GameVibration.stop();
+        // TODO - Os efeitos na tela devem ser removidos
+      } else if (
+        gameData.interference.etapa === index &&
+        gameData.interferenceState !== 2
+      ) {
+        tryStartInterference(true);
+        return;
+      }
+    }
+
     scoreAnim.setValue(0);
 
     // Caso o usuário tenha selecionado um diagnóstico final não adequado, o caso se encerra.
@@ -346,14 +477,21 @@ export const GameScreen = ({ route, navigation, ...props }) => {
     return null;
   }
 
-  console.log({ ...{ etapa, speechControl, options } });
+  function animateScore(value) {
+    Animated.timing(scoreAnim, {
+      duration: 300,
+      useNativeDriver: false,
+      toValue: value,
+    }).start();
+  }
 
   const isSpeech = speechControl.enableOptions
     ? gameplayScreenplay.etapas[etapa.index].options_speech
     : gameplayScreenplay.etapas[etapa.index].falas[speechControl.pagination]
         .is_speech;
 
-  console.log("render");
+  // console.log('render');
+
   return (
     <Container containerStyle={{ backgroundColor: "black" }}>
       <ImageBackground
@@ -437,9 +575,17 @@ export const GameScreen = ({ route, navigation, ...props }) => {
           </View>
 
           {/* Barra de pontuação */}
-          <View style={theme.styles.scoreBar}>
+          <View
+            style={[
+              theme.styles.dropShadow,
+              theme.styles.scoreBar,
+              { shadowOffset: { width: 0, height: 10 } },
+            ]}
+          >
             <Animated.View
               style={{
+                shadowOffset: { width: 10, height: 10 },
+                elevation: 10,
                 height: !scores[etapa.key]?.score
                   ? 0
                   : scoreAnim.interpolate({
@@ -456,6 +602,7 @@ export const GameScreen = ({ route, navigation, ...props }) => {
           {feedbackContent.visible && (
             <View
               style={[
+                theme.styles.dropShadow,
                 theme.styles.feedbackBox,
                 {
                   backgroundColor: feedbackContent.isSpeech
@@ -488,7 +635,7 @@ export const GameScreen = ({ route, navigation, ...props }) => {
             showArrow={
               options.options.length > options.perPage ||
               !speechControl.enableOptions ||
-              (etapa === 3 && gameData.selections.diagnostico)
+              (etapa.index === 3 && gameData.selections.diagnostico)
             }
             showText={!speechControl.enableOptions}
             text={
@@ -499,13 +646,25 @@ export const GameScreen = ({ route, navigation, ...props }) => {
           />
 
           {/* Imagem do médico */}
-          <View style={theme.styles.GameScreenAvatarContainer}>
-            <View style={[{ position: "relative" }, theme.styles.dropShadow]}>
-              <Image source={avatar} style={theme.styles.GameScreenAvatar} />
+          <View
+            style={[
+              theme.styles.dropShadow,
+              theme.styles.GameScreenAvatarContainer,
+              { borderRadius: theme.measure(1) },
+            ]}
+          >
+            <View
+              style={[
+                {
+                  position: "relative",
+                },
+              ]}
+            >
+              <Image source={avatar} style={[theme.styles.GameScreenAvatar]} />
               {!isSpeech && (
                 <Image
                   source={ThinkCircles}
-                  style={theme.styles.GameScreenThinkCircles}
+                  style={[theme.styles.GameScreenThinkCircles]}
                 />
               )}
             </View>
@@ -524,7 +683,7 @@ export const GameScreen = ({ route, navigation, ...props }) => {
             ]}
           >
             <StepButton
-              style={{ flexGrow: 1 }}
+              style={[{ flexGrow: 1 }]}
               title={"Anamnese"}
               step={1}
               currentStep={etapa.index}
