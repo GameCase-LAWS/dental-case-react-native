@@ -1,43 +1,45 @@
 import React from "react";
-import { Image, View, TextInput } from "react-native";
+import { Image, View, TextInput, Platform } from "react-native";
 
-import { appColors, styles } from "../../styles";
+import { appColors, screenHeight, screenWidth } from "../../styles";
 import { Button } from "../../components/Button";
+import { BackIcon } from "../../assets/icons/index";
 import { Typography } from "../../components/Typography";
+import { ThemeContext } from "../../ThemeContext";
 
-const BackIcon = require('../../assets/icons');
 const Banner = require("../../assets/images/banner.png");
+const logoIcon = require("../../assets/icons/icon.png");
+
+const BlueBg = require("../../assets/images/blue-bg.jpg");
 
 export function RedefinePasswordScreen({}) {
+  const { theme } = React.useContext(ThemeContext);
   const [username, setUsername] = React.useState();
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
   const [repeatedPassword, setRepeatedPassword] = React.useState("");
 
   return (
-    // Tela de login
-    <View
-      style={styles.screenContainer}
-    >
-      <BackIcon/>
+    <View style={theme.styles.container}>
+      {/* {() => {
+        if (Platform.OS === "web") {
+          return <Image style={{ flex: 1 }} source={BlueBg} />
+        }
+      }} */}
+      {/* <BackIcon style={{width:24, height:24}} /> */}
       <Image
-        style={styles.logoIcon}
+        // style={theme.styles.logoIcon}
         source={logoIcon}
         resizeMode={"contain"}
       ></Image>
       <Typography
-        style={styles.headerText}
         variant='header20'
         color={appColors.secondary}
-        onPress={() => {
-          alert("oi");
-        }}
       >
         Insira seu e-mail para recuperar sua conta
       </Typography>
       <View
         style={{
-          height: 168 + 64,
           justifyContent: "space-between",
           padding: 16,
         }}
@@ -45,11 +47,9 @@ export function RedefinePasswordScreen({}) {
         <TextInput
           value={email}
           onChangeText={(e) => setEmail(e)}
-          style={styles.textInput}
+          style={theme.styles.textInput}
           placeholder={"E-mail"}
-        >
-          {email}
-        </TextInput>
+        ></TextInput>
 
         <Button
           style={{ flex: 1, alignSelf: "center" }}

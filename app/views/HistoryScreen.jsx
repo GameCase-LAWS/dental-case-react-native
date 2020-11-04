@@ -9,18 +9,20 @@ import {
   Alert,
 } from "react-native";
 
-import { appColors, styles, windowHeight, windowWidth } from "../styles";
+import { appColors, windowHeight, windowWidth } from "../styles";
 import { Button } from "../components/Button";
 import { CloseIcon, ArrowIcon } from "../assets/icons";
 import { Cases } from "../services/firestore";
 import { Grid } from "../components/Grid";
 import { Typography } from "../components/Typography";
-import { measure } from "../tools/resolution";
 import { LoadHistoryCases } from "../components/LoadHistoryCases";
+import { ThemeContext } from "../ThemeContext";
 
 const icon = require("../assets/images/avatars/avatar_000.png");
 
-export const HistoryScreen = () => {
+export const HistoryScreen = ({ navigation, ...props }) => {
+  const { theme } = React.useContext(ThemeContext);
+
   const [pageIndex, setPageIndex] = React.useState(0);
   const [cases, setCases] = React.useState([
     {
@@ -55,16 +57,18 @@ export const HistoryScreen = () => {
     },
   ]);
 
-  const handlePagination = () => setPageIndex(old => old === Math.floor(cases.length /2) ? 0 : ++old);
+  const handlePagination = () => setPageIndex(old => old === Math.ceil(cases.length / 2) - 1 ? 0 : ++old);
 
-  React.useEffect(() => {}, []);
+  React.useEffect(() => {
+
+  }, []);
 
   console.log(cases);
 
   return (
     <View
       style={[
-        styles.container,
+        theme.styles.container,
         {
           backgroundColor: "#fff",
           position: "relative",
@@ -76,6 +80,7 @@ export const HistoryScreen = () => {
       <TouchableOpacity
         activeOpacity={0.9}
         style={{ position: "absolute", right: 15, top: 15 }}
+        onPress={navigation.goBack}
       >
         <CloseIcon color={appColors.primary} height={30} width={30} />
       </TouchableOpacity>
@@ -86,10 +91,10 @@ export const HistoryScreen = () => {
 
       <TouchableOpacity
         style={{
-          width: measure(4),
-          height: measure(6),
+          width: theme.measure(4),
+          height: theme.measure(6),
           position: "absolute",
-          right: measure(3),
+          right: theme.measure(3),
           top: windowHeight / 2,
           zIndex: 1,
         }}

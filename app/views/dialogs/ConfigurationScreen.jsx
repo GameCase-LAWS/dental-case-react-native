@@ -1,14 +1,19 @@
 import React from 'react';
 import { View, TouchableOpacity, StyleSheet } from 'react-native';
-import { appColors } from '../../styles';
-import { Typography } from '../../components/Typography';
 import { CloseIcon } from '../../assets/icons';
+import { appColors } from '../../styles';
+
+import { Typography } from '../../components/Typography';
 import { Grid } from '../../components/Grid';
 import { Button } from '../../components/Button';
-import { measure } from '../../tools/resolution';
 import { LocalStorage, localStorageKeys } from '../../services/localStorage';
+import { ThemeContext } from '../../ThemeContext';
 
-export const ConfigurationScreen = ({ onClose }) => {
+import PropTypes from "prop-types";
+
+export const ConfigurationScreen = ({ allowLanguageChange, onClose }) => {
+  const { theme } = React.useContext(ThemeContext);
+  
   const [isLoaded, setIsLoaded] = React.useState(false);
   const [vibrationEnabled, setVibrationEnabled] = React.useState();
   const [soundEnabled, setSoundEnabled] = React.useState();
@@ -64,19 +69,19 @@ export const ConfigurationScreen = ({ onClose }) => {
   }
 
   return (
-    <View style={styles.container}>
-      <TouchableOpacity activeOpacity={0.9} style={styles.closeBtn} onPress={handleClose}>
-        <CloseIcon color={appColors.primary} height={measure(1.5)} width={measure(1.5)} />
+    <View style={theme.styles.ConfigurationScreen_container}>
+      <TouchableOpacity activeOpacity={0.9} style={theme.styles.ConfigurationScreen_closeBtn} onPress={handleClose}>
+        <CloseIcon color={appColors.primary} height={theme.measure(1.5)} width={theme.measure(1.5)} />
       </TouchableOpacity>
 
       <Typography bold paragraph variant="header34" style={{ textAlign: 'center' }}>Configurações</Typography>
       <View>
         {/* Sons */}
-        <View style={styles.labelBtnRow}>
-          <View style={styles.labelColumn}>
+        <View style={theme.styles.ConfigurationScreen_labelBtnRow}>
+          <View style={theme.styles.ConfigurationScreen_labelColumn}>
             <Typography variant="header34">Sons</Typography>
           </View>
-          <Grid container spacingX={measure(1)} style={{ flexGrow: 1 }}>
+          <Grid container spacingX={theme.measure(1)} style={{ flexGrow: 1 }}>
             <Grid item size={6}>
               <Button disabled={soundEnabled} label='On' onPress={handleSoundChange(true)} />
             </Grid>
@@ -87,11 +92,11 @@ export const ConfigurationScreen = ({ onClose }) => {
         </View>
 
         {/* Vibração */}
-        <View style={styles.labelBtnRow}>
-          <View style={styles.labelColumn}>
+        <View style={theme.styles.ConfigurationScreen_labelBtnRow}>
+          <View style={theme.styles.ConfigurationScreen_labelColumn}>
             <Typography variant="header34">Vibração</Typography>
           </View>
-          <Grid container spacingX={measure(1)} style={{ flexGrow: 1 }}>
+          <Grid container spacingX={theme.measure(1)} style={{ flexGrow: 1 }}>
             <Grid item size={6}>
               <Button disabled={vibrationEnabled} label='On' onPress={handleVibrationChange(true)} />
             </Grid>
@@ -102,14 +107,14 @@ export const ConfigurationScreen = ({ onClose }) => {
         </View>
 
         {/* Língua */}
-        <View style={styles.labelBtnRow}>
-          <View style={styles.labelColumn}>
+        <View style={theme.styles.ConfigurationScreen_labelBtnRow}>
+          <View style={theme.styles.ConfigurationScreen_labelColumn}>
             <Typography variant="header34">Língua</Typography>
           </View>
           <View style={{ flexGrow: 1 }}>
-            <Button onPress={handleLanguageChange('pt-br')} disabled={language === 'pt-br'} label='Português' buttonStyle={styles.buttonStyle} />
-            <Button onPress={handleLanguageChange('es')} disabled={language === 'es'} label='Espanhol' buttonStyle={styles.buttonStyle} />
-            <Button onPress={handleLanguageChange('en-us')} disabled={language === 'en-us'} label='Inglês' buttonStyle={[styles.buttonStyle, { marginBottom: measure(1) }]} />
+            <Button onPress={handleLanguageChange('pt-br')} disabled={!allowLanguageChange || language === 'pt-br'} label='Português' buttonStyle={theme.styles.ConfigurationScreen_buttonStyle} />
+            <Button onPress={handleLanguageChange('es')} disabled={!allowLanguageChange || language === 'es'} label='Espanhol' buttonStyle={theme.styles.ConfigurationScreen_buttonStyle} />
+            <Button onPress={handleLanguageChange('en-us')} disabled={!allowLanguageChange || language === 'en-us'} label='Inglês' buttonStyle={[theme.styles.ConfigurationScreen_buttonStyle, { marginBottom: theme.measure(1) }]} />
 
             <Button label='Fale Conosco' buttonStyle={{ flexGrow: 1 }} style={{ backgroundColor: appColors.activeStep }} />
           </View>
@@ -126,29 +131,10 @@ export const ConfigurationScreen = ({ onClose }) => {
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    backgroundColor: '#fff',
-    position: 'relative',
-    paddingHorizontal: measure(8),
-    paddingVertical: measure(1),
-    width: measure(48),
-    height: measure(32)
-  },
-  closeBtn: {
-    position: 'absolute',
-    right: measure(1),
-    top: measure(1)
-  },
-  labelColumn: {
-    width: measure(10)
-  },
-  labelBtnRow: {
-    flexDirection: 'row',
-    marginBottom: measure(1)
-  },
-  buttonStyle: {
-    flexGrow: 1,
-    marginBottom: measure(0.5)
-  }
-});
+ConfigurationScreen.propTypes = {
+  allowLanguageChange: PropTypes.bool
+}
+
+ConfigurationScreen.defaultProps = {
+  allowLanguageChange: false
+}

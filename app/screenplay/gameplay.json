@@ -2,7 +2,7 @@
   "prontuario_paginas": [
     {
       "dataKey": null,
-      "label": "PRONTUÁRIO"
+      "label": null
     },
     {
       "dataKey": null,
@@ -36,35 +36,111 @@
   "etapas": [
     {
       "key": "queixa",
-      "fala_inicial": "Iniciando um novo dia de trabalho... Que casos vou atender hoje?"
+      "db_key": null,
+      "falas": [
+        {
+          "text": "Iniciando um novo dia de trabalho... Que casos vou atender hoje?",
+          "is_speech": false
+        },
+        {
+          "text": "Olá! Como você se chama?",
+          "is_speech": true
+        }
+      ],
+      "options_speech": null,
+      "patient_image": null,
+      "background_image": "default-background"
     },
     {
       "key": "anamnese",
-      "fala_inicial": "Que perguntas farei na anamnese?"
+      "db_key": "anamnese",
+      "falas": [
+        {
+          "text": "Que perguntas farei na anamnese?",
+          "is_speech": false
+        }
+      ],
+      "options_speech": true,
+      "patient_image": "default-character",
+      "background_image": "default-background"
     },
     {
       "key": "exame_clinico",
-      "fala_inicial": "Quais exames clínicos vou realizar?"
+      "db_key": "exame_fisico",
+      "falas": [
+        {
+          "text": "Quais exames clínicos vou realizar?",
+          "is_speech": false
+        }
+      ],
+      "options_speech": true,
+      "patient_image": "alternative-character",
+      "background_image": "alternative-background"
     },
     {
       "key": "diagnostico",
-      "fala_inicial": "De acordo com os exames clínicos, minha hipótese diagnóstica é..."
+      "db_key": "diagnostico_inicial",
+      "falas": [
+        {
+          "text": "De acordo com os exames clínicos, minha hipótese diagnóstica é...",
+          "is_speech": false
+        }
+      ],
+      "options_speech": true,
+      "patient_image": "default-character",
+      "background_image": "default-background"
     },
     {
       "key": "exame_complementar",
-      "fala_inicial": "Quais exames complementares vou pedir?"
+      "db_key": "exame_complementar",
+      "falas": [
+        {
+          "text": "Quais exames complementares vou pedir?",
+          "is_speech": false
+        }
+      ],
+      "options_speech": false,
+      "patient_image": null,
+      "background_image": "default-background"
     },
     {
       "key": "diagnostico",
-      "fala_inicial": "O diagnóstico para este caso é..."
+      "db_key": "diagnostico_inicial",
+      "falas": [
+        {
+          "text": "O diagnóstico para este caso é...",
+          "is_speech": false
+        }
+      ],
+      "options_speech": false,
+      "patient_image": "default-character",
+      "background_image": "default-background"
     },
     {
       "key": "tratamento",
-      "fala_inicial": "De acordo com os exames e diagnóstico, eu irei..."
+      "db_key": "tratamento",
+      "falas": [
+        {
+          "text": "De acordo com os exames e diagnóstico, eu irei...",
+          "is_speech": false
+        }
+      ],
+      "options_speech": false,
+      "patient_image": "default-character",
+      "background_image": "default-background"
     },
     {
       "key": "comunicacao",
-      "fala_inicial": "O que direi ao paciente?"
+      "db_key": null,
+      "falas": [
+        {
+          "text": "O que direi ao paciente?",
+          "is_speech": false
+        }
+      ],
+      "options_speech": true,
+      "patient_image": "default-character",
+      "background_image": "default-background"
     }
   ]
 }

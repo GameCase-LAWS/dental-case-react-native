@@ -1,10 +1,8 @@
 import React from 'react';
 import { View, StyleSheet, TouchableOpacity, Animated } from 'react-native';
-import { Typography } from './Typography';
 import PropTypes from 'prop-types';
 import { normalize } from '../tools/functions';
-import { measure } from '../tools/resolution';
-import { windowWidth } from '../styles';
+import { ThemeContext } from '../ThemeContext';
 
 export const CircleButton = ({
   size,
@@ -15,12 +13,12 @@ export const CircleButton = ({
   label,
   ...props
 }) => {
-
+  const { theme } = React.useContext(ThemeContext);
   const growAnim = React.useRef(new Animated.Value(0)).current;
 
   const handleGrow = () => {
     Animated.timing(growAnim, {
-      toValue: measure(10),
+      toValue: theme.measure(10),
       duration: 300,
       useNativeDriver: false
     }).start();
@@ -40,7 +38,7 @@ export const CircleButton = ({
         <View on style={[styles.container, containerStyle, { minWidth: size, height: size, borderRadius: size }]} {...props}>
           <Animated.Text
             numberOfLines={1}
-            style={[styles.label, { maxWidth: growAnim, marginHorizontal: measure(0.25) }]}
+            style={[styles.label, { maxWidth: growAnim, marginHorizontal: theme.measure(0.25) }]}
           >{label}</Animated.Text>
           {children}
         </View>
