@@ -11,7 +11,7 @@ const BlueBg = require("../../assets/images/blue-bg.jpg");
 const Banner = require("../../assets/images/banner.png");
 const logoIcon = require("../../assets/icons/icon.png");
 
-export const SignUpScreen = ({}) => {
+export const SignUpScreen = ({ navigation, ...props }) => {
   const { theme } = React.useContext(ThemeContext);
   const [username, setUsername] = React.useState("");
   const [email, setEmail] = React.useState("");
@@ -29,31 +29,21 @@ export const SignUpScreen = ({}) => {
   return (
     <View style={{ flex: 1 }}>
       <Image style={{ flex: 1 }} source={BlueBg} />
-      <View
-        style={[
-          {
-            position: "absolute",
-            bottom: 0,
-            top: 0,
-            left: 0,
-            right: 0,
-            padding: 32,
-          },
-          theme.styles.center,
-        ]}
-      >
+      <View style={[theme.styles.absolutePosition, theme.styles.center]}>
         <View
           style={{
             padding: 32,
             backgroundColor: "#ffffff",
-            minHeight:600,
-            minWidth: 500,
+            width: theme.measure(20),
+            // maxWidth:theme.measure(30),
+            // minHeight:theme.measure(20),
             borderRadius: theme.measure(0.5),
+            justifyContent: "space-between",
           }}
         >
-          <TouchableOpacity onPress={() => navigator}>
+          <TouchableOpacity onPress={() => navigation.goBack()}>
             <BackIcon
-              style={{ width: 24, height: 24 }}
+              style={{ width: theme.measure(1.5), height: theme.measure(1.5) }}
               fill={appColors.primary}
             />
           </TouchableOpacity>
@@ -63,14 +53,13 @@ export const SignUpScreen = ({}) => {
               width: 280,
               height: 170,
               alignSelf: "center",
-              marginBottom: 16,
             }}
             resizeMode='contain'
           ></Image>
           <Typography
-            variant='header20'
+            variant='subtitle16'
             color={appColors.secondary}
-            style={{ marginBottom: 16, alignSelf: "center" }}
+            style={{ marginVertical: 32, alignSelf: "center" }}
           >
             Crie sua conta
           </Typography>
@@ -99,7 +88,6 @@ export const SignUpScreen = ({}) => {
             placeholder={"Repita a senha"}
           ></TextInput>
           <Button
-            // buttonStyle={{ flexGrow: 1 }}
             backgroundColor={appColors.primary}
             label='Registrar'
             // onPress={() => {}}

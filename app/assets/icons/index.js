@@ -1,5 +1,5 @@
 import * as React from "react"
-import Svg, { Path, Filter } from "react-native-svg"
+import Svg, { Path, Circle, Defs } from "react-native-svg"
 
 export function ArrowIcon({ color, ...props }) {
   return (
@@ -39,3 +39,27 @@ export function CreditsIcon(props) {
     </Svg>
   )
 }
+
+// export function Shadow(props) {
+//   return (
+//     <Svg viewBox="0 0 30 10" xmlns="http://www.w3.org/2000/svg">
+//       <Defs>
+//         <filter id="shadow">
+//           <feDropShadow dx="0.2" dy="0.4" stdDeviation="0.2" />
+//         </filter>
+//         <filter id="shadow2">
+//           <feDropShadow dx="0" dy="0" stdDeviation="0.5"
+//             flood-color="cyan" />
+//         </filter>
+//         <filter id="shadow3">
+//           <feDropShadow dx="-0.8" dy="-0.8" stdDeviation="0"
+//             flood-color="pink" flood-opacity="0.5" />
+//         </filter>
+//       </Defs>
+//       <Circle cx="5" cy="50%" r="4" style="filter:url(#shadow);" />
+//       <Circle cx="15" cy="50%" r="4" style=" filter:url(#shadow2);" />
+//       <Circle cx="25" cy="50%" r="4"
+//         style="filter:url(#shadow3);" />
+//     </Svg>
+//   )
+// }

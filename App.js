@@ -15,11 +15,13 @@ import { SplashScreen } from './app/views/SplashScreen';
 import { CreditsScreen } from './app/views/CreditsScreen';
 
 import { AuthStack } from "./app/views/auth";
+import { AuthWebStack } from "./app/views/web/index";
 import { GameStack } from './app/views/gameplay';
 
 import { ThemeContextProvider } from './app/ThemeContext';
 import { UserContextProvider } from './app/UserContext';
 import { HistoryScreen } from './app/views/HistoryScreen';
+import { Test } from './app/views/Test';
 
 const Stack = createStackNavigator();
 
@@ -44,7 +46,7 @@ export default function App() {
     }
 
     loadResourcesAndDataAsync();
-      }, []);
+  }, []);
 
   if (!isLoadingComplete) {
     return null;
@@ -53,18 +55,28 @@ export default function App() {
   return (
     <ThemeContextProvider>
       <UserContextProvider>
-      <NavigationContainer>
-        <Stack.Navigator initialRouteName="Auth" screenOptions={{ headerShown: false, headerTitle: 'Dental Case' }}>
-          <Stack.Screen name="Splash" component={SplashScreen} />
-          <Stack.Screen name="Menu" component={MenuScreen} />
-          <Stack.Screen name="Credits" component={CreditsScreen} />
-          <Stack.Screen name="History" component={HistoryScreen} />
+        <NavigationContainer>
+          <Stack.Navigator initialRouteName="Test" screenOptions={{ headerShown: false, headerTitle: 'Dental Case' }}>
+            <Stack.Screen name="Splash" component={SplashScreen} />
+            <Stack.Screen name="Menu" component={MenuScreen} />
+            <Stack.Screen name="Credits" component={CreditsScreen} />
+            <Stack.Screen name="History" component={HistoryScreen} />
 
-          {/* Aditional Stacks */}
-          <Stack.Screen name="Auth" component={AuthStack} />
-          <Stack.Screen name="Game" component={GameStack} />
-        </Stack.Navigator>
-      </NavigationContainer>
+            {/* Aditional Stacks */}
+            {() => {
+              if (Platform.OS === "web") {
+                {/* Web */ }
+                <Stack.Screen name="Auth" component={AuthStack} />
+              }
+            }
+            }
+            {/* Mobile */}
+            <Stack.Screen name="Auth" component={AuthWebStack} />
+
+            <Stack.Screen name="Game" component={GameStack} />
+            <Stack.Screen name="Test" component={Test} />
+          </Stack.Navigator>
+        </NavigationContainer>
       </UserContextProvider>
     </ThemeContextProvider>
   );

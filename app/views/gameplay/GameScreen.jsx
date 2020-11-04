@@ -519,16 +519,17 @@ export const GameScreen = ({ route, navigation, ...props }) => {
           {/* Ícone de prontuário (direita) */}
           <CircleButton
             size={theme.measure(5)}
-            style={{
+            style={[{
               position: "absolute",
               top: theme.measure(2),
               left: theme.measure(2),
-            }}
+              borderRadius:theme.measure(3)
+            },theme.styles.dropShadow ]}
             onPress={handleRecordPress}
           >
             <Image
               source={MedicalRecordImage}
-              style={{ height: theme.measure(3), width: theme.measure(3) }}
+              style={[{ height: theme.measure(3), width: theme.measure(3)}]}
               resizeMode='contain'
             />
           </CircleButton>

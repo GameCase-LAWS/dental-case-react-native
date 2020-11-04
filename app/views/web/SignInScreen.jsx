@@ -42,12 +42,7 @@ const AnimatedPath = Animated.createAnimatedComponent(Path);
 
 function TopBorder({ props, color }) {
   return (
-    <Svg
-      style={{ margin: 15, }}
-        width={230}
-        height={30}
-      {...props}
-    >
+    <Svg style={{ margin: 15 }} width={230} height={30} {...props}>
       <AnimatedPath
         fill={color}
         d='M0 30 l30 -30 l170 0 l30 30 l0 200 l-230 0  Z'
@@ -56,7 +51,7 @@ function TopBorder({ props, color }) {
   );
 }
 
-export const SignInWebScreen = ({ navigation, ...props }) => {
+export const SignInScreen = ({ navigation, ...props }) => {
   const { theme } = React.useContext(ThemeContext);
   const { user, setUser } = React.useContext(UserContext);
 
@@ -110,23 +105,13 @@ export const SignInWebScreen = ({ navigation, ...props }) => {
     <Animated.View style={{ flex: 1, backgroundColor: "#ffffff" }}>
       {/* <Animated.Image style={{ flex: 1, opacity: fadeAnimIn }} source={fachadas[index]} /> */}
       <Image style={{ flex: 1 }} source={BlueBg} />
-      <View
-        style={{
-          position: "absolute",
-          bottom: 0,
-          top: 0,
-          left: 0,
-          right: 0,
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
+      <View style={[theme.styles.absolutePosition, theme.styles.center]}>
         <View
           style={{
             padding: 32,
-            // margin: 32,3
-            minHeight:600,
-            minWidth:500,
+            width: theme.measure(20),
+            // maxWidth:theme.measure(30),
+            // minHeight:theme.measure(20),
             backgroundColor: "#ffffff",
             borderRadius: theme.measure(0.5),
             elevation: 2,
@@ -140,13 +125,18 @@ export const SignInWebScreen = ({ navigation, ...props }) => {
           />
           <View>
             <Typography
+              variant={"subtitle16"}
               color={appColors.secondary}
-              style={{ marginVertical: 16, textAlign: "center" }}
+              style={{ marginVertical: 32, textAlign: "center" }}
             >
               Entre com sua conta existente
             </Typography>
             {message && (
-              <Typography paragraph color='#f00'>
+              <Typography
+                variant={"overline10"}
+                color='#f00'
+                style={{ marginBottom: 8 }}
+              >
                 {message}
               </Typography>
             )}
