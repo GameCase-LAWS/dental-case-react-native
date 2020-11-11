@@ -143,7 +143,7 @@ export function normalize(size) {
   if (Platform.OS === 'ios') {
     return Math.round(PixelRatio.roundToNearestPixel(newSize));
   } else if (Platform.OS === 'web') {
-    return newSize / 4;
+    return newSize / 3.5;
   } else {
     return Math.round(PixelRatio.roundToNearestPixel(newSize)) - 2;
   }

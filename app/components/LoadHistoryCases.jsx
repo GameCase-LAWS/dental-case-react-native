@@ -32,7 +32,7 @@ export const LoadHistoryCases = ({ casoSave, ...props }) => {
         resizeMode='contain'
       />
       <View style={{ flexGrow: 1, flexShrink: 1 }}>
-        <Typography paragraph variant="header24" bold>{casoSave.caso_nome}</Typography>
+        {/* <Typography paragraph variant="header24" bold>{casoSave.caso_nome}</Typography> */}
         <Row label={'Data:'} value={casoSave.data?.toDate().toLocaleString()} />
         <Row label={'Paciente:'} value={casoSave.paciente_nome} />
         <Row label={'Diagnóstico:'} value={casoSave.selections?.diagnostico?.texto} />

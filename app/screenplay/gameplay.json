@@ -45,10 +45,14 @@
         {
           "text": "Olá! Como você se chama?",
           "is_speech": true
+        },
+        {
+          "text": "O que lhe traz aqui?",
+          "is_speech": true
         }
       ],
       "options_speech": null,
-      "patient_image": null,
+      "patient_image": "default-character",
       "background_image": "default-background"
     },
     {

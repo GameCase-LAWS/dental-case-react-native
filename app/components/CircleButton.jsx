@@ -35,7 +35,12 @@ export const CircleButton = ({
   if (label) {
     return (
       <TouchableOpacity activeOpacity={0.9} onPress={onPress} style={style} onLongPress={handleGrow} onPressOut={handleRelease}>
-        <View on style={[styles.container, containerStyle, { minWidth: size, height: size, borderRadius: size }]} {...props}>
+        <View on style={[
+          styles.container,
+          theme.styles.dropShadow,
+          containerStyle,
+          { minWidth: size, height: size, borderRadius: size }
+        ]} {...props}>
           <Animated.Text
             numberOfLines={1}
             style={[styles.label, { maxWidth: growAnim, marginHorizontal: theme.measure(0.25) }]}
@@ -48,7 +53,12 @@ export const CircleButton = ({
 
   return (
     <TouchableOpacity activeOpacity={0.9} onPress={onPress} style={style}>
-      <View style={[styles.container, containerStyle, { width: size, height: size, borderRadius: size }]} {...props}>
+      <View style={[
+        styles.container,
+        theme.styles.dropShadow,
+        containerStyle,
+        { width: size, height: size, borderRadius: size }
+      ]} {...props}>
         {children}
       </View>
     </TouchableOpacity>
