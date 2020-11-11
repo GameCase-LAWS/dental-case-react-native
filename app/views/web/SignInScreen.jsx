@@ -1,34 +1,55 @@
-import React from 'react';
-import { View, ImageBackground, Image, Animated, TextInput } from 'react-native';
+import React from "react";
+import {
+  View,
+  ImageBackground,
+  Image,
+  Animated,
+  TextInput,
+  TouchableOpacity,
+} from "react-native";
 
 import * as GoogleSignIn from "expo-google-sign-in";
 
-import { appColors } from '../../styles';
+import { appColors } from "../../styles";
 
-import { Typography } from '../../components/Typography';
+import { Typography } from "../../components/Typography";
 import { Grid } from "../../components/Grid";
 import { Button } from "../../components/Button";
 
+import { Svg, Path } from "react-native-svg";
 import {
   Authentication,
   googleProvider,
   facebookProvider,
 } from "../../services/auth";
-import { ThemeContext } from '../../ThemeContext';
-import { UserContext } from '../../UserContext';
+import { ThemeContext } from "../../ThemeContext";
+import { UserContext } from "../../UserContext";
 
 // Import images
 const GoogleIcon = require("../../assets/images/providers/google.png");
 const FacebookIcon = require("../../assets/images/providers/facebook.png");
 const Banner = require("../../assets/images/banner.png");
 
-const BlueBg = require('../../assets/images/blue-bg.jpg');
+const BlueBg = require("../../assets/images/blue-bg.jpg");
 
 const fachadas = [
-  require('../../assets/images/fachadas/fachada_0.jpg'),
-  require('../../assets/images/fachadas/fachada_1.jpg'),
-  require('../../assets/images/fachadas/fachada_2.jpg')
+  require("../../assets/images/fachadas/fachada_0.jpg"),
+  require("../../assets/images/fachadas/fachada_1.jpg"),
+  require("../../assets/images/fachadas/fachada_2.jpg"),
 ];
+
+const AnimatedPath = Animated.createAnimatedComponent(Path);
+
+function TopBorder({ props, color }) {
+  return (
+    <Svg style={{ margin: 15 }} width={230} height={30} {...props}>
+      <AnimatedPath
+        fill={color}
+        d='M0 30 l30 -30 l170 0 l30 30 l0 200 l-230 0  Z'
+      />
+    </Svg>
+  );
+}
 
 export const SignInScreen = ({ navigation, ...props }) => {
   const { theme } = React.useContext(ThemeContext);
@@ -36,10 +57,9 @@ export const SignInScreen = ({ navigation, ...props }) => {
 
   const [index, setIndex] = React.useState(0);
   const [message, setMessage] = React.useState(null);
-  const [signedIn, setSignedIn] = React.useState(false);
   const [authentication, setAuthentication] = React.useState({
-    email: '',
-    password: '',
+    email: "",
+    password: "",
   });
 
   const onChangeText = (change) => (e) => {
@@ -47,121 +67,186 @@ export const SignInScreen = ({ navigation, ...props }) => {
   };
 
   async function handleSignIn() {
-    setMessage('Entrando...');
+    setMessage("Entrando...");
     try {
-      await Authentication.signIn(authentication);
-      setSignedIn(true);
+      const user = await Authentication.signIn(authentication);
+      setUser(user);
     } catch ({ message }) {
       setMessage(message);
     }
   }
 
   async function _syncUserWithStateAsync() {
-    await GoogleSignIn.signInSilentlyAsync();
-    setSignedIn(true);
+    const user = await GoogleSignIn.signInSilentlyAsync();
+    if (user) {
+      setUser(user);
+    }
   }
 
   const signInWithProvider = (provider) => async () => {
-    Authentication.signInWithProvider(provider, () => setSignedIn(true));
+    Authentication.signInWithProvider(provider, _syncUserWithStateAsync);
   };
 
   React.useEffect(() => {
     async function checkUserLogged() {
-      console.log('checking login');
-      if (!signedIn) {
-        setSignedIn(false);
-        return;
-      }
-
-      const authUser = await Authentication.currentUser();
-      if (authUser) {
-        setUser({
-          id: authUser.uid,
-          email: authUser.email,
-          displayName: authUser.displayName,
-          photoURL: authUser.photoURL,
-          emailVerified: authUser.emailVerified
-        });
-        setMessage('Entrou com sucesso!')
+      const user = await Authentication.currentUser();
+      if (user) {
+        setMessage("Entrou com sucesso!");
         navigation.navigate("Splash");
       } else {
-        console.log('Verificar usuário');
+        console.log("Verificar usuário");
       }
     }
 
     checkUserLogged();
-  }, [signedIn]);
+  }, [user]);
 
   return (
-    <Animated.View style={{ flex: 1, backgroundColor: '#ffffff' }}>
+    <Animated.View style={{ flex: 1, backgroundColor: "#ffffff" }}>
       {/* <Animated.Image style={{ flex: 1, opacity: fadeAnimIn }} source={fachadas[index]} /> */}
       <Image style={{ flex: 1 }} source={BlueBg} />
-      <View style={{ position: 'absolute', bottom: 0, top: 0, left: 0, right: 0, justifyContent: 'center', alignItems: 'center' }}>
-        <View style={{ width: 400, height: 600, padding: 32, paddingTop: 8, backgroundColor: '#ffffff', borderRadius: 4, elevation: 2, justifyContent: 'space-between' }}>
-          <Image source={Banner} style={{ width: 280, height: 170, alignSelf: 'center' }} resizeMode="contain" />
+      <View style={[theme.styles.absolutePosition, theme.styles.center]}>
+        <View
+          style={{
+            padding: 32,
+            width: theme.measure(20),
+            // maxWidth:theme.measure(30),
+            // minHeight:theme.measure(20),
+            backgroundColor: "#ffffff",
+            borderRadius: theme.measure(0.5),
+            elevation: 2,
+            justifyContent: "space-between",
+          }}
+        >
+          <Image
+            source={Banner}
+            style={{ width: 280, height: 170, alignSelf: "center" }}
+            resizeMode='contain'
+          />
           <View>
-            <Typography color={appColors.secondary} style={{ marginVertical: 16, textAlign: 'center' }} >Entre com sua conta existente</Typography>
-            {message && <Typography paragraph color='#f00'>{message}</Typography>}
+            <Typography
+              variant={"subtitle16"}
+              color={appColors.secondary}
+              style={{ marginVertical: 32, textAlign: "center" }}
+            >
+              Entre com sua conta existente
+            </Typography>
+            {message && (
+              <Typography
+                variant={"overline10"}
+                color='#f00'
+                style={{ marginBottom: 8 }}
+              >
+                {message}
+              </Typography>
+            )}
             <TextInput
-              value={authentication["email"]}
+              value={authentication.email}
               onChangeText={onChangeText("email")}
               style={theme.styles.textInput}
               placeholder={"Usuário ou E-mail"}
             />
             <TextInput
               secureTextEntry={true}
-              value={authentication["password"]}
+              value={authentication.password}
               onChangeText={onChangeText("password")}
               style={theme.styles.textInput}
               placeholder={"Senha"}
             />
-            <View style={{ justifyContent: "space-between", flexDirection: "row", marginVertical: 8 }} >
-              <Typography style={theme.styles.underscored}>Esqueceu a senha?</Typography>
-              <Typography bold color={appColors.primary}>Registrar</Typography>
+            <View
+              style={{
+                justifyContent: "space-between",
+                flexDirection: "row",
+                marginTop: 8,
+                marginBottom: 16,
+              }}
+            >
+              <Typography
+                style={theme.styles.underscored}
+                variant={"overline10"}
+                color={appColors.secondary}
+                onPress={() => navigation.navigate("RedefinePassword")}
+              >
+                Esqueceu a senha?
+              </Typography>
+
+              <Typography
+                bold
+                color={appColors.primary}
+                variant={"overline10"}
+                onPress={() => navigation.navigate("SignUp")}
+              >
+                Registrar
+              </Typography>
             </View>
           </View>
           <Button
             backgroundColor={appColors.primary}
-            label='Entrar'
+            label='Login'
             onPress={handleSignIn}
             fontVariant='button14'
           />
           <Typography
             color={appColors.secondary}
-            style={{ textAlign: "center" }}
+            style={{ textAlign: "center", marginVertical: 16 }}
+            variant={"caption12"}
           >
             Ou entre com a sua conta
           </Typography>
-          <Grid container spacingX={24} style={{ marginTop: 16 }}>
+          <Grid container spacingX={24}>
             <Grid item size={6}>
               <Button
                 buttonStyle={{ flexGrow: 1 }}
-                style={{ backgroundColor: '#4081ec' }}
+                style={{ backgroundColor: "#4081ec" }}
                 textColor='#fff'
                 label='Google'
-                disabled={true}
-                onPress={signInWithProvider(googleProvider)}
+                onPress={() => signInWithProvider(googleProvider)}
                 icon={
-                  <View style={{ margin: -8, padding: 8, backgroundColor: '#fff', borderRadius: 8 }}>
-                    <Image style={{ width: 16, height: 16 }} source={GoogleIcon} />
+                  <View
+                    style={[
+                      {
+                        backgroundColor: "#fff",
+                        borderRadius: 4,
+                        padding: 4,
+                        marginRight: 4,
+                      },
+                    ]}
+                  >
+                    <Image
+                      style={{
+                        width: 16,
+                        height: 16,
+                        backgroundColor: "#fff",
+                      }}
+                      source={GoogleIcon}
+                    />
                   </View>
                 }
               />
             </Grid>
             <Grid item size={6}>
               <Button
-                buttonStyle={{ flexGrow: 1 }}
-                style={{ backgroundColor: '#4064ac' }}
+                style={{ backgroundColor: "#4064ac" }}
                 textColor='#fff'
                 label='Facebook'
-                disabled={true}
-                onPress={signInWithProvider(facebookProvider)}
-                icon={<Image style={{ width: 16, height: 16 }} source={FacebookIcon} />}
+                onPress={() => signInWithProvider(facebookProvider)}
+                icon={
+                  <Image
+                    style={{
+                      width: 16,
+                      height: 16,
+                      margin: 4,
+                      padding: 8,
+                    }}
+                    source={FacebookIcon}
+                  />
+                }
               />
             </Grid>
           </Grid>
         </View>
       </View>
+      {/* <TopBorder /> */}
     </Animated.View>
   );
-}
+};

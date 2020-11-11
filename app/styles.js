@@ -51,10 +51,9 @@ export const makeStyles = (measure) => StyleSheet.create({
     shadowOffset: { width: 0, height: 0 },
     shadowOpacity: 0.5,
     shadowRadius: 10,
-    borderRadius:measure(2)
+    borderRadius: measure(2)
   },
   dropShadow: {
-    
     // shadowOffset: { width: 0, height: 0 },
     shadowOpacity: 0.5,
     shadowRadius: 10,
@@ -121,7 +120,13 @@ export const makeStyles = (measure) => StyleSheet.create({
   circlePadding: {
     paddingRight: measure(0.5)
   },
-
+  absolutePosition: {
+    position: "absolute",
+    bottom: 0,
+    top: 0,
+    left: 0,
+    right: 0,
+  },
   GameScreenAvatar: {
     width: measure(13),
     height: measure(13),
@@ -183,7 +188,7 @@ export const makeStyles = (measure) => StyleSheet.create({
     paddingRight: 32,
     paddingLeft: 16,
     paddingVertical: 16,
-    alignItems:'center'
+    alignItems: 'center'
   },
 
   componentStepButtonContainer: {
@@ -202,7 +207,7 @@ export const makeStyles = (measure) => StyleSheet.create({
   },
   componentStepButtonTop: {
     height: 0,
-    borderTopLeftRadius:measure(8),
+    borderTopLeftRadius: measure(8),
     borderBottomWidth: measure(1),
     borderLeftWidth: measure(1),
     borderRightWidth: measure(1),
