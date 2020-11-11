@@ -21,7 +21,6 @@ import { GameStack } from './app/views/gameplay';
 import { ThemeContextProvider } from './app/ThemeContext';
 import { UserContextProvider } from './app/UserContext';
 import { HistoryScreen } from './app/views/HistoryScreen';
-import { Test } from './app/views/Test';
 
 const Stack = createStackNavigator();
 
@@ -56,7 +55,7 @@ export default function App() {
     <ThemeContextProvider>
       <UserContextProvider>
         <NavigationContainer>
-          <Stack.Navigator initialRouteName="Test" screenOptions={{ headerShown: false, headerTitle: 'Dental Case' }}>
+          <Stack.Navigator initialRouteName="Auth" screenOptions={{ headerShown: false, headerTitle: 'Dental Case' }}>
             <Stack.Screen name="Splash" component={SplashScreen} />
             <Stack.Screen name="Menu" component={MenuScreen} />
             <Stack.Screen name="Credits" component={CreditsScreen} />
@@ -72,9 +71,7 @@ export default function App() {
             }
             {/* Mobile */}
             <Stack.Screen name="Auth" component={AuthWebStack} />
-
             <Stack.Screen name="Game" component={GameStack} />
-            <Stack.Screen name="Test" component={Test} />
           </Stack.Navigator>
         </NavigationContainer>
       </UserContextProvider>
