@@ -123,6 +123,7 @@ export const makeStyles = (measure) => StyleSheet.create({
     elevation: 3
   },
   GameScreenAvatarContainer: {
+    borderRadius: measure(1),
     position: 'absolute',
     left: measure(2),
     bottom: measure(7)
@@ -316,5 +317,10 @@ export const makeStyles = (measure) => StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'flex-end',
     paddingHorizontal: measure(2)
+  },
+  dropShadow: {
+    shadowOffset: { width: 0, height: 0 },
+    shadowOpacity: 0.5,
+    shadowRadius: 10,
   }
 });

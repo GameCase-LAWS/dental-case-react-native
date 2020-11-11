@@ -13,7 +13,7 @@ const gameplayScreenplay = require('../../screenplay/gameplay.json');
 export const MedicalRecordScreen = ({ route, navigation, ...props }) => {
   const { theme } = React.useContext(ThemeContext);
 
-  const { data, scores, page } = route.params;
+  const { data, scores, page, caso } = route.params;
   const [paginationIndex, setPaginationIndex] = React.useState(page + 2 || 0);
 
   React.useEffect(() => {
@@ -32,6 +32,7 @@ export const MedicalRecordScreen = ({ route, navigation, ...props }) => {
     <Container containerStyle={{ backgroundColor: '#00968A' }} style={theme.styles.MedicalRecordScreen_container} >
       <View style={theme.styles.MedicalRecordScreen_panel}>
         <Typography bold variant="header34" style={{ marginBottom: theme.measure(3) }}>PRONTUÁRIO</Typography>
+        {/* Sumário */}
         {paginationIndex === 0 && (
           <View style={{ flexGrow: 1, justifyContent: 'space-between' }}>
             {gameplayScreenplay.prontuario_paginas.slice(1, gameplayScreenplay.prontuario_paginas.length).map((page, index) => (
@@ -41,6 +42,32 @@ export const MedicalRecordScreen = ({ route, navigation, ...props }) => {
             ))}
           </View>
         )}
+
+        {/* Informações do paciente */}
+        {paginationIndex === 1 && (
+          <View style={{ flexShrink: 1 }}>
+            <Typography bold paragraph variant="header34">Informações do paciente</Typography>
+            
+            <Typography bold variant="header24">Nome</Typography>
+            <Typography paragraph variant="header24">{caso.paciente.nome}</Typography>
+          
+            <Typography bold variant="header24">Idade</Typography>
+            <Typography paragraph variant="header24">{caso.paciente.idade_anos_completos}</Typography>
+          
+            <Typography bold variant="header24">Sexo</Typography>
+            <Typography paragraph variant="header24">{caso.paciente.sexo}</Typography>
+          </View>
+        )}
+
+        {/* Histórico de doenças */}
+        {paginationIndex === 2 && (
+          <View style={{ flexShrink: 1 }}>
+            <Typography bold paragraph variant="header34">Histórico de doenças</Typography>
+            <Typography paragraph variant="header24">Nenhuma</Typography>
+          </View>
+        )}
+
+        {/* Anamnese e demais */}
         {paginationIndex >= 3 && (
           <ScrollView contentContainerStyle={{ flexShrink: 1, overflow: "scroll" }}>
             <Typography bold paragraph variant="header34">{gameplayScreenplay.prontuario_paginas[paginationIndex].label}</Typography>

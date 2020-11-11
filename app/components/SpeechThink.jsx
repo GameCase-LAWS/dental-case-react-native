@@ -49,7 +49,12 @@ export const SpeechThink = ({ isSpeech, showText, text, arrowBlink, onArrowClick
   }
 
   return (
-    <View style={[theme.styles.GameScreenPlayerSpeechThinkBox, { zIndex, backgroundColor, paddingLeft: theme.measure(isSpeech ? 6 : 4) }, styles]}>
+    <View style={[
+      theme.styles.GameScreenPlayerSpeechThinkBox,
+      theme.styles.dropShadow,
+      { zIndex, backgroundColor, paddingLeft: theme.measure(isSpeech ? 6 : 4) },
+      styles
+    ]}>
       <View style={[theme.styles.spacedRow, { flexGrow: 1 }]}>
         {showText
           ? (

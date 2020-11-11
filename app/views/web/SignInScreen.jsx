@@ -36,6 +36,7 @@ export const SignInScreen = ({ navigation, ...props }) => {
 
   const [index, setIndex] = React.useState(0);
   const [message, setMessage] = React.useState(null);
+  const [signedIn, setSignedIn] = React.useState(false);
   const [authentication, setAuthentication] = React.useState({
     email: '',
     password: '',
@@ -48,28 +49,39 @@ export const SignInScreen = ({ navigation, ...props }) => {
   async function handleSignIn() {
     setMessage('Entrando...');
     try {
-      const user = await Authentication.signIn(authentication);
-      setUser(user);
+      await Authentication.signIn(authentication);
+      setSignedIn(true);
     } catch ({ message }) {
       setMessage(message);
     }
   }
 
   async function _syncUserWithStateAsync() {
-    const user = await GoogleSignIn.signInSilentlyAsync();
-    if (user) {
-      setUser(user);
-    }
+    await GoogleSignIn.signInSilentlyAsync();
+    setSignedIn(true);
   }
 
   const signInWithProvider = (provider) => async () => {
-    Authentication.signInWithProvider(provider, _syncUserWithStateAsync);
+    Authentication.signInWithProvider(provider, () => setSignedIn(true));
   };
 
   React.useEffect(() => {
     async function checkUserLogged() {
-      const user = await Authentication.currentUser();
-      if (user) {
+      console.log('checking login');
+      if (!signedIn) {
+        setSignedIn(false);
+        return;
+      }
+
+      const authUser = await Authentication.currentUser();
+      if (authUser) {
+        setUser({
+          id: authUser.uid,
+          email: authUser.email,
+          displayName: authUser.displayName,
+          photoURL: authUser.photoURL,
+          emailVerified: authUser.emailVerified
+        });
         setMessage('Entrou com sucesso!')
         navigation.navigate("Splash");
       } else {
@@ -78,7 +90,7 @@ export const SignInScreen = ({ navigation, ...props }) => {
     }
 
     checkUserLogged();
-  }, [user]);
+  }, [signedIn]);
 
   return (
     <Animated.View style={{ flex: 1, backgroundColor: '#ffffff' }}>
@@ -110,7 +122,7 @@ export const SignInScreen = ({ navigation, ...props }) => {
           </View>
           <Button
             backgroundColor={appColors.primary}
-            label='Login'
+            label='Entrar'
             onPress={handleSignIn}
             fontVariant='button14'
           />
@@ -127,6 +139,7 @@ export const SignInScreen = ({ navigation, ...props }) => {
                 style={{ backgroundColor: '#4081ec' }}
                 textColor='#fff'
                 label='Google'
+                disabled={true}
                 onPress={signInWithProvider(googleProvider)}
                 icon={
                   <View style={{ margin: -8, padding: 8, backgroundColor: '#fff', borderRadius: 8 }}>
@@ -141,6 +154,7 @@ export const SignInScreen = ({ navigation, ...props }) => {
                 style={{ backgroundColor: '#4064ac' }}
                 textColor='#fff'
                 label='Facebook'
+                disabled={true}
                 onPress={signInWithProvider(facebookProvider)}
                 icon={<Image style={{ width: 16, height: 16 }} source={FacebookIcon} />}
               />

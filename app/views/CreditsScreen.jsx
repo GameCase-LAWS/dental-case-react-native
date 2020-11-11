@@ -36,7 +36,7 @@ export const CreditsScreen = ({ navigation, ...props }) => {
             ))}
           </Grid>
           <Grid item size={6}>
-            <Typography variant="header20" bold paragraph color="#fff">PRODUÇÃO DOS JOGOS DE CASOS CLÍNICOS MEDIAL/DENTAL CASE</Typography>
+            <Typography variant="header20" bold paragraph color="#fff">PRODUÇÃO DOS JOGOS DE CASOS CLÍNICOS MEDICAL/DENTAL CASE</Typography>
             {creditsScreenplay.production.map((e, i) => (
               <View style={{ marginBottom: 16 }} key={i}>
                 <Typography variant="subtitle16" bold color="#fff">{e.title}</Typography>
