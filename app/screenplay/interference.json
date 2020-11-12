@@ -113,7 +113,7 @@
       "key": "RUIDOS_EXTERNOS",
       "restrict": null,
       "inner_voice": "Nossa! Com este barulho não consigo entender direito!",
-      "screen_text": "As obras da profeititura reiniciaram e o atendimento fica bem compromentido pelo intenso barulho!!",
+      "screen_text": "As obras da prefeitura reiniciaram e o atendimento fica bem compromentido pelo intenso barulho!!",
       "respostas": [
         {
           "texto": "Vou falar mais devagar e me aproximar do paciente",

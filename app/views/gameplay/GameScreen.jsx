@@ -120,7 +120,7 @@ export const GameScreen = ({ route, navigation, ...props }) => {
   const scoreAnim = React.useRef(new Animated.Value(0)).current;
 
   React.useEffect(() => {
-    const etapaInicialIndex = 1;
+    const etapaInicialIndex = 0;
     setEtapa({
       key: gameplayScreenplay.etapas[etapaInicialIndex].key,
       db_key: gameplayScreenplay.etapas[etapaInicialIndex].db_key,
@@ -135,21 +135,16 @@ export const GameScreen = ({ route, navigation, ...props }) => {
 
   React.useEffect(() => {
     if (etapa) {
-      const options = map(
-        etapa.index === 7
-          ? mCaso.comunicacao_tratamento.comunicacoes
-          : mCaso[etapa.db_key],
-        etapa.key,
-      ).filter((i) => i);
+      const options = map(etapa.index === 7 ? mCaso.comunicacao_tratamento.comunicacoes : mCaso[etapa.db_key], etapa.key)?.filter(i => i);
       if (options || etapa.index === 0) {
-        setOptions({
-          options: shuffle(options),
-          pagination: 0,
-          perPage: etapa.index == 3 || etapa.index == 5 ? 3 : 2,
-        });
-
-        if (etapa.index === 1) {
-          // Se for anamnese, calcule o máximo de comunicacao também
+        if (options) {
+          setOptions({
+            options: shuffle(options),
+            pagination: 0,
+            perPage: etapa.index == 3 || etapa.index == 5 ? 3 : 2
+          });
+        }
+        if (etapa.index === 1) { // Se for anamnese, calcule o máximo de comunicacao também
           const maxAnamnese = getMaxScore(options, etapa.key, 0);
           setScores((old) => ({
             ...old,
@@ -177,8 +172,7 @@ export const GameScreen = ({ route, navigation, ...props }) => {
     }
   }, [etapa]);
 
-  const handleRecordPress = () =>
-    navigation.navigate("MedicalRecord", { data: gameData, scores: scores });
+  const handleRecordPress = () => navigation.navigate('MedicalRecord', { data: gameData, scores: scores, caso: mCaso });
 
   function tryStartInterference(force) {
     if (gameData.interferenceState === 2) {
@@ -249,7 +243,6 @@ export const GameScreen = ({ route, navigation, ...props }) => {
         break;
       case "END_GAME":
         console.log("Encerrando caso!");
-        GameVibration.stop();
         handleEndGame();
         break;
       case "STOP_EFFECTS_ON_END":
@@ -285,6 +278,36 @@ export const GameScreen = ({ route, navigation, ...props }) => {
   }
 
   const handlePaginationPress = () => {
+    if (etapa.index === 0) {
+      const maxPage = gameplayScreenplay.etapas[etapa.index].falas.length - 1;
+
+      // Verifica se chegou ao final das falas
+      if (speechControl.pagination < maxPage) {
+        // Caso negativo, prossegue com as falas
+        setSpeechControl(old => ({
+          ...old,
+          pagination: ++old.pagination
+        }));
+
+        if (speechControl.pagination === 1) {
+          setFeedbackContent({
+            text: `Olá! Meu nome é ${mCaso.paciente.nome}`,
+            visible: true,
+            isSpeech: true
+          });
+        } else if (speechControl.pagination === 2) {
+          setFeedbackContent({
+            text: mCaso.queixa_paciente,
+            visible: true,
+            isSpeech: true
+          });
+        }
+      } else {
+        handleNextStep();
+      }
+      return;
+    }
+
     if (etapa.index === 3 && gameData.selections.diagnostico) {
       handleNextStep();
     }
@@ -317,7 +340,7 @@ export const GameScreen = ({ route, navigation, ...props }) => {
             enableOptions: true,
           });
         } else {
-          // Caso negativo, passa para a próxima etapa
+          // Caso negativo, vai para próxima etapa
           handleNextStep();
         }
       }
@@ -411,6 +434,7 @@ export const GameScreen = ({ route, navigation, ...props }) => {
   };
 
   const handleEndGame = () => {
+    GameVibration.stop();
     const { caso } = route.params;
     navigation.navigate("Ending", { caso, data: gameData, scores });
   };
@@ -462,7 +486,8 @@ export const GameScreen = ({ route, navigation, ...props }) => {
       navigation.navigate("MedicalRecord", {
         data: gameData,
         scores: scores,
-        page: index > 3 ? index - 1 : index,
+        caso: mCaso,
+        page: index > 3 ? index - 1 : index
       });
     }
   };
@@ -493,29 +518,9 @@ export const GameScreen = ({ route, navigation, ...props }) => {
   // console.log('render');
 
   return (
-    <Container containerStyle={{ backgroundColor: "black" }}>
-      <ImageBackground
-        style={theme.styles.flex}
-        source={{
-          uri: findObjectInListByTag(
-            mCaso.imagens,
-            "identificador",
-            gameplayScreenplay.etapas[etapa.index].background_image,
-          ).arquivo,
-        }}
-        resizeMode='contain'
-      >
-        <ImageBackground
-          style={theme.styles.flex}
-          source={{
-            uri: findObjectInListByTag(
-              mCaso.imagens,
-              "identificador",
-              gameplayScreenplay.etapas[etapa.index].patient_image,
-            ).arquivo,
-          }}
-          resizeMode='contain'
-        >
+    <Container containerStyle={{ backgroundColor: 'black' }}>
+      <ImageBackground style={theme.styles.flex} source={{ uri: findObjectInListByTag(mCaso.imagens, 'identificador', gameplayScreenplay.etapas[etapa.index].background_image).arquivo }} resizeMode="contain">
+        <ImageBackground style={theme.styles.flex} source={!(etapa.index === 0 && speechControl.pagination === 0) && { uri: findObjectInListByTag(mCaso.imagens, 'identificador', gameplayScreenplay.etapas[etapa.index].patient_image).arquivo }} resizeMode="contain">
           {/* Ícone de prontuário (direita) */}
           <CircleButton
             size={theme.measure(5)}
@@ -576,42 +581,20 @@ export const GameScreen = ({ route, navigation, ...props }) => {
           </View>
 
           {/* Barra de pontuação */}
-          <View
-            style={[
-              theme.styles.dropShadow,
-              theme.styles.scoreBar,
-              { shadowOffset: { width: 0, height: 10 } },
-            ]}
-          >
-            <Animated.View
-              style={{
-                shadowOffset: { width: 10, height: 10 },
-                elevation: 10,
-                height: !scores[etapa.key]?.score
-                  ? 0
-                  : scoreAnim.interpolate({
-                      inputRange: [0, scores[etapa.key].maxScore],
-                      outputRange: ["0%", "100%"],
-                      extrapolate: "clamp",
-                    }),
-                backgroundColor: appColors.activeStep,
-              }}
-            />
+          <View style={[theme.styles.scoreBar, theme.styles.dropShadow]}>
+            <Animated.View style={{
+              height: !(scores[etapa.key]?.score) ? 0 : scoreAnim.interpolate({
+                inputRange: [0, scores[etapa.key].maxScore],
+                outputRange: ['0%', '100%'],
+                extrapolate: 'clamp'
+              }),
+              backgroundColor: appColors.activeStep
+            }} />
           </View>
 
           {/* Caixa de feedback do paciente e resultado de exames */}
           {feedbackContent.visible && (
-            <View
-              style={[
-                theme.styles.dropShadow,
-                theme.styles.feedbackBox,
-                {
-                  backgroundColor: feedbackContent.isSpeech
-                    ? "#ACDCCE"
-                    : appColors.cardGray,
-                },
-              ]}
-            >
+            <View style={[theme.styles.feedbackBox, theme.styles.dropShadow, { backgroundColor: feedbackContent.isSpeech ? '#ACDCCE' : appColors.cardGray }]}>
               <Typography>{feedbackContent.text}</Typography>
             </View>
           )}
@@ -647,27 +630,13 @@ export const GameScreen = ({ route, navigation, ...props }) => {
           />
 
           {/* Imagem do médico */}
-          <View
-            style={[
-              theme.styles.dropShadow,
-              theme.styles.GameScreenAvatarContainer,
-              { borderRadius: theme.measure(1) },
-            ]}
-          >
-            <View
-              style={[
-                {
-                  position: "relative",
-                },
-              ]}
-            >
-              <Image source={avatar} style={[theme.styles.GameScreenAvatar]} />
-              {!isSpeech && (
-                <Image
-                  source={ThinkCircles}
-                  style={[theme.styles.GameScreenThinkCircles]}
-                />
-              )}
+          <View style={[
+            theme.styles.GameScreenAvatarContainer,
+            theme.styles.dropShadow
+          ]}>
+            <View style={{ position: 'relative' }}>
+              <Image source={avatar} style={theme.styles.GameScreenAvatar} />
+              {!isSpeech && <Image source={ThinkCircles} style={theme.styles.GameScreenThinkCircles} />}
             </View>
           </View>
 

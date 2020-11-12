@@ -19,6 +19,7 @@ export const Authentication = {
                 .then(function (res) {
                     let token = res.credential.accessToken;
                     let user = res.user;
+                    callback(user);
                 })
                 .catch(function (e) {
                     console.log(e)

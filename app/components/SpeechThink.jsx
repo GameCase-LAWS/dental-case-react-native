@@ -60,19 +60,12 @@ export const SpeechThink = ({
   };
 
   return (
-    <View
-      style={[
-        theme.styles.dropShadow,
-        theme.styles.GameScreenPlayerSpeechThinkBox,
-        {
-          shadowOffset: { width: 15, height: 5 },
-          zIndex,
-          backgroundColor,
-          paddingLeft: theme.measure(isSpeech ? 6 : 4),
-        },
-        styles,
-      ]}
-    >
+    <View style={[
+      theme.styles.GameScreenPlayerSpeechThinkBox,
+      theme.styles.dropShadow,
+      { zIndex, backgroundColor, paddingLeft: theme.measure(isSpeech ? 6 : 4) },
+      styles
+    ]}>
       <View style={[theme.styles.spacedRow, { flexGrow: 1 }]}>
         {showText ? (
           <View style={{ flexShrink: 1, justifyContent: "center" }}>

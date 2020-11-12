@@ -76,11 +76,11 @@ export const SignInScreen = ({ navigation, ...props }) => {
     }
   }
 
-  async function _syncUserWithStateAsync() {
-    const user = await GoogleSignIn.signInSilentlyAsync();
-    if (user) {
-      setUser(user);
+  async function _syncUserWithStateAsync(user) {
+    if (!user) {
+      user = await GoogleSignIn.signInSilentlyAsync();
     }
+    setUser(user);
   }
 
   const signInWithProvider = (provider) => async () => {
@@ -97,7 +97,6 @@ export const SignInScreen = ({ navigation, ...props }) => {
         console.log("Verificar usuário");
       }
     }
-
     checkUserLogged();
   }, [user]);
 
@@ -200,7 +199,7 @@ export const SignInScreen = ({ navigation, ...props }) => {
                 style={{ backgroundColor: "#4081ec" }}
                 textColor='#fff'
                 label='Google'
-                onPress={() => signInWithProvider(googleProvider)}
+                onPress={signInWithProvider(googleProvider)}
                 icon={
                   <View
                     style={[
@@ -229,7 +228,7 @@ export const SignInScreen = ({ navigation, ...props }) => {
                 style={{ backgroundColor: "#4064ac" }}
                 textColor='#fff'
                 label='Facebook'
-                onPress={() => signInWithProvider(facebookProvider)}
+                onPress={signInWithProvider(facebookProvider)}
                 icon={
                   <Image
                     style={{
