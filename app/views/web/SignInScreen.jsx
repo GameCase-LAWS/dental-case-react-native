@@ -77,9 +77,9 @@ export const SignInScreen = ({ navigation, ...props }) => {
   }
 
   async function _syncUserWithStateAsync(user) {
-    if (!user) {
-      user = await GoogleSignIn.signInSilentlyAsync();
-    }
+    // if (!user) {
+    //   user = await GoogleSignIn.signInSilentlyAsync();
+    // }
     setUser(user);
   }
 
