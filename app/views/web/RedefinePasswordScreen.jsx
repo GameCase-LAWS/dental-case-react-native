@@ -22,7 +22,7 @@ export function RedefinePasswordScreen({ navigation, ...props }) {
   const [repeatedPassword, setRepeatedPassword] = React.useState("");
   const [message, setMessage] = React.useState();
   const actionSettings = {
-    url: "https://www.dentalcase.games",
+    url: "https://dentalcase.games",
     // dynamicLinkDomain: "https://localhost",
     handleCodeInApp: true,
   };

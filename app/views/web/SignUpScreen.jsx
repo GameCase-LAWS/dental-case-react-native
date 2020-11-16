@@ -25,10 +25,10 @@ export const SignUpScreen = ({ navigation, ...props }) => {
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
   const [repeatedPassword, setRepeatedPassword] = React.useState("");
-  const [message, setMessage] = React.useState();
+  const [message, setMessage] = React.useState({ text: "", color: false });
   const actionSettings = {
     // url: "https://game-case-ed16c.firebaseapp.com",
-    url: "https://www.dentalcase.games",
+    url: "https://dentalcase.games",
     // dynamicLinkDomain: "https://localhost",
     handleCodeInApp: true,
   };
@@ -39,7 +39,10 @@ export const SignUpScreen = ({ navigation, ...props }) => {
       .then(() =>
         auth()
           .sendSignInLinkToEmail(email, actionSettings)
-          .then(() => window.localStorage.setItem("emailForSignIn", email))
+          .then(() => {
+            window.localStorage.setItem("emailForSignIn", email);
+            setMessage({ text: "Conta criada com sucesso.", color: true });
+          })
           .catch((e) => errorHandler(e, setMessage)),
       )
       .catch((e) => errorHandler(e));
@@ -85,13 +88,13 @@ export const SignUpScreen = ({ navigation, ...props }) => {
           >
             Crie sua conta
           </Typography>
-          {message && (
+          {message.text && (
             <Typography
               variant={"overline10"}
-              color='#f00'
+              color={() => {}}
               style={{ marginBottom: 8 }}
             >
-              {message}
+              {message.text}
             </Typography>
           )}
           <TextInput
