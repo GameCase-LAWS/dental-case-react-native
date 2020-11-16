@@ -26,7 +26,9 @@ export const appColors = {
   disabledBlackText: "#FFFFFF61",
   highEmphasisWhiteText: "#FFFFFFDE",
   mediumEmphasisWhiteText: "#FFFFFF8A",
-  stokeBlue: "#007ACD"
+  stokeBlue: "#007ACD",
+  warning:'dc3545'
+  
 };
 
 export const makeStyles = (measure) => StyleSheet.create({
