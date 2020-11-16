@@ -27,7 +27,7 @@ export const appColors = {
   highEmphasisWhiteText: "#FFFFFFDE",
   mediumEmphasisWhiteText: "#FFFFFF8A",
   stokeBlue: "#007ACD",
-  warning:'dc3545'
+  warning:'#dc3545'
   
 };
 
