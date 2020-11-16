@@ -6,6 +6,8 @@ import { Button } from "../../components/Button";
 import { BackIcon } from "../../assets/icons/index";
 import { Typography } from "../../components/Typography";
 import { ThemeContext } from "../../ThemeContext";
+import { auth } from "../../database/firebase";
+import { errorHandler } from "../web/SignUpScreen";
 
 const Banner = require("../../assets/images/banner.png");
 const logoIcon = require("../../assets/icons/icon.png");
@@ -18,21 +20,35 @@ export function RedefinePasswordScreen({ navigation, ...props }) {
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
   const [repeatedPassword, setRepeatedPassword] = React.useState("");
+  const [message, setMessage] = React.useState();
+  const actionSettings = {
+    url: "https://www.dentalcase.games",
+    // dynamicLinkDomain: "https://localhost",
+    handleCodeInApp: true,
+  };
+
+  function redefinePassword(email) {
+    auth()
+      .sendPasswordResetEmail(email, actionSettings)
+      .then(() =>
+        setMessage(
+          "E-mail de redefinição de senha enviado.",
+        ),
+      )
+      .catch((e) => {
+        errorHandler(e);
+      });
+  }
 
   return (
     <View style={{ flex: 1 }}>
-      {/* {() => {
-        if (Platform.OS === "web") {
-          return <Image style={{ flex: 1 }} source={BlueBg} />
-        }
-      }} */}
       <Image style={{ flex: 1 }} source={BlueBg} />
       <View style={[theme.styles.absolutePosition, theme.styles.center]}>
         <View
           style={{
             padding: 32,
             width: theme.measure(20),
-            minWidth:theme.measure(20),
+            minWidth: theme.measure(20),
             // maxWidth:theme.measure(30),
             backgroundColor: "#ffffff",
             borderRadius: theme.measure(0.5),
@@ -66,6 +82,15 @@ export function RedefinePasswordScreen({ navigation, ...props }) {
           >
             Insira seu e-mail para recuperar sua conta
           </Typography>
+          {message && (
+            <Typography
+              variant={"overline10"}
+              color='#f00'
+              style={{ marginBottom: 8 }}
+            >
+              {message}
+            </Typography>
+          )}
           <View
             style={{
               justifyContent: "space-between",
@@ -83,7 +108,7 @@ export function RedefinePasswordScreen({ navigation, ...props }) {
               variant='contained'
               backgroundColor={appColors.primary}
               label='Recuperar'
-              onPress={() => {}}
+              onPress={() => redefinePassword(email)}
             ></Button>
           </View>
         </View>

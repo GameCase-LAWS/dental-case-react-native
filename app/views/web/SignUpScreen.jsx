@@ -6,10 +6,18 @@ import { Button } from "../../components/Button";
 import { BackIcon } from "../../assets/icons/index";
 import { Typography } from "../../components/Typography";
 import { ThemeContext } from "../../ThemeContext";
+import { auth } from "../../database/firebase";
 
 const BlueBg = require("../../assets/images/blue-bg.jpg");
 const Banner = require("../../assets/images/banner.png");
 const logoIcon = require("../../assets/icons/icon.png");
+
+export const errorHandler = (e, setMessage) => {
+  let errorCode = e.code;
+  let errorMessage = e.message;
+  setMessage(errorMessage);
+  console.log(errorCode);
+};
 
 export const SignUpScreen = ({ navigation, ...props }) => {
   const { theme } = React.useContext(ThemeContext);
@@ -17,14 +25,27 @@ export const SignUpScreen = ({ navigation, ...props }) => {
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
   const [repeatedPassword, setRepeatedPassword] = React.useState("");
+  const [message, setMessage] = React.useState();
+  const actionSettings = {
+    // url: "https://game-case-ed16c.firebaseapp.com",
+    url: "https://www.dentalcase.games",
+    // dynamicLinkDomain: "https://localhost",
+    handleCodeInApp: true,
+  };
 
   function createUser() {
-    firebase
-      .auth()
+    auth()
       .createUserWithEmailAndPassword(email, password)
-      .then(() => console.log("Logged In"))
-      .catch((e) => console.log("Login failed", e));
+      .then(() =>
+        auth()
+          .sendSignInLinkToEmail(email, actionSettings)
+          .then(() => window.localStorage.setItem("emailForSignIn", email))
+          .catch((e) => errorHandler(e, setMessage)),
+      )
+      .catch((e) => errorHandler(e));
   }
+
+  function handleLogedIn() {}
 
   return (
     <View style={{ flex: 1 }}>
@@ -56,6 +77,7 @@ export const SignUpScreen = ({ navigation, ...props }) => {
             }}
             resizeMode='contain'
           ></Image>
+
           <Typography
             variant='subtitle16'
             color={appColors.secondary}
@@ -63,6 +85,15 @@ export const SignUpScreen = ({ navigation, ...props }) => {
           >
             Crie sua conta
           </Typography>
+          {message && (
+            <Typography
+              variant={"overline10"}
+              color='#f00'
+              style={{ marginBottom: 8 }}
+            >
+              {message}
+            </Typography>
+          )}
           <TextInput
             value={username}
             onChangeText={(e) => setUsername(e)}
@@ -77,12 +108,14 @@ export const SignUpScreen = ({ navigation, ...props }) => {
           ></TextInput>
           <TextInput
             value={password}
+            secureTextEntry={true}
             onChangeText={(e) => setPassword(e)}
             style={theme.styles.textInput}
             placeholder={"Senha"}
           ></TextInput>
           <TextInput
             value={repeatedPassword}
+            secureTextEntry={true}
             onChangeText={(e) => setRepeatedPassword(e)}
             style={theme.styles.textInput}
             placeholder={"Repita a senha"}
@@ -90,7 +123,7 @@ export const SignUpScreen = ({ navigation, ...props }) => {
           <Button
             backgroundColor={appColors.primary}
             label='Registrar'
-            // onPress={() => {}}
+            onPress={() => createUser(email, password)}
           ></Button>
         </View>
       </View>
