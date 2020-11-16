@@ -5,7 +5,8 @@
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
-    "eject": "expo eject"
+    "eject": "expo eject",
+    "copy-to-deply": "cp -r web-build/* /var/www/dentalcase.games/html/"
   },
   "dependencies": {
     "@react-native-community/async-storage": "~1.12.0",
