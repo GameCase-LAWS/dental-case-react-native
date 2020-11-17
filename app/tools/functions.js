@@ -148,3 +148,10 @@ export function normalize(size) {
     return Math.round(PixelRatio.roundToNearestPixel(newSize)) - 2;
   }
 }
+
+export const errorHandler = (e) => {
+  let errorCode = e.code;
+  let errorMessage = e.message;
+  console.log(errorMessage, errorCode);
+  return errorCode
+};

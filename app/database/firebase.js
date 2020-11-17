@@ -17,6 +17,13 @@ const firebaseConfig = {
   measurementId: "G-Q9TNH2TS69"
 };
 
+export const actionSettings = {
+  // url: "https://game-case-ed16c.firebaseapp.com",
+  url: "https://dentalcase.games",
+  // dynamicLinkDomain: "https://localhost",
+  handleCodeInApp: true,
+}
+
 firebase.initializeApp(firebaseConfig);
 
 export const auth = firebase.auth;

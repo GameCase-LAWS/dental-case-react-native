@@ -40,17 +40,6 @@ const fachadas = [
 
 const AnimatedPath = Animated.createAnimatedComponent(Path);
 
-function TopBorder({ props, color }) {
-  return (
-    <Svg style={{ margin: 15 }} width={230} height={30} {...props}>
-      <AnimatedPath
-        fill={color}
-        d='M0 30 l30 -30 l170 0 l30 30 l0 200 l-230 0  Z'
-      />
-    </Svg>
-  );
-}
-
 export const SignInScreen = ({ navigation, ...props }) => {
   const { theme } = React.useContext(ThemeContext);
   const { user, setUser } = React.useContext(UserContext);
@@ -68,12 +57,8 @@ export const SignInScreen = ({ navigation, ...props }) => {
 
   async function handleSignIn() {
     setMessage("Entrando...");
-    try {
-      const user = await Authentication.signIn(authentication);
-      setUser(user);
-    } catch ({ message }) {
-      setMessage(message);
-    }
+    const user = await Authentication.signIn(authentication, setMessage);
+    setUser(user);
   }
 
   async function _syncUserWithStateAsync(user) {
@@ -245,7 +230,6 @@ export const SignInScreen = ({ navigation, ...props }) => {
           </Grid>
         </View>
       </View>
-      {/* <TopBorder /> */}
     </Animated.View>
   );
 };
