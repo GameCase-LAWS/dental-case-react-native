@@ -120,7 +120,7 @@ export function getMaxScore(options, etapa, extra) {
   if (!options) {
     return 0;
   }
-  return extra + options.map(o => getScore(o, etapa)).filter(s => s > 0).reduce((prev, curr) => prev + curr, 0);
+  return extra + options.filter(o => o.tipo === "+").map(o => getScore(o, etapa)).reduce((prev, curr) => prev + curr, 0);
 }
 
 // Arquivos relacionados ao ajuste em múltiplas telas.

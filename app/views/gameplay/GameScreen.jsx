@@ -135,16 +135,22 @@ export const GameScreen = ({ route, navigation, ...props }) => {
 
   React.useEffect(() => {
     if (etapa) {
-      const options = map(etapa.index === 7 ? mCaso.comunicacao_tratamento.comunicacoes : mCaso[etapa.db_key], etapa.key)?.filter(i => i);
+      const options = map(
+        etapa.index === 7
+          ? mCaso.comunicacao_tratamento.comunicacoes
+          : mCaso[etapa.db_key],
+        etapa.key,
+      )?.filter((i) => i);
       if (options || etapa.index === 0) {
         if (options) {
           setOptions({
-            options: shuffle(options),
+            options: options, //shuffle(options),
             pagination: 0,
-            perPage: etapa.index == 3 || etapa.index == 5 ? 3 : 2
+            perPage: etapa.index == 3 || etapa.index == 5 ? 3 : 2,
           });
         }
-        if (etapa.index === 1) { // Se for anamnese, calcule o máximo de comunicacao também
+        if (etapa.index === 1) {
+          // Se for anamnese, calcule o máximo de comunicacao também
           const maxAnamnese = getMaxScore(options, etapa.key, 0);
           setScores((old) => ({
             ...old,
@@ -172,7 +178,12 @@ export const GameScreen = ({ route, navigation, ...props }) => {
     }
   }, [etapa]);
 
-  const handleRecordPress = () => navigation.navigate('MedicalRecord', { data: gameData, scores: scores, caso: mCaso });
+  const handleRecordPress = () =>
+    navigation.navigate("MedicalRecord", {
+      data: gameData,
+      scores: scores,
+      caso: mCaso,
+    });
 
   function tryStartInterference(force) {
     if (gameData.interferenceState === 2) {
@@ -284,22 +295,22 @@ export const GameScreen = ({ route, navigation, ...props }) => {
       // Verifica se chegou ao final das falas
       if (speechControl.pagination < maxPage) {
         // Caso negativo, prossegue com as falas
-        setSpeechControl(old => ({
+        setSpeechControl((old) => ({
           ...old,
-          pagination: ++old.pagination
+          pagination: ++old.pagination,
         }));
 
         if (speechControl.pagination === 1) {
           setFeedbackContent({
             text: `Olá! Meu nome é ${mCaso.paciente.nome}`,
             visible: true,
-            isSpeech: true
+            isSpeech: true,
           });
         } else if (speechControl.pagination === 2) {
           setFeedbackContent({
             text: mCaso.queixa_paciente,
             visible: true,
-            isSpeech: true
+            isSpeech: true,
           });
         }
       } else {
@@ -377,7 +388,10 @@ export const GameScreen = ({ route, navigation, ...props }) => {
         scores.comunicacao.score += getScore(option, etapa.key);
       }
     }
-    animateScore(scores[etapa.key].score);
+
+    if (etapa.key !== 3 && etapa.key !== 5) {
+      animateScore(scores[etapa.key].score);
+    }
 
     const interfStart = tryStartInterference();
     if (interfStart) {
@@ -487,7 +501,7 @@ export const GameScreen = ({ route, navigation, ...props }) => {
         data: gameData,
         scores: scores,
         caso: mCaso,
-        page: index > 3 ? index - 1 : index
+        page: index > 3 ? index - 1 : index,
       });
     }
   };
@@ -518,23 +532,48 @@ export const GameScreen = ({ route, navigation, ...props }) => {
   // console.log('render');
 
   return (
-    <Container containerStyle={{ backgroundColor: 'black' }}>
-      <ImageBackground style={theme.styles.flex} source={{ uri: findObjectInListByTag(mCaso.imagens, 'identificador', gameplayScreenplay.etapas[etapa.index].background_image).arquivo }} resizeMode="contain">
-        <ImageBackground style={theme.styles.flex} source={!(etapa.index === 0 && speechControl.pagination === 0) && { uri: findObjectInListByTag(mCaso.imagens, 'identificador', gameplayScreenplay.etapas[etapa.index].patient_image).arquivo }} resizeMode="contain">
+    <Container containerStyle={{ backgroundColor: "black" }}>
+      <ImageBackground
+        style={theme.styles.flex}
+        source={{
+          uri: findObjectInListByTag(
+            mCaso.imagens,
+            "identificador",
+            gameplayScreenplay.etapas[etapa.index].background_image,
+          ).arquivo,
+        }}
+        resizeMode='contain'
+      >
+        <ImageBackground
+          style={theme.styles.flex}
+          source={
+            !(etapa.index === 0 && speechControl.pagination === 0) && {
+              uri: findObjectInListByTag(
+                mCaso.imagens,
+                "identificador",
+                gameplayScreenplay.etapas[etapa.index].patient_image,
+              ).arquivo,
+            }
+          }
+          resizeMode='contain'
+        >
           {/* Ícone de prontuário (direita) */}
           <CircleButton
             size={theme.measure(5)}
-            style={[{
-              position: "absolute",
-              top: theme.measure(2),
-              left: theme.measure(2),
-              borderRadius:theme.measure(3)
-            },theme.styles.dropShadow ]}
+            style={[
+              {
+                position: "absolute",
+                top: theme.measure(2),
+                left: theme.measure(2),
+                borderRadius: theme.measure(3),
+              },
+              theme.styles.dropShadow,
+            ]}
             onPress={handleRecordPress}
           >
             <Image
               source={MedicalRecordImage}
-              style={[{ height: theme.measure(3), width: theme.measure(3)}]}
+              style={[{ height: theme.measure(3), width: theme.measure(3) }]}
               resizeMode='contain'
             />
           </CircleButton>
@@ -582,19 +621,33 @@ export const GameScreen = ({ route, navigation, ...props }) => {
 
           {/* Barra de pontuação */}
           <View style={[theme.styles.scoreBar, theme.styles.dropShadow]}>
-            <Animated.View style={{
-              height: !(scores[etapa.key]?.score) ? 0 : scoreAnim.interpolate({
-                inputRange: [0, scores[etapa.key].maxScore],
-                outputRange: ['0%', '100%'],
-                extrapolate: 'clamp'
-              }),
-              backgroundColor: appColors.activeStep
-            }} />
+            <Animated.View
+              style={{
+                height: !scores[etapa.key]?.score
+                  ? 0
+                  : scoreAnim.interpolate({
+                      inputRange: [0, scores[etapa.key].maxScore],
+                      outputRange: ["0%", "100%"],
+                      extrapolate: "clamp",
+                    }),
+                backgroundColor: appColors.activeStep,
+              }}
+            />
           </View>
 
           {/* Caixa de feedback do paciente e resultado de exames */}
           {feedbackContent.visible && (
-            <View style={[theme.styles.feedbackBox, theme.styles.dropShadow, { backgroundColor: feedbackContent.isSpeech ? '#ACDCCE' : appColors.cardGray }]}>
+            <View
+              style={[
+                theme.styles.feedbackBox,
+                theme.styles.dropShadow,
+                {
+                  backgroundColor: feedbackContent.isSpeech
+                    ? "#ACDCCE"
+                    : appColors.cardGray,
+                },
+              ]}
+            >
               <Typography>{feedbackContent.text}</Typography>
             </View>
           )}
@@ -630,13 +683,20 @@ export const GameScreen = ({ route, navigation, ...props }) => {
           />
 
           {/* Imagem do médico */}
-          <View style={[
-            theme.styles.GameScreenAvatarContainer,
-            theme.styles.dropShadow
-          ]}>
-            <View style={{ position: 'relative' }}>
+          <View
+            style={[
+              theme.styles.GameScreenAvatarContainer,
+              theme.styles.dropShadow,
+            ]}
+          >
+            <View style={{ position: "relative" }}>
               <Image source={avatar} style={theme.styles.GameScreenAvatar} />
-              {!isSpeech && <Image source={ThinkCircles} style={theme.styles.GameScreenThinkCircles} />}
+              {!isSpeech && (
+                <Image
+                  source={ThinkCircles}
+                  style={theme.styles.GameScreenThinkCircles}
+                />
+              )}
             </View>
           </View>
 
